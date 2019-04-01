@@ -11,11 +11,12 @@ install: true
 # 配置邮箱通知
 notifications:
   email:
-    on_failure: always # 失败通知
-    on_success: change  # 成功不通知
-    recipients:
-      - zhaoyunxing@ccclubs.com
-      - 2385585770@qq.com
+    - zhaoyunxing@ccclubs.com
+    - 2385585770@qq.com
+#    on_failure: always # 失败通知
+#    on_success: always  # 成功不通知
+#    recipients:
+
 
 #deploy:
 
