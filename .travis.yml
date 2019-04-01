@@ -13,9 +13,9 @@ notifications:
   email:
     on_failure: always # 失败通知
     on_success: always # 成功不通知
-    recipients:
-      - zhaoyunxing@ccclubs.com
-      - 2385585770@qq.com
+#    recipients:  列表没有配置成功
+#      - zhaoyunxing@ccclubs.com
+#      - 2385585770@qq.com
 
 #deploy:
 
