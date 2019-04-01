@@ -26,8 +26,14 @@ notifications:
 before_deploy:
   - echo maven runing
 
-script:
-  - travis_wait 30 mvn clean package -DskipTests=false -Dcheckstyle.skip=false
+#script:
+#  - travis_wait 30 mvn clean package -DskipTests=false -Dcheckstyle.skip=false
+
+deploy:
+  provider: script
+  script: travis_wait 30 mvn clean package -DskipTests=false -Dcheckstyle.skip=false
+  on:
+    branch: master
 
 after_success:
   - echo mvn package success
