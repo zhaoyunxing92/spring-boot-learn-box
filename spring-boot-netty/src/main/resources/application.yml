@@ -1,0 +1,7 @@
+server:
+  port: 7800
+  servlet:
+    context-path: /push
+
+netty:
+  port: 7777
