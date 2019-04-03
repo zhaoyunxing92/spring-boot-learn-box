@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>websocket</title>
+</head>
+<script>
+  var socket;
+
+  // 链接
+  function connect( msg ) {
+    console.log(msg);
+    if( window.WebSocket ) {
+      socket = new WebSocket("ws://localhost:9999/ws");
+      // 服务连接
+      socket.onopen = function( ev ) {
+        var state = document.getElementById("state");
+        state.innerText = "服务链接开启";
+        state.style.color = '#30e56f';
+        send(msg);
+      };
+      // 接受服务端数据
+      socket.onmessage = function( ev ) {
+        var reqText = document.getElementById("reqText");
+        reqText.value += ev.data + "\n";
+      };
+      //连接断开
+      socket.onclose = function( ev ) {
+        var state = document.getElementById("state");
+        state.innerText += "服务连接断开";
+        state.style.color = '#edae05';
+      };
+      // 服务器异常
+      socket.onerror = function( ev ) {
+        console.log(ev);
+        var state = document.getElementById("error");
+        state.innerText = "服务链接异常";
+        state.style.color = '#ed0505';
+      };
+    } else {
+      alert("浏览器不支持");
+    }
+  }
+
+  /**
+   * 发送信息
+   * @param msg
+   */
+  function send( msg ) {
+    // message.trim();
+    var state = document.getElementById("state");
+    console.log(">>" + "" === msg.trim() + "<<");
+    if( !window.WebSocket ) return;
+    // if( message. )
+    if( socket != null && socket.readyState === WebSocket.OPEN ) {
+      socket.send(msg);
+      state.innerText = "发送成功";
+      state.style.color = '#30e56f';
+    } else {
+      state.innerText = "发送异常";
+      state.style.color = '#ed0505';
+    }
+
+  }
+</script>
+
+<body>
+
+<h3>客户端</h3>
+<label>
+    <input id="userId" placeholder="请输入客户id"
+           style="width: 210px;height: 25px;margin: 8px 0; padding-left:3px;font-size: 16px"/>
+    <button style="width: 90px;height: 32px" onclick="connect(document.getElementById('userId').value)">链接</button>
+    <br/>
+    <textarea id="message" name="message" style="width: 400px;height: 150px"></textarea><br/>
+    <button style="width: 100px;height: 30px" onclick="send(document.getElementById('message').value)">发送数据</button>
+    <span id="state"></span>
+    <span id="error"></span>
+</label>
+
+<h3>服务端</h3>
+<label>
+    <textarea id="reqText" style="width: 400px;height: 150px"></textarea><br/>
+    <button style="width: 100px;height: 30px" onclick="document.getElementById('reqText').value=''">清空数据</button>
+</label>
+</body>
+</html>

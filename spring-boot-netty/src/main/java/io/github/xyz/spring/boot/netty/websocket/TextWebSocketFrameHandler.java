@@ -6,9 +6,11 @@ package io.github.xyz.spring.boot.netty.websocket;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
+import io.netty.handler.timeout.IdleState;
+import io.netty.handler.timeout.IdleStateEvent;
 
 import java.time.LocalDateTime;
-import java.util.logging.SocketHandler;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @author zhaoyunxing
@@ -21,7 +23,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
         System.out.println("收到消息：" + msg.text());
-        ctx.channel().writeAndFlush(new TextWebSocketFrame("服务器时间：" + LocalDateTime.now()));
+        ctx.channel().writeAndFlush(new TextWebSocketFrame("服务器时间：" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss:SSS"))));
     }
 
     @Override
@@ -39,5 +41,22 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         System.out.println("异常发生:" + ctx.channel().id().asLongText());
         ctx.close();
+        cause.printStackTrace(System.err);
+    }
+
+    /**
+     * 客户端事件监听
+     *
+     * @param ctx
+     * @param evt
+     * @throws Exception
+     */
+    @Override
+    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
+        // 检测心跳
+        if (evt instanceof IdleStateEvent) {
+            System.out.println("userEventTriggered==================");
+        }
+
     }
 }

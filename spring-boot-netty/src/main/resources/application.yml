@@ -4,4 +4,7 @@ server:
     context-path: /push
 
 netty:
-  port: 7777
+  port: 9999
+  readerIdleTimeSeconds: 3
+  writerIdleTimeSeconds: 5
+  allIdleTimeSeconds: 0
