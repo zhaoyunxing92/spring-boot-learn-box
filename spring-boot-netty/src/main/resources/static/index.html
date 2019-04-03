@@ -49,7 +49,7 @@
   function send( msg ) {
     // message.trim();
     var state = document.getElementById("state");
-    console.log(">>" + "" === msg.trim() + "<<");
+    console.log(">>" + '' === msg.trim() + "<<");
     if( !window.WebSocket ) return;
     // if( message. )
     if( socket != null && socket.readyState === WebSocket.OPEN ) {

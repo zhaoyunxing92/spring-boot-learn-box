@@ -3,6 +3,7 @@
  */
 package io.github.xyz.spring.boot.netty.websocket;
 
+import io.github.xyz.spring.boot.netty.websocket.handler.TextWebSocketFrameHandler;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
