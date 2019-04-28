@@ -4,4 +4,4 @@
 spring boot集成其他组件
 
 - [x] netty
-- [x] [kafka](./spring-boot-kafka/readme.md)
+- [x] [kafka](./spring-boot-kafka)
