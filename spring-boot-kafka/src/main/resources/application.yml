@@ -1,0 +1,10 @@
+server:
+  port: 7800
+  servlet:
+    context-path: /push
+
+netty:
+  port: 9999
+  readerIdleTimeSeconds: 3
+  writerIdleTimeSeconds: 5
+  allIdleTimeSeconds: 0
