@@ -8,7 +8,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>spriing-boot-netty</artifactId>
+    <artifactId>spring-boot-netty</artifactId>
     <name>spring-boot-netty</name>
     <description>netty learn</description>
 
