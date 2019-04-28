@@ -1,12 +1,12 @@
 /**
  * Copyright(C) 2019 Hangzhou zhaoyunxing Technology Co., Ltd. All rights reserved.
  */
-package io.github.xyz.spring.boot.kafka.config;
+package io.github.xyz.spring.boot.kafka.service;
 
 /**
  * @author zhaoyunxing
- * @date: 2019-04-28 10:53
+ * @date: 2019-04-28 14:28
  * @des:
  */
-public class KafkaProducerConfig {
+public interface KafkaService {
 }
