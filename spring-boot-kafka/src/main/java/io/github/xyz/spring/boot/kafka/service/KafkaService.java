@@ -9,4 +9,12 @@ package io.github.xyz.spring.boot.kafka.service;
  * @des:
  */
 public interface KafkaService {
+    String TOPIC = "spring.kafka.test";
+
+    /**
+     * 发送信息
+     *
+     * @return true or false
+     */
+    String send();
 }

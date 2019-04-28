@@ -3,7 +3,10 @@
  */
 package io.github.xyz.spring.boot.kafka.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+
+import java.util.Date;
 
 /**
  * @author zhaoyunxing
@@ -11,8 +14,10 @@ import lombok.Data;
  * @des:
  */
 @Data
+@AllArgsConstructor
 public class People {
     private String id;
     private String name;
-    private String age;
+    private Integer age;
+    private Date loginTime;
 }
