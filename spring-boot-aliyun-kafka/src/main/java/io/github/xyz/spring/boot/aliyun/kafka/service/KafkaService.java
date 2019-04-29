@@ -9,7 +9,7 @@ package io.github.xyz.spring.boot.aliyun.kafka.service;
  * @des:
  */
 public interface KafkaService {
-    String TOPIC = "spring_kafka_test";
+    String TOPIC = "aliyun_kafka_test";
 
     /**
      * 发送信息

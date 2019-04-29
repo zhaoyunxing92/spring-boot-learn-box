@@ -51,7 +51,7 @@ public class KafkaServiceImpl implements KafkaService {
         ListenableFuture<SendResult> listenableFuture = kafkaTemplate.send(topic, uuid, msg);
 
         try {
-            SendResult sendResult = listenableFuture.get();
+            SendResult<String,String> sendResult = listenableFuture.get();
             log.info("producer send ok {}", sendResult);
             return topic + " send ok";
         } catch (InterruptedException | ExecutionException ex) {
