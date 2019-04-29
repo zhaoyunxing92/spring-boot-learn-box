@@ -20,23 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/")
 public class KafkaController {
-
     private final KafkaService kafkaService;
-
     @Autowired
     public KafkaController(KafkaService kafkaService) {this.kafkaService = kafkaService;}
 
     @GetMapping("/send")
     public String send() {
-        //log.info("kafka config: {}", kafkaAdmin.getConfig());
-
-        // 判断
-
-        //        kafkaAdmin.
-        //        AdminClient.create(kafkaAdmin.getConfig()).createTopics(() -> {
-        //        });
-
-
         return kafkaService.send();
     }
 }

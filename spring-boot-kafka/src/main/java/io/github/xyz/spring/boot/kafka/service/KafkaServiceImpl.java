@@ -46,15 +46,22 @@ public class KafkaServiceImpl implements KafkaService {
         String topic = KafkaService.TOPIC;
         // 1.判断topic是否存在,不存在创建
         createTopic(topic);
+        String uuid = UUID.randomUUID().toString().replaceAll("-", "");
         // 2.发送信息
-        String msg = JSON.toJSONString(new People(UUID.randomUUID().toString(), "sunny", 25, new Date()));
-        ListenableFuture<SendResult<String, String>> listenableFuture = kafkaTemplate.send(topic, msg);
+        String msg = JSON.toJSONString(new People(uuid, "sunny", 25, new Date()));
+        ListenableFuture<SendResult<String, String>> listenableFuture = kafkaTemplate.send(topic, uuid, msg);
 
-        listenableFuture.addCallback(
-                // 添加消息发送结果
-                result -> log.debug("push kafka:{}   {}", result.toString()),
-                ex -> log.error("push kafka to [{}] failure,error message:{}", topic, ex.getMessage()));
-        return topic + "send ok";
+
+        try {
+            SendResult<String, String> sendResult = listenableFuture.get();
+
+            log.info("producer send ok {}", sendResult.getProducerRecord());
+            return topic + " send ok";
+        } catch (InterruptedException | ExecutionException ex) {
+            ex.printStackTrace();
+            return topic + "send error";
+        }
+
     }
 
     /**

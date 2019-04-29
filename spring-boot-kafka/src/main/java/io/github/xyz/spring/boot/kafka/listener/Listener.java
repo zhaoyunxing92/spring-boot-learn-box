@@ -3,7 +3,6 @@
  */
 package io.github.xyz.spring.boot.kafka.listener;
 
-import com.alibaba.fastjson.JSON;
 import io.github.xyz.spring.boot.kafka.service.KafkaService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;

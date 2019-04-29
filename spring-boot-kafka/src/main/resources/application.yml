@@ -15,4 +15,4 @@ spring:
       auto-commit-interval: 1000
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      group-id: test # 必须设置
+      group-id: spring_kafka # 必须设置
