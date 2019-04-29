@@ -4,7 +4,7 @@ server:
     context-path: /kafka
 spring:
   kafka:
-    bootstrap-servers: 127.0.0.1:9092 # 本地kafka地址
+    bootstrap-servers: 172.16.2.61:9092 # 开发环境kafka
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
@@ -15,4 +15,4 @@ spring:
       auto-commit-interval: 1000
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      group-id: spring_kafka # 必须设置
+      group-id: t3_group_kafka_test # 必须设置
