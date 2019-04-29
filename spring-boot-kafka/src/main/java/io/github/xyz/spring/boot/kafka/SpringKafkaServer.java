@@ -17,8 +17,8 @@ import org.springframework.kafka.annotation.EnableKafka;
 @SpringBootApplication
 @EnableKafka
 @Import(Listener.class)
-public class KafkaServer {
+public class SpringKafkaServer {
     public static void main(String[] args) {
-        SpringApplication.run(KafkaServer.class, args);
+        SpringApplication.run(SpringKafkaServer.class, args);
     }
 }
