@@ -3,7 +3,8 @@
  */
 package io.github.xyz.spring.boot.aliyun.kafka.listener;
 
-import io.github.xyz.spring.boot.kafka.service.KafkaService;
+
+import io.github.xyz.spring.boot.aliyun.kafka.service.KafkaService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
