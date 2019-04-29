@@ -3,8 +3,11 @@
  */
 package io.github.xyz.spring.boot.aliyun.kafka;
 
+import io.github.xyz.spring.boot.aliyun.kafka.listener.Listener;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Import;
+import org.springframework.kafka.annotation.EnableKafka;
 
 /**
  * @author zhaoyunxing
@@ -12,6 +15,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @des:
  */
 @SpringBootApplication
+@EnableKafka
+@Import(Listener.class)
 public class AliyunKafkaServer {
     public static void main(String[] args) {
         SpringApplication.run(AliyunKafkaServer.class, args);
