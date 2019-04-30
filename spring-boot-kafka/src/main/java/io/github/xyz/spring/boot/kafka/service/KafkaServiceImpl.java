@@ -10,7 +10,6 @@ import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.ListTopicsOptions;
 import org.apache.kafka.clients.admin.ListTopicsResult;
 import org.apache.kafka.clients.admin.NewTopic;
-import org.apache.kafka.common.utils.AppInfoParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaAdmin;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -49,13 +48,13 @@ public class KafkaServiceImpl implements KafkaService {
         String uuid = UUID.randomUUID().toString().replaceAll("-", "");
         // 2.发送信息
         String msg = JSON.toJSONString(new People(uuid, "sunny", 25, new Date()));
-        ListenableFuture<SendResult<String, String>> listenableFuture = kafkaTemplate.send(topic, uuid, msg);
+        ListenableFuture<SendResult> listenableFuture = kafkaTemplate.send(topic, uuid, msg);
 
 
         try {
-            SendResult<String, String> sendResult = listenableFuture.get();
+            SendResult sendResult = listenableFuture.get();
 
-            log.info("producer send ok {}", sendResult.getProducerRecord());
+            log.info("producer send ok {}", sendResult);
             return topic + " send ok";
         } catch (InterruptedException | ExecutionException ex) {
             ex.printStackTrace();

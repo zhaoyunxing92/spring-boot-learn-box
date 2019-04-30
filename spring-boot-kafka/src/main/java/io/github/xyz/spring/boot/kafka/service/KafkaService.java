@@ -9,6 +9,9 @@ package io.github.xyz.spring.boot.kafka.service;
  * @des:
  */
 public interface KafkaService {
+    /**
+     * aliyun topic:aliyun_kafka_test
+     */
     String TOPIC = "spring.kafka.test";
 
     /**

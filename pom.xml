@@ -48,7 +48,6 @@
     <modules>
         <module>spring-boot-netty</module>
         <module>spring-boot-kafka</module>
-        <module>spring-boot-aliyun-kafka</module>
     </modules>
 
     <dependencies>
