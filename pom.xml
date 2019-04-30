@@ -22,7 +22,21 @@
         <netty.version>4.1.34.Final</netty.version>
         <spring.kafka.version>2.2.0.RELEASE</spring.kafka.version>
         <fastjson.version>1.2.47</fastjson.version>
+        <hystrix.version>2.1.0.RELEASE</hystrix.version>
     </properties>
+
+    <modules>
+        <module>spring-boot-netty</module>
+        <module>spring-boot-kafka</module>
+        <module>spring-boot-hystrix</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
 
     <dependencyManagement>
         <dependencies>
@@ -41,19 +55,14 @@
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+                <version>${hystrix.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
-
-    <modules>
-        <module>spring-boot-netty</module>
-        <module>spring-boot-kafka</module>
-    </modules>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-    </dependencies>
 </project>
