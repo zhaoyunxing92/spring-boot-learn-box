@@ -23,12 +23,14 @@
         <spring.kafka.version>2.2.0.RELEASE</spring.kafka.version>
         <fastjson.version>1.2.47</fastjson.version>
         <hystrix.version>2.1.0.RELEASE</hystrix.version>
+        <sentinel.version>1.6.0</sentinel.version>
     </properties>
 
     <modules>
         <module>spring-boot-netty</module>
         <module>spring-boot-kafka</module>
         <module>spring-boot-hystrix</module>
+        <module>spring-boot-sentinel</module>
     </modules>
 
     <dependencies>
@@ -62,6 +64,21 @@
                 <version>${hystrix.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-core</artifactId>
+                <version>${sentinel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-annotation-aspectj</artifactId>
+                <version>${sentinel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-transport-simple-http</artifactId>
+                <version>${sentinel.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
