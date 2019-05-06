@@ -1,7 +1,7 @@
 spring:
   application:
-    name: spring-boot-hystrix
+    name: spring-boot-sentinel
 server:
-  port: 7810
+  port: 7820
   servlet:
-    context-path: /hystrix
+    context-path: /sentinel

@@ -24,6 +24,7 @@
         <fastjson.version>1.2.47</fastjson.version>
         <hystrix.version>2.1.0.RELEASE</hystrix.version>
         <sentinel.version>1.6.0</sentinel.version>
+        <spring.boot.aop.version>2.1.0.RELEASE</spring.boot.aop.version>
     </properties>
 
     <modules>
@@ -78,6 +79,11 @@
                 <groupId>com.alibaba.csp</groupId>
                 <artifactId>sentinel-transport-simple-http</artifactId>
                 <version>${sentinel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-aop</artifactId>
+                <version>${spring.boot.aop.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
