@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: spring-boot-hystrix
+server:
+  port: 7810
+  servlet:
+    context-path: /hystrix
