@@ -5,10 +5,7 @@ package io.github.xyz.spring.boot.sentinel.controller;
 
 import io.github.xyz.spring.boot.sentinel.service.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author zhaoyunxing
@@ -26,5 +23,11 @@ public class HelloController {
     @GetMapping
     public String say(@RequestParam(required = false, defaultValue = "10") long time) {
         return helloService.say(time);
+    }
+
+    @GetMapping("/another/{name}")
+    public String say(@PathVariable String name) {
+        helloService.test();
+        return helloService.helloAnother(name);
     }
 }
