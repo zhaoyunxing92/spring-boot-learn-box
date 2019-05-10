@@ -52,7 +52,7 @@ Apollo（阿波罗）是携程框架部门研发的分布式配置中心，能�
         eagerLoad:
           enabled: true # 优先加载
  ```
- * jvm启动添加 指定环境
+ * jvm启动添加 `-Denv=DEV`指定环境
  ```shell
   java -jar -Denv=DEV
  ```
