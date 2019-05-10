@@ -1,78 +1,58 @@
-# sentinel
-> [sentinel注解实现](https://github.com/alibaba/Sentinel/wiki/%E6%B3%A8%E8%A7%A3%E6%94%AF%E6%8C%81)
+# apollo
+> [apollo](https://github.com/ctripcorp/apollo)
 
-> [sentinel](https://github.com/alibaba/Sentinel)
+Apollo（阿波罗）是携程框架部门研发的分布式配置中心，能够集中化管理应用不同环境、不同集群的配置，配置修改后能够实时推送到应用端，并且具备规范的权限、流程治理等特性，适用于微服务配置管理场景。
 
-## sentinel的版本
- * spring boot 的版本是2.1.0.RELEASE
- * sentinel 1.6.0
-## 测试
- 启动访问: http://localhost:7820/sentinel/hello
-## sentinel-dashboard
-sentinel依赖[sentinel-dashboard](https://github.com/alibaba/Sentinel/tree/master/sentinel-dashboard),首先要编译一份jar
-## 启动参数说明
-[启动配置项](https://github.com/alibaba/Sentinel/wiki/%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE%E9%A1%B9)
-
-simple
-```shell
-java -jar -Dcsp.sentinel.dashboard.server=localhost:8100 -Dproject.name=spring-boot-sentinel
-```
-* `csp.sentinel.dashboard.server` sentinel-dashboard服务地址
-* `project.name` 注册的项目名称
-## 说明
- * sentinel启动后默认开启`8719`端口向[sentinel-dashboard](https://github.com/alibaba/Sentinel/tree/master/sentinel-dashboard) 传输数据
-## 使用流程
-* 添加maven依赖
-```xml
- <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.csp</groupId>
-            <artifactId>sentinel-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.csp</groupId>
-            <artifactId>sentinel-annotation-aspectj</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.csp</groupId>
-            <artifactId>sentinel-transport-simple-http</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.csp</groupId>
-            <artifactId>sentinel-parameter-flow-control</artifactId>
-        </dependency>
-    </dependencies>
-```
-* SentinelResourceAspect bean注入到spring boot中
+## 准备工作
+ * 下载[apollo-build-scripts](https://github.com/nobodyiam/apollo-build-scripts.git)或者源码编译
+ * 使用包说明
+   * [apollo-adminservice](https://github.com/ctripcorp/apollo/tree/master/apollo-adminservice) 提供配置的修改、发布等功能，服务对象是Apollo Portal（管理界面）
+   * [apollo-configservice](https://github.com/ctripcorp/apollo/tree/master/apollo-configservice)和Admin Service都是多实例、无状态部署，所以需要将自己注册到Eureka中并保持心跳
+   * [apollo-portal](https://github.com/ctripcorp/apollo/tree/master/apollo-portal)管理界面
+ * mysql 5.7安装可以参考[docker for mysql](https://github.com/zhaoyunxing92/docker-case/tree/develop/mysql)
+   * ApolloPortalDB和ApolloConfigDB两个库创建 [sql](./doc)
+ * 修改数据库配置
+   
+## [spring boot 整合](https://github.com/ctripcorp/apollo/wiki/Java%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97#3213-spring-boot%E9%9B%86%E6%88%90%E6%96%B9%E5%BC%8F%E6%8E%A8%E8%8D%90)
+ * pom
+ ```xml
+  <dependencies>
+       <dependency>
+           <groupId>org.springframework.boot</groupId>
+           <artifactId>spring-boot-starter-web</artifactId>
+       </dependency>
+       
+       <dependency>
+           <groupId>com.ctrip.framework.apollo</groupId>
+           <artifactId>apollo-client</artifactId>
+       </dependency>
+   </dependencies>
+ ```
+ * 启动文件
  ```java
-public class SentinelConfig implements ImportSelector {
-     // SentinelResourceAspect bean注入到spring中
-    @Override
-    public String[] selectImports(AnnotationMetadata importingClassMetadata) {
-        return new String[]{SentinelResourceAspect.class.getName()};
+    @SpringBootApplication
+    @EnableApolloConfig // 开启apollo
+    public class SpringApolloServer {
+    
+        public static void main(String[] args) {
+            SpringApplication.run(SpringApolloServer.class, args);
+        }
     }
-}
-```
-* 使用注解可参考[sentinel注解实现](https://github.com/alibaba/Sentinel/wiki/%E6%B3%A8%E8%A7%A3%E6%94%AF%E6%8C%81)
-```java
-    /**
-     * 对应的 `handleException` 函数需要位于 `ExceptionUtil` 类中，并且必须为 static 函数.
-     */
-    @Override
-    @SentinelResource(value = "test", blockHandler = "handleException", blockHandlerClass = {ExceptionUtil.class})
-    public void test() {
-        log.info("test blockHandler");
-    }
-```
-* 添加jvm参数
-```shell
--Dcsp.sentinel.dashboard.server=localhost:8100 -Dproject.name=spring-boot-sentinel
-```
+ ```
+ * application.yml
+ ```yaml
+    app:
+      id: spring-boot-apollo # 配置的id
+    apollo:
+      meta: http://127.0.0.1:8080 # 拉去配置文件地址
+      cacheDir: ./apolloconfig  # 缓存文件位置
+      bootstrap:
+        enabled: true
+        namespaces: application,application.yml
+        eagerLoad:
+          enabled: true # 优先加载
+ ```
+ * jvm启动添加 指定环境
+ ```shell
+  java -jar -Denv=DEV
+ ```

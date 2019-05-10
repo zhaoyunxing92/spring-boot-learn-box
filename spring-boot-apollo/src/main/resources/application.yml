@@ -1,7 +1,10 @@
-spring:
-  application:
-    name: spring-boot-hystrix
-server:
-  port: 7810
-  servlet:
-    context-path: /hystrix
+app:
+  id: spring-boot-apollo
+apollo:
+  meta: http://127.0.0.1:8080
+  cacheDir: ./apolloconfig  # 缓存文件位置
+  bootstrap:
+    enabled: true
+    namespaces: application,application.yml
+    eagerLoad:
+      enabled: true
