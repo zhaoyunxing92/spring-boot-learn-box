@@ -25,6 +25,7 @@
         <hystrix.version>2.1.0.RELEASE</hystrix.version>
         <sentinel.version>1.6.0</sentinel.version>
         <spring.boot.aop.version>2.1.0.RELEASE</spring.boot.aop.version>
+        <apollo.client.vresion>1.1.0</apollo.client.vresion>
     </properties>
 
     <modules>
@@ -32,6 +33,7 @@
         <module>spring-boot-kafka</module>
         <module>spring-boot-hystrix</module>
         <module>spring-boot-sentinel</module>
+        <module>spring-boot-apollo</module>
     </modules>
 
     <dependencies>
@@ -96,6 +98,13 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-aop</artifactId>
                 <version>${spring.boot.aop.version}</version>
+            </dependency>
+
+            <!--apollo-->
+            <dependency>
+                <groupId>com.ctrip.framework.apollo</groupId>
+                <artifactId>apollo-client</artifactId>
+                <version>${apollo.client.vresion}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
