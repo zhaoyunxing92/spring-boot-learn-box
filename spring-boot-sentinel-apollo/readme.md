@@ -8,8 +8,8 @@
 
 ## 整合流程
 
-* pom
-```yaml
+* pom.xml
+```xml
   <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
@@ -20,4 +20,37 @@
       <artifactId>sentinel-datasource-apollo</artifactId>
       <version>1.6.0</version>
   </dependency>
+```
+* application.yml
+```yaml
+spring:
+  application:
+    name: spring-boot-sentinel-apollo
+  cloud:
+    sentinel:
+      transport:
+        port: 8719 # 向sentinel-dashboard传输数据的端口 默认:8719
+        dashboard: localhost:8100 # sentinel-dashboard
+      log:
+        dir: ./logs
+      datasource:
+        ds:
+          apollo:
+            namespaceName: application # 命名空间
+            flowRulesKey: flowRules # apollo 上配置的key
+            rule-type: flow
+app:
+  id: ${spring.application.name}
+apollo:
+  meta: http://127.0.0.1:8080
+  cacheDir: ./apolloconfig  # 缓存文件位置
+#  bootstrap:  todo：缓存文件删除是否可用
+#    enabled: true
+#    namespaces: application
+#    eagerLoad:
+#      enabled: true
+```
+* flowRules参数规则说明
+```json
+
 ```
