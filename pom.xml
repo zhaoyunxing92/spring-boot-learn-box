@@ -26,6 +26,7 @@
         <sentinel.version>1.6.0</sentinel.version>
         <spring.boot.aop.version>2.1.0.RELEASE</spring.boot.aop.version>
         <apollo.client.vresion>1.1.0</apollo.client.vresion>
+        <spring.cloud.alibaba.version>0.9.0.RELEASE</spring.cloud.alibaba.version>
     </properties>
 
     <modules>
@@ -34,6 +35,7 @@
         <module>spring-boot-hystrix</module>
         <module>spring-boot-sentinel</module>
         <module>spring-boot-apollo</module>
+        <module>spring-boot-sentinel-apollo</module>
     </modules>
 
     <dependencies>
@@ -71,7 +73,7 @@
                 <version>${hystrix.version}</version>
             </dependency>
 
-           <!--sentinel-->
+            <!--sentinel-->
             <dependency>
                 <groupId>com.alibaba.csp</groupId>
                 <artifactId>sentinel-core</artifactId>
@@ -92,6 +94,12 @@
                 <artifactId>sentinel-parameter-flow-control</artifactId>
                 <version>${sentinel.version}</version>
             </dependency>
+            <!--sentinel datasource-->
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-datasource-apollo</artifactId>
+                <version>${sentinel.version}</version>
+            </dependency>
 
             <!--aop-->
             <dependency>
@@ -105,6 +113,15 @@
                 <groupId>com.ctrip.framework.apollo</groupId>
                 <artifactId>apollo-client</artifactId>
                 <version>${apollo.client.vresion}</version>
+            </dependency>
+
+            <!--spring cloud alibaba -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring.cloud.alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

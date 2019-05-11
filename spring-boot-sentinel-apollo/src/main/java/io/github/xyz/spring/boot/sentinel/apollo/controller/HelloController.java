@@ -1,11 +1,12 @@
 /**
  * Copyright(C) 2019 Hangzhou zhaoyunxing Technology Co., Ltd. All rights reserved.
  */
-package io.github.xyz.spring.boot.sentinel.controller;
+package io.github.xyz.spring.boot.sentinel.apollo.controller;
 
-import io.github.xyz.spring.boot.sentinel.service.HelloService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author zhaoyunxing
@@ -13,21 +14,12 @@ import org.springframework.web.bind.annotation.*;
  * @des:
  */
 @RestController
-@RequestMapping("/hello")
+@RequestMapping
 public class HelloController {
-    private final HelloService helloService;
 
-    @Autowired
-    public HelloController(HelloService helloService) {this.helloService = helloService;}
-
-    @GetMapping
-    public String say(@RequestParam(required = false, defaultValue = "10") long time) {
-        return helloService.say(time);
-    }
-
-    @GetMapping("/another/{name}")
-    public String say(@PathVariable String name) {
-        helloService.test();
-        return helloService.helloAnother(name);
+    @GetMapping("/hello")
+    @SentinelResource(value = "/hello")
+    public String hello() {
+        return "hello sentinel";
     }
 }

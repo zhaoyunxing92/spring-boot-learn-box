@@ -3,10 +3,19 @@
  */
 package io.github.xyz.spring.boot.sentinel.apollo;
 
+import com.ctrip.framework.apollo.spring.annotation.EnableApolloConfig;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 /**
  * @author zhaoyunxing
  * @date: 2019-05-10 21:03
  * @des:
  */
+@SpringBootApplication
+@EnableApolloConfig
 public class SpringSentinelApolloServer {
+    public static void main(String[] args) {
+        SpringApplication.run(SpringSentinelApolloServer.class, args);
+    }
 }

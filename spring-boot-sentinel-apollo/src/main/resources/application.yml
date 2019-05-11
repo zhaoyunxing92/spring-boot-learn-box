@@ -1,7 +1,26 @@
 spring:
   application:
-    name: spring-boot-sentinel
-server:
-  port: 7820
-  servlet:
-    context-path: /sentinel
+    name: spring-boot-sentinel-apollo
+  cloud:
+    sentinel:
+      transport:
+        port: 8719 # 向sentinel-dashboard传输数据的端口 默认:8719
+        dashboard: localhost:8100 # sentinel-dashboard
+      log:
+        dir: ./logs
+      datasource:
+        ds:
+          apollo:
+            namespaceName: application
+            flowRulesKey: flowRules
+            rule-type: flow
+app:
+  id: ${spring.application.name}
+apollo:
+  meta: http://127.0.0.1:8080
+  cacheDir: ./apolloconfig  # 缓存文件位置
+#  bootstrap:
+#    enabled: true
+#    namespaces: application
+#    eagerLoad:
+#      enabled: true
