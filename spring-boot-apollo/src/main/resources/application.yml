@@ -5,6 +5,6 @@ apollo:
   cacheDir: ./apolloconfig  # 缓存文件位置
   bootstrap:
     enabled: true
-    namespaces: application,application.yml
+    namespaces: application
     eagerLoad:
       enabled: true

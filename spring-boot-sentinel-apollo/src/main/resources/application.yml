@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: spring-boot-sentinel
+server:
+  port: 7820
+  servlet:
+    context-path: /sentinel

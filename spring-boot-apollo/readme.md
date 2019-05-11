@@ -4,7 +4,7 @@
 Apollo（阿波罗）是携程框架部门研发的分布式配置中心，能够集中化管理应用不同环境、不同集群的配置，配置修改后能够实时推送到应用端，并且具备规范的权限、流程治理等特性，适用于微服务配置管理场景。
 
 ## 准备工作
- * 下载[apollo-build-scripts](https://github.com/nobodyiam/apollo-build-scripts.git)或者源码编译
+ * 下载[apollo-build-scripts](https://github.com/nobodyiam/apollo-build-scripts.git)或者源码编译,再或者直接下载[release](https://github.com/ctripcorp/apollo/releases)
  * 使用包说明
    * [apollo-adminservice](https://github.com/ctripcorp/apollo/tree/master/apollo-adminservice) 提供配置的修改、发布等功能，服务对象是Apollo Portal（管理界面）
    * [apollo-configservice](https://github.com/ctripcorp/apollo/tree/master/apollo-configservice)和Admin Service都是多实例、无状态部署，所以需要将自己注册到Eureka中并保持心跳
