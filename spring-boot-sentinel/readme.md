@@ -9,7 +9,7 @@
 ## 测试
  启动访问: http://localhost:7820/sentinel/hello
 ## sentinel-dashboard
-sentinel依赖[sentinel-dashboard](https://github.com/alibaba/Sentinel/tree/master/sentinel-dashboard),首先要编译一份jar
+sentinel依赖[sentinel-dashboard](https://github.com/alibaba/Sentinel/tree/master/sentinel-dashboard),首先要编译一份jar,账户密码:sentinel/sentinel
 ## 启动参数说明
 [启动配置项](https://github.com/alibaba/Sentinel/wiki/%E5%90%AF%E5%8A%A8%E9%85%8D%E7%BD%AE%E9%A1%B9)
 
