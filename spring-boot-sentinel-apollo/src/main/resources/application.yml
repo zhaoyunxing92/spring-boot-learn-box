@@ -8,19 +8,20 @@ spring:
         dashboard: localhost:8100 # sentinel-dashboard
       log:
         dir: ./logs
+        switch-pid: true # 日志带上线程id
       datasource:
-        ds:
+        ds1:
           apollo:
             namespaceName: application
             flowRulesKey: flowRules
-            rule-type: flow
+            rule-type: flow #flow,degrade,authority,system, param-flow
+        ds2:
+          apollo:
+            namespaceName: application
+            flowRulesKey: degrades
+            rule-type: degrade #flow,degrade,authority,system, param-flow
 app:
   id: ${spring.application.name}
 apollo:
   meta: http://127.0.0.1:8080
   cacheDir: ./apolloconfig  # 缓存文件位置
-#  bootstrap:
-#    enabled: true
-#    namespaces: application
-#    eagerLoad:
-#      enabled: true

@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
  * @des:
  */
 @RestController
-@RequestMapping
+@RequestMapping("/hello")
 public class HelloController {
 
-    @GetMapping("/hello")
+    @GetMapping
     @SentinelResource(value = "/hello")
     public String hello() {
         return "hello sentinel";
