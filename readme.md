@@ -8,6 +8,7 @@ spring boot集成其他组件
 * java 1.8.0_191
 * maven 3.6.0
 * mysql 5.7
+* spring boot 2.1.0.RELEASE
 ## 集成进度
 - [ ] netty
 - [x] [kafka](./spring-boot-kafka)
