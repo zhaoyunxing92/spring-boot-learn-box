@@ -34,8 +34,8 @@
         <module>spring-boot-kafka</module>
         <module>spring-boot-hystrix</module>
         <module>spring-boot-sentinel/sentinel</module>
-        <module>spring-boot-apollo</module>
         <module>spring-boot-sentinel/sentinel-apollo</module>
+        <module>spring-boot-apollo</module>
     </modules>
 
     <dependencies>

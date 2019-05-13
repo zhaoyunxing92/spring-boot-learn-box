@@ -6,7 +6,7 @@
 * [Sentinel使用Apollo存储规则](https://www.jianshu.com/p/f31c86628994)
 * [spring-cloud-alibaba](https://github.com/spring-cloud-incubator/spring-cloud-alibaba/wiki/Sentinel)
 
-## 整合流程
+## 整合流程(拉模式)
 
 * pom.xml
 ```xml
@@ -45,7 +45,7 @@ spring:
             namespaceName: application
             flowRulesKey: degrades
             rule-type: degrade
-        authority: # 授权规则
+        authority: # 授权规则  未验证,官方不推荐
           apollo:
             namespaceName: application
             flowRulesKey: authoritys
@@ -55,7 +55,7 @@ spring:
             namespaceName: application
             flowRulesKey: systems
             rule-type: system
-        param-flow: # 系统规则
+        param-flow: # 热点规则
           apollo:
             namespaceName: application
             flowRulesKey: paramflows
@@ -103,6 +103,24 @@ public class SpringSentinelApolloServer {
 | controlBehavior |         流量控制效果（直接拒绝、Warm Up、匀速排队）          |   拒绝   |
 |   clusterMode   |                        是否为集群模式                        |          |
 
+* system 系统规则参数格式,四个参数只能选择一个不能设置-1
+
+```
+[{"qps": 2}]
+```
+
+* system参数列表
+
+|   参数    |            说明            |
+| :-------: | :------------------------: |
+|  avgLoad  |       最大的 `load`        |
+|   avgRt   | 所有入口流量的平均响应时间 |
+| maxThread |    入口流量的最大并发数    |
+|    qps    |     所有入口资源的 QPS     |
+
+
+
+
 * degrade 参数格式 json
 
 ```json
@@ -136,7 +154,33 @@ public class SpringSentinelApolloServer {
 |   grade    | 降级模式，根据 RT (0)、异常数(2)、 异常比例(1)      | RT (0) |
 | timeWindow |              降级的时间，单位为 s                 |        |
 
-  
+
+* param-flow(热点规则) json
+
+```json
+[
+    {
+        "resource": "/hello",
+        "grade": 1,
+        "paramIdx": 1,
+        "count": 10,
+        "paramFlowItemList": []
+    }
+]
+```
+
+* param-flow(热点规则) 参数
+
+|       字段        |                             描述                             | 默认值 |
+| :---------------: | :----------------------------------------------------------: | :----: |
+|     resource      |                         资源名，必填                         |        |
+|       grade       |                           限流模式                           | qps(1) |
+|     paramIdx      | 热点参数的索引，必填，对应 `SphU.entry(xxx, args)` 中的参数索引位置 |        |
+|       count       |                        限流阈值，必填                        |        |
+| paramFlowItemList | 参数例外项，可以针对指定的参数值单独设置限流阈值，不受前面 `count` 阈值的限制。 |        |
+
+
+
 * apollo上配置
 ```properties
 server.port = 7852
@@ -144,13 +188,15 @@ server.servlet.context-path = /sentinel
 flowRules = [{"resource": "/hello","limitApp": "default","grade": 1,"count": 3000000,"strategy": 0,"controlBehavior": 0,"clusterMode": false}]
 degrades = [{"resource": "/rt","count": 50,"timeWindow": 5,"grade": 0},{"resource": "/count","count": 5,"timeWindow": 8,"grade": 2},{"resource": "/erro","count": 0.5,"timeWindow": 5,"grade": 1}]
 authoritys = [{"resource": "/hello","limitApp": "192.168.12.215","strategy": 1}]
-paramflows = []
-systems = []
+paramflows = [{"resource": "/hello","grade": 1,"paramIdx": 1,"count": 10,"paramFlowItemList": []}]
+systems = [{"qps": 20}]
 ```
 * 拉去规则成功日志
 
 ```
   2019-05-12 14:30:50.811  INFO 27388 --- [           main] o.s.c.a.s.c.SentinelDataSourceHandler    : [Sentinel Starter] DataSource ds-sentinel-apollo-datasource load 1 FlowRule
 ```
+
 * 测试接口
-http://192.168.12.215:7852/sentinel/hello
+http://localhost:7852/sentinel/hello
+
