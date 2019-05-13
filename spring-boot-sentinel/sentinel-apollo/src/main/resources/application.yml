@@ -30,7 +30,7 @@ spring:
             namespaceName: application
             flowRulesKey: systems
             rule-type: system
-        param-flow: # 系统规则
+        param-flow: # 热点规则
           apollo:
             namespaceName: application
             flowRulesKey: paramflows
