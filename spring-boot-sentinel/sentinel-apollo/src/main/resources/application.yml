@@ -7,19 +7,34 @@ spring:
         port: 8719 # 向sentinel-dashboard传输数据的端口 默认:8719
         dashboard: localhost:8100 # sentinel-dashboard
       log:
-        dir: ./logs
+        dir: ./logs # 默认值${home}/logs/csp/
         switch-pid: true # 日志带上线程id
       datasource:
-        ds1:
+        flow: # 流控规则
           apollo:
             namespaceName: application
             flowRulesKey: flowRules
             rule-type: flow #flow,degrade,authority,system, param-flow
-        ds2:
+        degrade: # 熔断降级规则
           apollo:
             namespaceName: application
             flowRulesKey: degrades
-            rule-type: degrade #flow,degrade,authority,system, param-flow
+            rule-type: degrade
+        authority: # 授权规则
+          apollo:
+            namespaceName: application
+            flowRulesKey: authoritys
+            rule-type: authority
+        system: # 系统规则
+          apollo:
+            namespaceName: application
+            flowRulesKey: systems
+            rule-type: system
+        param-flow: # 系统规则
+          apollo:
+            namespaceName: application
+            flowRulesKey: paramflows
+            rule-type: param-flow
 app:
   id: ${spring.application.name}
 apollo:

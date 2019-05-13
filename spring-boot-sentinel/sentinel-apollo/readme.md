@@ -32,13 +32,34 @@ spring:
         port: 8719 # 向sentinel-dashboard传输数据的端口 默认:8719
         dashboard: localhost:8100 # sentinel-dashboard
       log:
-        dir: ./logs
+        dir: ./logs # 默认值${home}/logs/csp/
+        switch-pid: true # 日志带上线程id
       datasource:
-        ds1:
+        flow: # 流控规则
           apollo:
-            namespaceName: application # 命名空间
-            flowRulesKey: flowRules # apollo 上配置的key
+            namespaceName: application
+            flowRulesKey: flowRules
             rule-type: flow #flow,degrade,authority,system, param-flow
+        degrade: # 熔断降级规则
+          apollo:
+            namespaceName: application
+            flowRulesKey: degrades
+            rule-type: degrade
+        authority: # 授权规则
+          apollo:
+            namespaceName: application
+            flowRulesKey: authoritys
+            rule-type: authority
+        system: # 系统规则
+          apollo:
+            namespaceName: application
+            flowRulesKey: systems
+            rule-type: system
+        param-flow: # 系统规则
+          apollo:
+            namespaceName: application
+            flowRulesKey: paramflows
+            rule-type: param-flow
 app:
   id: ${spring.application.name}
 apollo:
@@ -71,6 +92,7 @@ public class SpringSentinelApolloServer {
 ]
 ```
 * flow(流控规则)参数规则说明
+
 |      字段       |                             描述                             |  默认值  |
 | :-------------: | :----------------------------------------------------------: | :------: |
 |    resource     |                 资源名，即限流规则的作用对象                 |          |
@@ -82,12 +104,53 @@ public class SpringSentinelApolloServer {
 |   clusterMode   |                        是否为集群模式                        |          |
 
 * degrade 参数格式 json
+
 ```json
-
+[
+    {
+        "resource": "/rt",
+        "count": 50,
+        "timeWindow": 5,
+        "grade": 0
+    },
+    {
+        "resource": "/count",
+        "count": 5,
+        "timeWindow": 8,
+        "grade": 2
+    },
+    {
+        "resource": "/erro",
+        "count": 0.5,
+        "timeWindow": 5,
+        "grade": 1
+    }
+]
 ```
-* degrade参数规则说明
+* degrade(熔断降级规则)参数规则说明
 
+|    字段     |                      描述                      | 默认值 |
+| :--------: | :--------------------------------------------: | :----: |
+|  resource  |          资源名，即限流规则的作用对象              |        |
+|   count    |                      阈值                      |        |
+|   grade    | 降级模式，根据 RT (0)、异常数(2)、 异常比例(1)      | RT (0) |
+| timeWindow |              降级的时间，单位为 s                 |        |
+
+  
+* apollo上配置
+```properties
+server.port = 7852
+server.servlet.context-path = /sentinel
+flowRules = [{"resource": "/hello","limitApp": "default","grade": 1,"count": 3000000,"strategy": 0,"controlBehavior": 0,"clusterMode": false}]
+degrades = [{"resource": "/rt","count": 50,"timeWindow": 5,"grade": 0},{"resource": "/count","count": 5,"timeWindow": 8,"grade": 2},{"resource": "/erro","count": 0.5,"timeWindow": 5,"grade": 1}]
+authoritys = [{"resource": "/hello","limitApp": "192.168.12.215","strategy": 1}]
+paramflows = []
+systems = []
+```
 * 拉去规则成功日志
-```log
-2019-05-12 14:30:50.811  INFO 27388 --- [           main] o.s.c.a.s.c.SentinelDataSourceHandler    : [Sentinel Starter] DataSource ds-sentinel-apollo-datasource load 1 FlowRule
+
 ```
+  2019-05-12 14:30:50.811  INFO 27388 --- [           main] o.s.c.a.s.c.SentinelDataSourceHandler    : [Sentinel Starter] DataSource ds-sentinel-apollo-datasource load 1 FlowRule
+```
+* 测试接口
+http://192.168.12.215:7852/sentinel/hello
