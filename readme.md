@@ -11,14 +11,7 @@ spring boot集成其他组件
 ## 集成进度
 - [ ] netty
 - [x] [kafka](./spring-boot-kafka)
-
-<details>
-  <summary>sentinel</summary>
-  
 - [x] [sentinel](./spring-boot-sentinel/sentinel)
-
 - [x] [sentinel-apollo](./spring-boot-sentinel/sentinel-apollo)
-</details>
-
 - [x] [hystrix](./spring-boot-hystrix)
 - [x] [apollo](./spring-boot-apollo)
