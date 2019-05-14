@@ -193,10 +193,18 @@ systems = [{"qps": 20}]
 ```
 * 拉去规则成功日志
 
-```
-  2019-05-12 14:30:50.811  INFO 27388 --- [           main] o.s.c.a.s.c.SentinelDataSourceHandler    : [Sentinel Starter] DataSource ds-sentinel-apollo-datasource load 1 FlowRule
+```log
+  2019-05-14 09:26:46.072  INFO 10100 --- [           main] o.s.c.a.s.c.SentinelDataSourceHandler    : [Sentinel Starter] DataSource authority-sentinel-apollo-datasource load 1 AuthorityRule
+  2019-05-14 09:26:46.090  INFO 10100 --- [           main] o.s.c.a.s.c.SentinelDataSourceHandler    : [Sentinel Starter] DataSource degrade-sentinel-apollo-datasource load 3 DegradeRule
+  2019-05-14 09:26:46.099  INFO 10100 --- [           main] o.s.c.a.s.c.SentinelDataSourceHandler    : [Sentinel Starter] DataSource flow-sentinel-apollo-datasource load 1 FlowRule
+  2019-05-14 09:26:46.115  INFO 10100 --- [           main] o.s.c.a.s.c.SentinelDataSourceHandler    : [Sentinel Starter] DataSource param-flow-sentinel-apollo-datasource load 1 ParamFlowRule
+  2019-05-14 09:26:46.122  INFO 10100 --- [           main] o.s.c.a.s.c.SentinelDataSourceHandler    : [Sentinel Starter] DataSource system-sentinel-apollo-datasource load 1 SystemRule
 ```
 
 * 测试接口
 http://localhost:7852/sentinel/hello
 
+* 最终效果图
+![sentinel-dashboard](https://gitee.com/sunny9/resource/raw/master/sentinel/sentinel.png)
+
+![apollo-dashboard](https://gitee.com/sunny9/resource/raw/master/sentinel/apollo.png)
