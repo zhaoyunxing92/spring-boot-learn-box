@@ -8,7 +8,8 @@
 
 ## 整合流程(拉模式)
 
-* pom.xml
+### pom.xml
+
 ```xml
   <dependency>
       <groupId>org.springframework.cloud</groupId>
@@ -21,7 +22,9 @@
       <version>1.6.0</version>
   </dependency>
 ```
-* application.yml
+
+### application.yml
+
 ```yaml
 spring:
   application:
@@ -66,7 +69,9 @@ apollo:
   meta: http://127.0.0.1:8080
   cacheDir: ./apolloconfig  # 缓存文件位置
 ```
-* java
+
+### java
+
 ```java
 @SpringBootApplication
 @EnableApolloConfig // 开启apollo
@@ -77,7 +82,8 @@ public class SpringSentinelApolloServer {
 }
 ```
 
-* flow(流控规则)参数格式json
+### flow(流控规则)参数格式json
+
 ```json
 [
     {
@@ -91,7 +97,8 @@ public class SpringSentinelApolloServer {
     }
 ]
 ```
-* flow(流控规则)参数规则说明
+
+### flow(流控规则)参数规则说明
 
 |      字段       |                             描述                             |  默认值  |
 | :-------------: | :----------------------------------------------------------: | :------: |
@@ -103,13 +110,13 @@ public class SpringSentinelApolloServer {
 | controlBehavior |         流量控制效果（直接拒绝、Warm Up、匀速排队）          |   拒绝   |
 |   clusterMode   |                        是否为集群模式                        |          |
 
-* system 系统规则参数格式,四个参数只能选择一个不能设置-1
+### system 系统规则参数格式,四个参数只能选择一个不能设置-1
 
 ```
 [{"qps": 2}]
 ```
 
-* system参数列表
+### system参数列表
 
 |   参数    |            说明            |
 | :-------: | :------------------------: |
@@ -121,7 +128,7 @@ public class SpringSentinelApolloServer {
 
 
 
-* degrade 参数格式 json
+### degrade 参数格式 json
 
 ```json
 [
@@ -145,7 +152,8 @@ public class SpringSentinelApolloServer {
     }
 ]
 ```
-* degrade(熔断降级规则)参数规则说明
+
+### degrade(熔断降级规则)参数规则说明
 
 |    字段     |                      描述                      | 默认值 |
 | :--------: | :--------------------------------------------: | :----: |
@@ -155,7 +163,7 @@ public class SpringSentinelApolloServer {
 | timeWindow |              降级的时间，单位为 s                 |        |
 
 
-* param-flow(热点规则) json
+### param-flow(热点规则) json
 
 ```json
 [
@@ -169,7 +177,7 @@ public class SpringSentinelApolloServer {
 ]
 ```
 
-* param-flow(热点规则) 参数
+### param-flow(热点规则) 参数
 
 |       字段        |                             描述                             | 默认值 |
 | :---------------: | :----------------------------------------------------------: | :----: |
@@ -181,7 +189,8 @@ public class SpringSentinelApolloServer {
 
 
 
-* apollo上配置
+### apollo上配置
+
 ```properties
 server.port = 7852
 server.servlet.context-path = /sentinel
@@ -191,7 +200,8 @@ authoritys = [{"resource": "/hello","limitApp": "192.168.12.215","strategy": 1}]
 paramflows = [{"resource": "/hello","grade": 1,"paramIdx": 1,"count": 10,"paramFlowItemList": []}]
 systems = [{"qps": 20}]
 ```
-* 拉去规则成功日志
+
+### 拉去规则成功日志
 
 ```log
   2019-05-14 09:26:46.072  INFO 10100 --- [           main] o.s.c.a.s.c.SentinelDataSourceHandler    : [Sentinel Starter] DataSource authority-sentinel-apollo-datasource load 1 AuthorityRule
@@ -201,10 +211,11 @@ systems = [{"qps": 20}]
   2019-05-14 09:26:46.122  INFO 10100 --- [           main] o.s.c.a.s.c.SentinelDataSourceHandler    : [Sentinel Starter] DataSource system-sentinel-apollo-datasource load 1 SystemRule
 ```
 
-* 测试接口
+### 测试接口
+
 http://localhost:7852/sentinel/hello
 
-* 最终效果图
+### 最终效果图
 
 ![sentinel-dashboard](https://gitee.com/sunny9/resource/raw/master/sentinel/sentinel.png)
 
