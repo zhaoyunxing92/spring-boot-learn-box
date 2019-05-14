@@ -81,6 +81,11 @@ public class SpringSentinelApolloServer {
     }
 }
 ```
+### jvm参数配置
+
+```shell
+-Denv=DEV
+```
 
 ### flow(流控规则)参数格式json
 
