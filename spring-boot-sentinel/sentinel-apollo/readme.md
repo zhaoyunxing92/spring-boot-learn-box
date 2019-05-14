@@ -185,7 +185,7 @@ public class SpringSentinelApolloServer {
 ```properties
 server.port = 7852
 server.servlet.context-path = /sentinel
-flowRules = [{"resource": "/hello","limitApp": "default","grade": 1,"count": 3000000,"strategy": 0,"controlBehavior": 0,"clusterMode": false}]
+flowRules = [{"resource": "/hello","limitApp": "default","grade": 1,"count": 3,"strategy": 0,"controlBehavior": 0,"clusterMode": false}]
 degrades = [{"resource": "/rt","count": 50,"timeWindow": 5,"grade": 0},{"resource": "/count","count": 5,"timeWindow": 8,"grade": 2},{"resource": "/erro","count": 0.5,"timeWindow": 5,"grade": 1}]
 authoritys = [{"resource": "/hello","limitApp": "192.168.12.215","strategy": 1}]
 paramflows = [{"resource": "/hello","grade": 1,"paramIdx": 1,"count": 10,"paramFlowItemList": []}]
