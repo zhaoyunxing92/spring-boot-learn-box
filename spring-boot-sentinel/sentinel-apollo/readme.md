@@ -205,6 +205,7 @@ systems = [{"qps": 20}]
 http://localhost:7852/sentinel/hello
 
 * 最终效果图
+
 ![sentinel-dashboard](https://gitee.com/sunny9/resource/raw/master/sentinel/sentinel.png)
 
 ![apollo-dashboard](https://gitee.com/sunny9/resource/raw/master/sentinel/apollo.png)
