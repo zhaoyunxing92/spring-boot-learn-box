@@ -15,26 +15,26 @@ spring:
             namespaceName: application
             flowRulesKey: sentinel.flowRules # 注意该key必须固定
             rule-type: flow #flow,degrade,authority,system, param-flow
-#        degrade: # 熔断降级规则
-#          apollo:
-#            namespaceName: application
-#            flowRulesKey: degrades
-#            rule-type: degrade
-#        authority: # 授权规则
-#          apollo:
-#            namespaceName: application
-#            flowRulesKey: authoritys
-#            rule-type: authority
-#        system: # 系统规则
-#          apollo:
-#            namespaceName: application
-#            flowRulesKey: systems
-#            rule-type: system
-#        param-flow: # 热点规则
-#          apollo:
-#            namespaceName: application
-#            flowRulesKey: paramflows
-#            rule-type: param-flow
+        degrade: # 熔断降级规则
+          apollo:
+            namespaceName: application
+            flowRulesKey: sentinel.degradeRules
+            rule-type: degrade
+        authority: # 授权规则
+          apollo:
+            namespaceName: application
+            flowRulesKey: sentinel.authorityRules
+            rule-type: authority
+        system: # 系统规则
+          apollo:
+            namespaceName: application
+            flowRulesKey: sentinel.systemRules
+            rule-type: system
+        param-flow: # 热点规则
+          apollo:
+            namespaceName: application
+            flowRulesKey: sentinel.paramFlowRules
+            rule-type: param-flow
 app:
   id: ${spring.application.name}
 apollo:

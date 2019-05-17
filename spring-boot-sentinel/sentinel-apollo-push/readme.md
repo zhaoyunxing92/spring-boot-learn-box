@@ -28,9 +28,10 @@
 ### application.yml
 
 ```yaml
+
 spring:
   application:
-    name: spring-boot-sentinel-apollo
+    name: sentinel-apollo-push
   cloud:
     sentinel:
       transport:
@@ -43,27 +44,27 @@ spring:
         flow: # 流控规则
           apollo:
             namespaceName: application
-            flowRulesKey: sentinel.flowRules
+            flowRulesKey: sentinel.flowRules # 注意该key必须固定
             rule-type: flow #flow,degrade,authority,system, param-flow
         degrade: # 熔断降级规则
           apollo:
             namespaceName: application
-            flowRulesKey: degrades
+            flowRulesKey: sentinel.degradeRules
             rule-type: degrade
-        authority: # 授权规则  未验证,官方不推荐
+        authority: # 授权规则
           apollo:
             namespaceName: application
-            flowRulesKey: authoritys
+            flowRulesKey: sentinel.authorityRules
             rule-type: authority
         system: # 系统规则
           apollo:
             namespaceName: application
-            flowRulesKey: systems
+            flowRulesKey: sentinel.systemRules
             rule-type: system
         param-flow: # 热点规则
           apollo:
             namespaceName: application
-            flowRulesKey: paramflows
+            flowRulesKey: sentinel.paramFlowRules
             rule-type: param-flow
 app:
   id: ${spring.application.name}
@@ -102,4 +103,5 @@ public class SpringSentinelApolloServer {
 
 http://localhost:7853/sentinel/hello
 
-### 最终效果图
+### apollo效果图
+![sentinel-dashboard-push](https://gitee.com/sunny9/resource/raw/master/sentinel/sentinel-dashboard-push.png)
