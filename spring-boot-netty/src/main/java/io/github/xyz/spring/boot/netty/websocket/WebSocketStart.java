@@ -10,6 +10,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Component;
  * @des:
  */
 @Component
+@Slf4j
 public class WebSocketStart implements ApplicationRunner {
     @Value("${netty.port:8888}")
     private int port;
@@ -46,7 +48,7 @@ public class WebSocketStart implements ApplicationRunner {
                     .childHandler(new WebSocketChannelInitializer(readerIdleTimeSeconds, writerIdleTimeSeconds, allIdleTimeSeconds));
 
             ChannelFuture channelFuture = serverBootstrap.bind(port).sync();
-            System.out.println("netty start in " + port);
+            log.info("netty start in {}", port);
             channelFuture.channel().closeFuture().sync();
         } finally {
             bossGroup.shutdownGracefully();

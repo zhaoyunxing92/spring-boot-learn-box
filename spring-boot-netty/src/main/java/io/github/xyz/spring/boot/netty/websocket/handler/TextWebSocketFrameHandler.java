@@ -8,6 +8,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -17,6 +18,7 @@ import java.time.format.DateTimeFormatter;
  * @date: 2019-04-02 14:59
  * @des:
  */
+@Slf4j
 public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
 
 
@@ -55,7 +57,8 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
         // 检测心跳
         if (evt instanceof IdleStateEvent) {
-            System.out.println("userEventTriggered==================");
+           // System.out.println("userEventTriggered==================");
+            log.info("IdleStateEvent ip{}",ctx.channel().remoteAddress().toString());
         }
 
     }
