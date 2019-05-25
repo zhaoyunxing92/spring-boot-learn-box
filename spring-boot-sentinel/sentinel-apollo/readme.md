@@ -208,6 +208,9 @@ degrades = [{"resource": "/rt","count": 50,"timeWindow": 5,"grade": 0},{"resourc
 authoritys = [{"resource": "/hello","limitApp": "192.168.12.215","strategy": 1}]
 paramflows = [{"resource": "/hello","grade": 1,"paramIdx": 1,"count": 10,"paramFlowItemList": []}]
 systems = [{"qps": 20}]
+
+sentinel.paramFlowRules = [{"clusterMode":false,"count":0.0,"grade":1,"limitApp":"default","paramFlowItemList":[],"paramIdx":1,"resource":"/hello"]
+sentinel.authorityRules = [{"limitApp":"5","resource":"/hello","rule":{"limitApp":"5","resource":"/hello","strategy":0},"strategy":0}]
 ```
 
 ### 拉去规则成功日志

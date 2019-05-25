@@ -37,6 +37,7 @@
         <module>spring-boot-sentinel/sentinel-apollo</module>
         <module>spring-boot-sentinel/sentinel-apollo-push</module>
         <module>spring-boot-apollo</module>
+        <module>spring-boot-skywalking</module>
     </modules>
 
     <dependencies>
