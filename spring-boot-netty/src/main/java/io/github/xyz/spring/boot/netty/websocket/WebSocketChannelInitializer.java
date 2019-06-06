@@ -35,21 +35,22 @@ public class WebSocketChannelInitializer extends ChannelInitializer<SocketChanne
     protected void initChannel(SocketChannel ch) throws Exception {
 
         ChannelPipeline pipeline = ch.pipeline();
-        pipeline.addLast(new HttpServerCodec());
+        pipeline.addLast("httpServerCodec", new HttpServerCodec());
         //添加依块去写
-        pipeline.addLast(new ChunkedWriteHandler());
+        pipeline.addLast("chunkWriteHandler", new ChunkedWriteHandler());
         // 心跳
-        pipeline.addLast(new IdleStateHandler(readerIdleTimeSeconds, writerIdleTimeSeconds, allIdleTimeSeconds));
+        pipeline.addLast("idleStateHandler", new IdleStateHandler(readerIdleTimeSeconds, writerIdleTimeSeconds, allIdleTimeSeconds));
         /**
          * Creates a new instance.
          * @param maxContentLength the maximum length of the aggregated content in bytes.
          * If the length of the aggregated content exceeds this value,
          * {@link #handleOversizedMessage(ChannelHandlerContext, HttpMessage)} will be called.
          */
-        pipeline.addLast(new HttpObjectAggregator(64 * 1024));
+        pipeline.addLast("httpObjectAggregator", new HttpObjectAggregator(64 * 1024));
         //添加websocket
-        pipeline.addLast(new WebSocketServerProtocolHandler("/ws"));
-        pipeline.addLast(new TextWebSocketFrameHandler());
+        pipeline.addLast("webSocketServerProtocolHandler", new WebSocketServerProtocolHandler("/ws"));
+        // 添加TextWebSocketFrameHandler
+        pipeline.addLast("textWebSocketFrameHandler", new TextWebSocketFrameHandler());
 
     }
 }
