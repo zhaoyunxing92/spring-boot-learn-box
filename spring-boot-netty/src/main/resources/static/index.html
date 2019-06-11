@@ -11,7 +11,7 @@
   function connect( msg ) {
     console.log(msg);
     if( window.WebSocket ) {
-      socket = new WebSocket("ws://localhost:9999/ws");
+      socket = new WebSocket("ws://172.26.105.14:9999/ws");
       // 服务连接
       socket.onopen = function( ev ) {
         var state = document.getElementById("state");
