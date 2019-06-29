@@ -10,7 +10,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>spring-boot-sentinel</artifactId>
+    <artifactId>sentinel</artifactId>
 
     <dependencies>
         <dependency>

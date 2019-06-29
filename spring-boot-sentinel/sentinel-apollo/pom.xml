@@ -11,7 +11,7 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>spring-boot-sentinel-apollo</artifactId>
+    <artifactId>sentinel-apollo</artifactId>
 
     <dependencies>
         <dependency>

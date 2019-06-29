@@ -11,7 +11,7 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>spring-boot-sentinel-apollo-push</artifactId>
+    <artifactId>sentinel-apollo-push</artifactId>
 
     <dependencies>
         <dependency>
