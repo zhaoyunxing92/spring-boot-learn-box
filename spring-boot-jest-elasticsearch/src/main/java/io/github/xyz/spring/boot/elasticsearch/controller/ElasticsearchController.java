@@ -1,14 +1,15 @@
 package io.github.xyz.spring.boot.elasticsearch.controller;
 
 import io.github.xyz.spring.boot.elasticsearch.entity.User;
-import io.github.xyz.spring.boot.elasticsearch.service.UserService;
 import io.searchbox.client.JestClient;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.util.List;
