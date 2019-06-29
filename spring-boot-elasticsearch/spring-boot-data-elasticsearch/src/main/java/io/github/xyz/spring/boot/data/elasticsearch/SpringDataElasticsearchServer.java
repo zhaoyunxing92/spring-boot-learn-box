@@ -1,4 +1,4 @@
-package io.github.xyz.spring.boot.jest.elasticsearch;
+package io.github.xyz.spring.boot.data.elasticsearch;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,7 +1,8 @@
-package io.github.xyz.spring.boot.jest.elasticsearch.controller;
+package io.github.xyz.spring.boot.data.elasticsearch.controller;
 
-import io.github.xyz.spring.boot.jest.elasticsearch.entity.User;
-import io.github.xyz.spring.boot.jest.elasticsearch.service.UserService;
+
+import io.github.xyz.spring.boot.data.elasticsearch.entity.User;
+import io.github.xyz.spring.boot.data.elasticsearch.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

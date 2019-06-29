@@ -1,4 +1,4 @@
-package io.github.xyz.spring.boot.jest.elasticsearch.entity;
+package io.github.xyz.spring.boot.data.elasticsearch.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
