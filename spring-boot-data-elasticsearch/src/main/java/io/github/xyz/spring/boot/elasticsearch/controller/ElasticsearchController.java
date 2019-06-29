@@ -16,15 +16,29 @@ public class ElasticsearchController {
     private final UserService userService;
 
     @Autowired
-    public ElasticsearchController(UserService userService) {this.userService = userService;}
+    public ElasticsearchController(UserService userService) {
+        this.userService = userService;
+    }
 
+    /**
+     * 创建用户
+     *
+     * @param user 用户对象
+     * @return User
+     */
     @PostMapping
     public User save(@RequestBody User user) {
         return userService.save(user);
     }
 
+    /**
+     * 根据主键查找用户
+     *
+     * @param id 用户id
+     * @return User
+     */
     @GetMapping
-    public User findeUserById(String id) {
+    public User findUserById(String id) {
         return userService.findById(id).orElse(new User());
     }
 }
