@@ -18,6 +18,8 @@ spring boot集成其他组件
 - [x] [sentinel-apollo](./spring-boot-sentinel/sentinel-apollo)
 - [x] [hystrix](./spring-boot-hystrix)
 - [x] [apollo](./spring-boot-apollo)
+- [x] [spring-data-for-elasticsearch](./spring-boot-data-elasticsearch)
+- [x] [spring-jest-for-elasticsearch](./spring-boot-jest-elasticsearch)
 
 ## 公众号
 

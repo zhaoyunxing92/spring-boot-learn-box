@@ -17,9 +17,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(indexName = "user", type = "user", shards = 1, replicas = 0, refreshInterval = "-1")
 public class User {
-    @Id
     @JestId
     private String id;
     /**

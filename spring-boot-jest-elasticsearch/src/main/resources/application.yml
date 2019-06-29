@@ -3,13 +3,11 @@ spring:
     elasticsearch:
       repositories:
         enabled: true
-      cluster-nodes: 172.16.1.54:9300
-      cluster-name: es-cn-45910glzw000g5esz
-#      properties:
-#        xpack.security.user: elastic:Ela%Ts6Op!cU
+      cluster-nodes: 127.0.0.1:9300
+      cluster-name: elasticsearch # 集群名称
   elasticsearch:
     jest:
       uris:
-        - http://172.16.1.54:9200
-      username: elastic
-      password: Ela%Ts6Op!cU
+        - http://127.0.0.1:9200 # 多个使用数组
+      username: elastic  # 账号
+      password: xxxx # 密码

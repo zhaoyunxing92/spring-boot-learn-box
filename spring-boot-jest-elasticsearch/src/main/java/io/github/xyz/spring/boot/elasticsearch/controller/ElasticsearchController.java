@@ -21,12 +21,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 public class ElasticsearchController {
-   // private final UserService userService;
     private final JestClient jestClient;
 
     @Autowired
-    public ElasticsearchController(UserService userService, JestClient jestClient) {
-      //  this.userService = userService;
+    public ElasticsearchController(JestClient jestClient) {
         this.jestClient = jestClient;
     }
 
@@ -34,7 +32,7 @@ public class ElasticsearchController {
     public User add() throws IOException {
         User user = new User();
         user.setAge(30);
-        user.setName("张三");
+        user.setName("李四");
         Index index = new Index.Builder(user).index("user").type("user").build();
         DocumentResult result = jestClient.execute(index);
         return result.getSourceAsObject(User.class);
@@ -45,7 +43,7 @@ public class ElasticsearchController {
         String json = "{\n" +
                 " \"query\" : {\n" +
                 "  \"match\" : {\n" +
-                "   \"name\" : \"张三\"\n" +
+                "   \"name\" : \"李四\"\n" +
                 "  }\n" +
                 " }\n" +
                 "}";
@@ -53,14 +51,4 @@ public class ElasticsearchController {
         SearchResult result = jestClient.execute(search);
         return result.getSourceAsObjectList(User.class, true);
     }
-
-//    @PostMapping
-//    public User save(@RequestBody User user) {
-//        return userService.save(user);
-//    }
-//
-//    @GetMapping
-//    public User findeUserById(String id) {
-//        return userService.findById(id).orElse(new User());
-//    }
 }

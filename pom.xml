@@ -38,7 +38,8 @@
         <module>spring-boot-sentinel/sentinel-apollo-push</module>
         <module>spring-boot-apollo</module>
         <module>spring-boot-skywalking</module>
-        <module>spring-boot-elasticsearch</module>
+        <module>spring-boot-data-elasticsearch</module>
+        <module>spring-boot-jest-elasticsearch</module>
     </modules>
 
     <dependencies>
