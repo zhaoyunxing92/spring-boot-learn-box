@@ -1,6 +1,6 @@
-package io.github.xyz.spring.boot.elasticsearch.service;
+package io.github.xyz.spring.boot.jest.elasticsearch.service;
 
-import io.github.xyz.spring.boot.elasticsearch.entity.User;
+import io.github.xyz.spring.boot.jest.elasticsearch.entity.User;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
 /**

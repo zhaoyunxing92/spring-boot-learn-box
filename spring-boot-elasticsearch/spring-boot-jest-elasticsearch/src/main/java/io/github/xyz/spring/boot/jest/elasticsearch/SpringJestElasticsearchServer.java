@@ -1,4 +1,4 @@
-package io.github.xyz.spring.boot.elasticsearch;
+package io.github.xyz.spring.boot.jest.elasticsearch;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,9 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @des:
  */
 @SpringBootApplication
-public class SpringElasticsearchServer {
-
+public class SpringJestElasticsearchServer {
     public static void main(String[] args) {
-        SpringApplication.run(SpringElasticsearchServer.class, args);
+        SpringApplication.run(SpringJestElasticsearchServer.class, args);
     }
 }

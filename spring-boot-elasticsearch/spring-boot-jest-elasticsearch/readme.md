@@ -27,7 +27,7 @@ spring:
 
 ## 可能遇到的问题
 
- * Consider defining a bean of type 'io.github.xyz.spring.boot.elasticsearch.service.UserService' in your configuration.
+ * Consider defining a bean of type 'UserService' in your configuration.
 
   出现这个问题是`spring.data.elasticsearch.repositories.enabled`属性需要设置为`true`
   

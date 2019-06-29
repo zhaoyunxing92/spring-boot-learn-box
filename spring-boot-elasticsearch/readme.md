@@ -198,4 +198,4 @@ logging.level=${SW_LOGGING_LEVEL:DEBUG}
     </appender>
 ```
 
-> 默认情况下输出`TID: N/A` 所以不用紧张
+> 默认情况下输出`TID: N/A` 说以不用紧张

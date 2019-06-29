@@ -1,6 +1,6 @@
-package io.github.xyz.spring.boot.elasticsearch.controller;
+package io.github.xyz.spring.boot.jest.elasticsearch.controller;
 
-import io.github.xyz.spring.boot.elasticsearch.entity.User;
+import io.github.xyz.spring.boot.jest.elasticsearch.entity.User;
 import io.searchbox.client.JestClient;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
