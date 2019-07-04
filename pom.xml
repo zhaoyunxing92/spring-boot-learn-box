@@ -40,6 +40,7 @@
         <module>spring-boot-skywalking</module>
         <module>spring-boot-elasticsearch/spring-boot-data-elasticsearch</module>
         <module>spring-boot-elasticsearch/spring-boot-jest-elasticsearch</module>
+        <module>spring-boot-elasticsearch/elasticsearch-in-java</module>
     </modules>
 
     <dependencies>

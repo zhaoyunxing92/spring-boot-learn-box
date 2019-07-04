@@ -1,7 +1,8 @@
 # spring-boot-elasticsearch
 
-## elasticsearch有两种操作方式
-
+## elasticsearch有三种操作方式
+  
+ - [x] [elasticsearch-in-java](./elasticsearch-in-java) 使用elasticsearch自带的api操作
  - [x] [spring-data-elasticsearch](./spring-boot-data-elasticsearch) spring data方式操作elasticsearch
  - [x] [jest-elasticsearch](./spring-boot-jest-elasticsearch) jest 操作elasticsearch
  
@@ -15,4 +16,6 @@
   
     * 出现这个问题需要验证下你`spring.data.elasticsearch.cluster-name`属性配置的是否跟你es配置的名称一致
   
-    * 检查你的`spring.data.elasticsearch.cluster-nodes`端口是否配置正确`9300`而不是`9200` 
+    * 检查你的`spring.data.elasticsearch.cluster-nodes`端口是否配置正确`9300`而不是`9200`
+    
+    * es开启了xpack认证，账号密码不对或者没有设置 
