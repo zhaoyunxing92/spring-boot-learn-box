@@ -152,23 +152,33 @@ public void createIndex() {
 对应的java代码
 
 ```java
-XContentBuilder builder= XContentFactory.jsonBuilder()
+XContentBuilder builder = XContentFactory.jsonBuilder()
             .startObject() // 相当于json的'{'
                 .startObject("properties")
                     .startObject("id")
-                        .field("type","long") //字段类型
-                        .field("store",true) //是否存储
+                        .field("type", "long") //字段类型
+                        .field("store", true) //是否存储
                     .endObject() //相当于json的'}'
                     .startObject("name")
-                         .field("type","text")
-                         .field("store",true)
-                         .field("analyzer","ik_smart") //采用ik_smart分词
+                        .field("type", "text")
+                        .field("store", true)
+                        .field("analyzer", "ik_smart") //采用ik_smart分词 "search_analyzer": "ik_smart"
                     .endObject()
                     .startObject("age")
-                        .field("type","long")
-                        .field("store",true)
+                        .field("type", "integer")
+                        .field("store", true)
                     .endObject()
-                .endObject()
+                    .startObject("desc")
+                        .field("type", "text")
+                        .field("store", true)
+                        .field("analyzer", "ik_max_word")
+                    .endObject()
+                    .startObject("registerTime")
+                        .field("type", "date")
+                        .field("store", true)
+                        .field("format", "yyy-MM-dd HH:mm:ss||yyyy-MM-dd||epoch_millis")
+                    .endObject()
+               .endObject()
             .endObject();
 
     client.admin().indices()
@@ -232,7 +242,7 @@ public void addDocumentPojo(){
 
 #### 根据id查询
 
- ```java
+```java
 @Test
 public void searchById(){
      QueryBuilder query = QueryBuilders.idsQuery().addIds("1","2");
