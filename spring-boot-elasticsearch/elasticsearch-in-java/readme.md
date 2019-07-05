@@ -18,6 +18,22 @@
   * jdk 1.8
   * elasticsearch 6.5.4
   * x-pack 6.5.4 正常的私服下载不到,es官方给的解决方案：https://www.elastic.co/guide/en/elasticsearch/reference/6.5/setup-xpack-client.html
+
+## 准备工作
+
+下面可能用到了中文分词[elasticsearch-analysis-ik](https://github.com/medcl/elasticsearch-analysis-ik),由于很简单我就不单独写了简单说下流程吧
+
+* docker 进入容器
+```shell
+docker exec -it elasticsearch /bin/bash
+```
+* 进入`bin`目录下
+
+在github：https://github.com/medcl/elasticsearch-analysis-ik/releases 找到跟你elasticsearch匹配的版本这里6.5.4为列
+
+```shell
+elasticsearch-plugin install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v6.5.4/elasticsearch-analysis-ik-6.5.4.zip
+```  
   
 ## pom.xml依赖
 
@@ -212,8 +228,131 @@ public void addDocumentPojo(){
 ```
 ### 查询
 
+由于我抽取了公共的`search()`方法，那么下面我只写一遍
+
 #### 根据id查询
 
+ ```java
+@Test
+public void searchById(){
+     QueryBuilder query = QueryBuilders.idsQuery().addIds("1","2");
+     search(query);
+ }
+private void search(QueryBuilder query) {
+    SearchResponse searchResponse = client.prepareSearch("elastic")
+            .setTypes("user")
+            .setQuery(query)
+            .get();
+    //查询命中缓存
+    SearchHits searchHits = searchResponse.getHits();
+    System.out.println("查询结果总记录数："+searchHits.getTotalHits());
+
+    Arrays.stream(searchHits.getHits()).forEach(doc-> System.out.println(doc.getSourceAsString()));
+
+    client.close();
+}
+```
+
+#### 根据关键字查询
+
+```java
+@Test
+public void searchByTerm(){
+    /*
+     * * 搜索的字段名称
+     * * 关键字
+     */
+    QueryBuilder query = QueryBuilders.termQuery("desc","es");
+    search(query);
+}
+```
+#### 模糊查询
+
+```java
+@Test
+public void searchByStringQuery(){
+    QueryBuilder query = QueryBuilders.queryStringQuery("sunny爱中国，最近在学es")
+            // 可以指定作用域，不指定全部字段匹配
+            .defaultField("name");
+    search(query);
+}
+```
+ 
+#### 分页设置
+
+```java
+SearchResponse searchResponse = client.prepareSearch("elastic")
+            .setTypes("user")
+            .setQuery(query)
+            //从零开始
+            .setFrom(0)
+            //每页显示5条
+            .setSize(5)
+            .get();
+```
+
+#### 根据字段排序
+
+只写下关键代码 `addSort("id", SortOrder.DESC)`
+
+```java
+SearchResponse searchResponse = client.prepareSearch("elastic")
+                .setTypes("user")
+                .setQuery(query)
+                //从零开始
+                .setFrom(from)
+                //每页显示5条
+                .setSize(size)
+                .addSort("id", SortOrder.DESC) //设置字段排序规则
+                .highlighter(highlightBuilder)
+                .get();
+```
+
+#### 根据时间域查询
+
+这里也只写伪代码，我数据插入进去的是时间戳，可能是我设置的时间不对，但是能说明问题即可
+
+```java
+SearchResponse searchResponse = client.prepareSearch("elastic")
+                .setTypes("user")
+                .setQuery(query)
+                .setQuery(new RangeQueryBuilder("registerTime").from("1562324622115").to("1562324622260"))
+                .get();
+```
+
+#### 高亮显示
+
+高亮显示原理即在匹配到的关键字前后添加上特殊标签，然后前端通过css识别
+
+```java
+HighlightBuilder highlightBuilder = new HighlightBuilder();
+    highlightBuilder.field(highlight); // 高亮字段
+    highlightBuilder.preTags("<b>"); //前字段
+    highlightBuilder.postTags("</b>"); //后字段
+
+    SearchResponse searchResponse = client.prepareSearch("elastic")
+            .setTypes("user")
+            .setQuery(query)
+            //从零开始
+            .setFrom(from)
+            //每页显示5条
+            .setSize(size)
+            .highlighter(highlightBuilder)
+            .get();
+    //查询命中缓存
+    SearchHits searchHits = searchResponse.getHits();
+    System.out.println("查询结果总记录数：" + searchHits.getTotalHits());
+
+    Arrays.stream(searchHits.getHits()).forEach(doc ->{
+        System.out.println(doc.getSourceAsString());
+        System.out.println("*******************高亮结果********************");
+        Map<String, HighlightField> highlightFields = doc.getHighlightFields();
+        HighlightField highlightField = highlightFields.get(highlight);
+        Arrays.stream(highlightField.getFragments()).forEach(System.out::println);
+        System.out.println();
+    });
+    client.close();
+```
 
 
 
