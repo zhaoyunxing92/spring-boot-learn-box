@@ -27,6 +27,8 @@
         <spring.boot.aop.version>2.1.0.RELEASE</spring.boot.aop.version>
         <apollo.client.vresion>1.1.0</apollo.client.vresion>
         <spring.cloud.alibaba.version>0.9.0.RELEASE</spring.cloud.alibaba.version>
+        <!--修改es版本-->
+        <elasticsearch.version>6.4.0</elasticsearch.version>
     </properties>
 
     <modules>
@@ -153,6 +155,11 @@
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
+        </repository>
+        <repository>
+            <id>spring-libs-snapshot</id>
+            <name>Spring Snapshot Repository</name>
+            <url>https://repo.spring.io/libs-snapshot</url>
         </repository>
     </repositories>
 

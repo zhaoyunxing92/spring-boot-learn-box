@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 /**
  * @author zhaoyunxing
@@ -16,9 +18,10 @@ import org.springframework.data.elasticsearch.annotations.Document;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(indexName = "user", type = "user", shards = 1, replicas = 0, refreshInterval = "-1")
+@Document(indexName = "elastic", type = "sunny")
 public class User {
     @Id
+    @Field(type = FieldType.Text, store = false)
     private String id;
     /**
      * 姓名
