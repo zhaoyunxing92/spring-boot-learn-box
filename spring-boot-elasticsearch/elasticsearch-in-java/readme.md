@@ -114,7 +114,7 @@ public void initClint() {
 
 ### 创建索引
 
-可以理解为创建一个mysql数据库
+可以理解为创建一个mysql数据库表
 
 ```java
 @Test
@@ -127,7 +127,7 @@ public void createIndex() {
 ```
 ### 设置mappings
 
-`mappings`可以理解为mysql的建表语句(json数据)
+`mappings`可以理解为mysql的表字段(json数据)
 
 对应的json格式
 
