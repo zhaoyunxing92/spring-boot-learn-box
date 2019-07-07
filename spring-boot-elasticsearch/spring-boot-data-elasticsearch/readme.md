@@ -226,7 +226,104 @@ public class Article {
 这里你只要熟悉[spring-data-elasticsearch](https://docs.spring.io/spring-data/elasticsearch/docs/2.1.22.RELEASE/reference/html/)的命名规则就很嗨皮的编写代码的，不了解就去翻文档吧,`IDAE`编辑器也会提示你怎么写。我就直接贴代码了
 
 ```java
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class ElasticsearchCase {
 
+    @Autowired
+    private ArticleService articleService;
+    @Autowired
+    private ElasticsearchTemplate elasticsearchTemplate;
+
+    /**
+     * 创建文章,更新文档只有保证id一直就可以了
+     */
+    @Test
+    public void addDocument() {
+        System.out.println("***********************一次性插入30条数据***********************");
+        List<Article> articles = new ArrayList<>(30);
+        for (int i = 1; i <= 30; i++) {
+            Article article = new Article();
+            article.setName("elasticsearch入门到放弃之docker搭建" + i);
+            article.setContent("在我的观念里elasticsearch是" + i + "大数据的产物");
+            article.setCreateTime(new Date());
+            article.setId(String.valueOf(i));
+            articles.add(article);
+        }
+        articleService.saveAll(articles);
+    }
+
+    /**
+     * 查询全部 默认是查询10条数据的，但是findAll()查询的是全部数据，说明它真的是findAll()
+     */
+    @Test
+    public void findAll() {
+        System.out.println("***********************获取全部数据***********************");
+        articleService.findAll().forEach(System.out::println);
+    }
+
+    /**
+     * 根据id查询
+     */
+    @Test
+    public void findById() {
+        System.out.println("***********************根据id查询***********************");
+        Article article = articleService.findById(String.valueOf(27)).orElseGet(Article::new);
+        System.out.println(article);
+    }
+
+    /**
+     * 根据名称查询 默认值返回10条数据
+     */
+    @Test
+    public void findByName() {
+        System.out.println("***********************根据名称查询***********************");
+        articleService.findArticleByName("docker搭建").forEach(System.out::println);
+    }
+
+    /**
+     * 标题中包含或者内容中包含,设置分页 三条数据分页
+     */
+    @Test
+    public void findArticleByNameOrContent() {
+        System.out.println("***********************根据名称和内容查询***********************");
+        articleService.findArticleByNameOrContent("docker搭建", "30", PageRequest.of(0, 3)).forEach(System.out::println);
+    }
+
+    /**
+     * 指定时间域名并且根据id进行deac排序(aec)类似不写了
+     */
+    @Test
+    public void findArticlesByCreateTimeBetweenAndOrderByCreateTimeDesc() {
+        System.out.println("***********************指定时间域名并且根据id进行deac排序***********************");
+
+        articleService.findArticlesByCreateTimeBetweenOrderByIdDesc("2019-07-07 14:41:39:998", "2019-07-07 16:33:29:175", PageRequest.of(0, 3)).forEach(System.out::println);
+    }
+
+    /**
+     * 模糊匹配查询对应的是QueryString方法这个可以参考：<a>https://www.jianshu.com/p/9f6f7f67df4e</a>
+     */
+    @Test
+    public void nativeSearchQuery() {
+        System.out.println("***********************模糊查询***********************");
+        // 构建查询对象
+        NativeSearchQuery query = new NativeSearchQueryBuilder()
+                .withQuery(QueryBuilders.queryStringQuery("sunny在学用docker搭建elasticsearch环境").defaultField("content"))
+                .withPageable(PageRequest.of(0, 3))
+                .build();
+
+        elasticsearchTemplate.queryForList(query, Article.class).forEach(System.out::println);
+    }
+
+    /**
+     * 删除文章 deleteAll()、delete() 这些方法类似不写了
+     */
+    @Test
+    public void deleteDocumentById() {
+        System.out.println("***********************根据id删除***********************");
+        articleService.deleteById("1");
+    }
+}
 ```
 
 ## 可能遇到的问题
