@@ -10,4 +10,5 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
  * @des:
  */
 public interface ArticleService extends ElasticsearchRepository<Article, String> {
+
 }

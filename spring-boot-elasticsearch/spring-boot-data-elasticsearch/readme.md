@@ -14,6 +14,7 @@
 ## 参考文档
 
 * [spring-data-elasticsearch](https://github.com/spring-projects/spring-data-elasticsearch) 官方的代码最能说明问题了
+* [官方代码](https://docs.spring.io/spring-data/elasticsearch/docs/2.1.22.RELEASE/reference/html/)
 
 ## 环境信息
 
