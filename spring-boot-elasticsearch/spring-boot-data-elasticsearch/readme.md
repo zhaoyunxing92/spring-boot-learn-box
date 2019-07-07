@@ -14,7 +14,10 @@
 ## 参考文档
 
 * [spring-data-elasticsearch](https://github.com/spring-projects/spring-data-elasticsearch) 官方的代码最能说明问题了
-* [官方代码](https://docs.spring.io/spring-data/elasticsearch/docs/2.1.22.RELEASE/reference/html/)
+
+* [官方文档](https://docs.spring.io/spring-data/elasticsearch/docs/2.1.22.RELEASE/reference/html/) 官方的文档也是很棒的
+
+* [官方日期处理](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-date-format.html#strict-date-time) 日期
 
 ## 环境信息
 
@@ -212,7 +215,7 @@ public class Article {
     /**
      * 创建时间 采用自定义的时间格式
      */
-    @Field(type = FieldType.Date, store = true, format = DateFormat.custom, pattern = "yyyy-MM-dd HH:mm:ss:SSS")
+    @Field(type = FieldType.Date, store = true, format = DateFormat.custom, pattern = "yyyy-MM-dd HH:mm:ss:SSS||yyyy-MM-dd||epoch_millis||date_optional_time")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss:SSS", timezone = "GMT+8")
     private Date createTime;
 }
@@ -220,7 +223,11 @@ public class Article {
 
 ### CURD操作
 
+这里你只要熟悉[spring-data-elasticsearch](https://docs.spring.io/spring-data/elasticsearch/docs/2.1.22.RELEASE/reference/html/)的命名规则就很嗨皮的编写代码的，不了解就去翻文档吧,`IDAE`编辑器也会提示你怎么写。我就直接贴代码了
 
+```java
+
+```
 
 ## 可能遇到的问题
 
@@ -232,6 +239,7 @@ public class Article {
   
   出现这个问题说明你的`elasticsearch`没有安装`ik`插件，可以看我的[elasticsearch-in-java](https://www.jianshu.com/p/9f6f7f67df4e)
 
-* ` Constructor threw exception; nested exception is java.lang.IllegalArgumentException: Rejecting mapping update to [elastic] as the final mapping would have more than 1 type: [sunny, user]`
+* `Constructor threw exception; nested exception is java.lang.IllegalArgumentException: Rejecting mapping update to [elastic] as the final mapping would have more than 1 type: [sunny, user]`
  
   出现这个问题是以为你的索引`elastic`存在两个mapping,在[elasticsearch-head](https://www.jianshu.com/p/80bb53bc1256)删除索引重新开始
+* `IllegalArgumentException[Parse failure at index [0] of [Sun Jul 07 06:41:39 UTC 2019]]`  

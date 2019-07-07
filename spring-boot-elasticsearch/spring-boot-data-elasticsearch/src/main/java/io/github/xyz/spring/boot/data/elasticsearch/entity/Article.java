@@ -39,8 +39,9 @@ public class Article {
     private String content;
     /**
      * 创建时间
+     * 关于日期可以参考：https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-date-format.html#strict-date-time
      */
-    @Field(type = FieldType.Date, store = true, format = DateFormat.custom, pattern = "yyyy-MM-dd HH:mm:ss:SSS")
+    @Field(type = FieldType.Date, store = true, format = DateFormat.custom, pattern = "yyyy-MM-dd HH:mm:ss:SSS||yyyy-MM-dd||epoch_millis||date_optional_time")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss:SSS", timezone = "GMT+8")
     private Date createTime;
 }

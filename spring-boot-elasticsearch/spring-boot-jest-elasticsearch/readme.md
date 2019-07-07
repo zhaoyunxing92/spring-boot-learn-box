@@ -1,5 +1,7 @@
 # spring-boot-jest-elasticsearch
 
+懒得写了可以看【[elasticsearch入门到放弃之elasticsearch java](https://www.jianshu.com/p/9f6f7f67df4e)】都差不多
+
 ## pom.xml配置
 
 ```xml

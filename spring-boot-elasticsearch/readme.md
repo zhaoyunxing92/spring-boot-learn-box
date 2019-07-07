@@ -4,7 +4,7 @@
   
  - [x] [elasticsearch-in-java](./elasticsearch-in-java) 使用elasticsearch自带的api操作
  - [x] [spring-data-elasticsearch](./spring-boot-data-elasticsearch) spring data方式操作elasticsearch
- - [x] [jest-elasticsearch](./spring-boot-jest-elasticsearch) jest 操作elasticsearch
+ - [x] [jest-elasticsearch](./spring-boot-jest-elasticsearch) jest 操作elasticsearch，这个懒得写了可以看【[elasticsearch入门到放弃之elasticsearch java](https://www.jianshu.com/p/9f6f7f67df4e)】都差不多
  
 ## 可能遇到的问题
 
