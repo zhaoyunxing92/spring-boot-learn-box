@@ -8,14 +8,30 @@
  
 ## 可能遇到的问题
 
- * Consider defining a bean of type 'UserService' in your configuration.
+ * `Consider defining a bean of type 'UserService' in your configuration.`
 
   出现这个问题是`spring.data.elasticsearch.repositories.enabled`属性需要设置为`true`
   
- * None of the configured nodes are available: [{#transport#-1}{-sq-D5sBSTCbdr1apbd9WA}{172.26.104.209}{172.26.104.209:9300}] 
+ * `None of the configured nodes are available: [{#transport#-1}{-sq-D5sBSTCbdr1apbd9WA}{172.26.104.209}{172.26.104.209:9300}]` 
   
     * 出现这个问题需要验证下你`spring.data.elasticsearch.cluster-name`属性配置的是否跟你es配置的名称一致
   
     * 检查你的`spring.data.elasticsearch.cluster-nodes`端口是否配置正确`9300`而不是`9200`
     
-    * es开启了xpack认证，账号密码不对或者没有设置 
+    * es开启了xpack认证，账号密码不对或者没有设置
+    
+ * `Caused by: java.lang.ClassNotFoundException: org.elasticsearch.action.admin.indices.mapping.put.PutMappingResponse`
+  
+   出现这个问题是因为你选择的`spring-boot-starter-data-elasticsearch`版本没有对`elasticsearch`兼容,你找一个有`PutMappingResponse`的版本，我选择的是`6.4.0`
+ 
+ * `failed to load elasticsearch nodes : org.elasticsearch.index.mapper.MapperParsingException: analyzer [ik_smart] not found for field [name]`
+   
+   出现这个问题说明你的`elasticsearch`没有安装`ik`插件，可以看我的[elasticsearch-in-java](https://www.jianshu.com/p/9f6f7f67df4e)
+ 
+ * `Constructor threw exception; nested exception is java.lang.IllegalArgumentException: Rejecting mapping update to [elastic] as the final mapping would have more than 1 type: [sunny, user]`
+  
+   出现这个问题是以为你的索引`elastic`存在两个mapping,在[elasticsearch-head](https://www.jianshu.com/p/80bb53bc1256)删除索引重新开始
+   
+ * `IllegalArgumentException[Parse failure at index [0] of [Sun Jul 07 06:41:39 UTC 2019]]`
+    
+   出现这个问题主要是你设置了日期类型跟参数类型不对称导致，入参改为string即可,可以参考[ArticleService#findArticlesByCreateTimeBetweenOrderByIdDesc](https://github.com/zhaoyunxing92/spring-boot-learn-box/blob/master/spring-boot-elasticsearch/spring-boot-data-elasticsearch/src/main/java/io/github/xyz/spring/boot/data/elasticsearch/service/ArticleService.java)是怎么处理的
