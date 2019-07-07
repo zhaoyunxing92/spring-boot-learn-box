@@ -9,5 +9,5 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
  * @date: 2019-06-28 14:43
  * @des:
  */
-public interface UserService extends ElasticsearchRepository<Article, String> {
+public interface ArticleService extends ElasticsearchRepository<Article, String> {
 }
