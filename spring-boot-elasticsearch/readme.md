@@ -10,7 +10,7 @@
 
  * `Consider defining a bean of type 'UserService' in your configuration.`
 
-  出现这个问题是`spring.data.elasticsearch.repositories.enabled`属性需要设置为`true`
+    出现这个问题是`spring.data.elasticsearch.repositories.enabled`属性需要设置为`true`
   
  * `None of the configured nodes are available: [{#transport#-1}{-sq-D5sBSTCbdr1apbd9WA}{172.26.104.209}{172.26.104.209:9300}]` 
   
@@ -35,3 +35,41 @@
  * `IllegalArgumentException[Parse failure at index [0] of [Sun Jul 07 06:41:39 UTC 2019]]`
     
    出现这个问题主要是你设置了日期类型跟参数类型不对称导致，入参改为string即可,可以参考[ArticleService#findArticlesByCreateTimeBetweenOrderByIdDesc](https://github.com/zhaoyunxing92/spring-boot-learn-box/blob/master/spring-boot-elasticsearch/spring-boot-data-elasticsearch/src/main/java/io/github/xyz/spring/boot/data/elasticsearch/service/ArticleService.java)是怎么处理的
+   
+ * `挂载容器内部目录到物理机上出现 [0.001s][error][logging] Error opening log file 'logs/gc.log': Permission denied`
+ 
+      这个是权限问题
+      
+      ```shell
+          # 给目录775权限
+          sudo chmod -R 775 /data/es/
+          # 修改文件归属者
+          sudo chown -R 1000:1000 /data/es/
+      ```
+ 
+ * `java.lang.RuntimeException: can not run elasticsearch as root`
+ 
+      > es禁止root用户直接运行,切换用户就可以了,不过用docker好像没有出现
+ 
+ * `max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]`
+ 
+      > jvm 内存不够需要修改系统jvm内存
+    
+      ```shell
+       vim /etc/sysctl.conf
+       # 追加配置
+       vm.max_map_count=655300
+      ```
+      修改完后执行: `sudo sysctl -p`可以执行:`more /proc/sys/vm/max_map_count`验证下是否修改成功
+ 
+ * `failed to read [id:1, file:/usr/share/elasticsearch/data/nodes/0/_state/node-1.st]`
+ 
+   挂载的宿主目录文件加不是空导致,清空即可
+ 
+ * `java.lang.OutOfMemoryError: Java heap space (oom和gc等这里问题我电脑无法还原就弄这个oom说明问题吧)`
+ 
+   jvm内存设置的小了修改 `ES_JAVA_OPTS`参数即可
+ 
+ * `docker启动了但是不能正常访问或者只能本地访问,另外在用网段的电脑不能访问`
+ 
+   这个主要是docker网络模式的问题`network_mode: host`设置上就可以了,你也可以通过`docker inspect 容器id` 查看docker帮我们绑定的ip    
