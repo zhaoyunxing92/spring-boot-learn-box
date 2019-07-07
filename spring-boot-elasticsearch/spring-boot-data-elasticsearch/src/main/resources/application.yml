@@ -3,7 +3,7 @@ spring:
     elasticsearch:
       repositories:
         enabled: true
-#      cluster-nodes: 172.26.104.209:9300
-#      cluster-name: elasticsearch
-#      properties:
-#        xpack.security.user: elastic:123456
+      cluster-nodes: 172.26.104.209:9300
+      cluster-name: elasticsearch
+      properties:
+        xpack.security.user: elastic:123456

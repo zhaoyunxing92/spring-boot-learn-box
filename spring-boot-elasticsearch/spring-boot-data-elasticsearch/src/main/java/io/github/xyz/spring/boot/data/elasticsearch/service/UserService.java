@@ -1,7 +1,7 @@
 package io.github.xyz.spring.boot.data.elasticsearch.service;
 
 
-import io.github.xyz.spring.boot.data.elasticsearch.entity.User;
+import io.github.xyz.spring.boot.data.elasticsearch.entity.Article;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
 /**
@@ -9,5 +9,5 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
  * @date: 2019-06-28 14:43
  * @des:
  */
-public interface UserService extends ElasticsearchRepository<User, String> {
+public interface UserService extends ElasticsearchRepository<Article, String> {
 }
