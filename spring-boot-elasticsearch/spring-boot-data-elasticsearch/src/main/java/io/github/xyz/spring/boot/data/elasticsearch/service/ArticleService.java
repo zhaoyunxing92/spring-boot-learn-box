@@ -2,6 +2,7 @@ package io.github.xyz.spring.boot.data.elasticsearch.service;
 
 
 import io.github.xyz.spring.boot.data.elasticsearch.entity.Article;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
@@ -38,8 +39,8 @@ public interface ArticleService extends ElasticsearchRepository<Article, String>
      * @param start    开始时间
      * @param end      结束时间
      * @param pageable 分页对象
-     * @return  List<Article>
+     * @return  Page<Article>
      */
-    List<Article> findArticlesByCreateTimeBetweenOrderByIdDesc(String start, String end, Pageable pageable);
+    Page<Article> findArticlesByCreateTimeBetweenOrderByIdDesc(String start, String end, Pageable pageable);
 
 }

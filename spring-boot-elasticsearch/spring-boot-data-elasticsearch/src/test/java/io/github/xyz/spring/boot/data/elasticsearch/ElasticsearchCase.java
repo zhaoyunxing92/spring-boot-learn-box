@@ -1,12 +1,15 @@
 package io.github.xyz.spring.boot.data.elasticsearch;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import io.github.xyz.spring.boot.data.elasticsearch.entity.Article;
 import io.github.xyz.spring.boot.data.elasticsearch.service.ArticleService;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
@@ -16,6 +19,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author zhaoyunxing
@@ -93,7 +98,11 @@ public class ElasticsearchCase {
     public void findArticlesByCreateTimeBetweenAndOrderByCreateTimeDesc() {
         System.out.println("***********************指定时间域名并且根据id进行deac排序***********************");
 
-        articleService.findArticlesByCreateTimeBetweenOrderByIdDesc("2019-07-07 14:41:39:998", "2019-07-07 16:33:29:175", PageRequest.of(0, 3)).forEach(System.out::println);
+        Page<Article> page = articleService.findArticlesByCreateTimeBetweenOrderByIdDesc("2019-07-07 14:41:39:998", "2019-07-07 16:33:29:175", PageRequest.of(0, 3));
+
+        System.out.println("匹配的总条数：" + page.getTotalElements());
+        page.get().forEach(System.out::println);
+       // page.get().collect(Collectors.toCollection(ArrayList::new)).forEach(System.out::println);
     }
 
     /**
