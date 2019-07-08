@@ -6,6 +6,14 @@
  - [x] [spring-data-elasticsearch](./spring-boot-data-elasticsearch) spring data方式操作elasticsearch
  - [x] [jest-elasticsearch](./spring-boot-jest-elasticsearch) jest 操作elasticsearch，这个懒得写了可以看【[elasticsearch入门到放弃之elasticsearch java](https://www.jianshu.com/p/9f6f7f67df4e)】都差不多
  
+## 系列文章
+ 
+ * [elasticsearch入门到放弃之docker搭建](https://www.jianshu.com/p/ba7caa5bed53) es环境搭建
+ * [elasticsearch入门到放弃之x-pack安全认证](https://www.jianshu.com/p/3b01817996c8) x-pack保驾护航你的es
+ * [elasticsearch入门到放弃之elasticsearch-head](https://www.jianshu.com/p/80bb53bc1256) es-head可视化你的es
+ * [elasticsearch入门到放弃之elasticsearch-in-java](https://www.jianshu.com/p/9f6f7f67df4e) 这个很关键，看完这个，再看这个就很容易理解了
+ * [elasticsearch入门到放弃之springboot elasticsearch x-pack](https://www.jianshu.com/p/7019d93219f5) springboot整合elasticsearch
+  
 ## 可能遇到的问题
 
  * `Consider defining a bean of type 'UserService' in your configuration.`
