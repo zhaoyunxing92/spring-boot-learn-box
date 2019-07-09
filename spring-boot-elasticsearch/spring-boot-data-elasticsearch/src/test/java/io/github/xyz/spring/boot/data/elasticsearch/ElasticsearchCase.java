@@ -1,10 +1,8 @@
 package io.github.xyz.spring.boot.data.elasticsearch;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
 import io.github.xyz.spring.boot.data.elasticsearch.entity.Article;
 import io.github.xyz.spring.boot.data.elasticsearch.service.ArticleService;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +17,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @author zhaoyunxing
