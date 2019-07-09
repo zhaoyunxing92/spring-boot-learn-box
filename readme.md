@@ -10,6 +10,10 @@ spring boot集成其他组件
 * maven 3.6.0
 * mysql 5.7
 * spring boot 2.1.0.RELEASE
+* netty 4.1.34.Final
+* kafka 2.2.0.RELEASE
+* elasticsearch 6.4.0
+* apollo 1.1.0
 
 ## 集成进度
 - [ ] netty
