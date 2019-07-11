@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @author zhaoyunxing
@@ -33,6 +33,20 @@ public interface SpringDataElasticsearchService extends ElasticsearchRepository<
      */
     Page<Article> findArticleByNameOrderByCreateTimeDesc(String name, Pageable pageable);
 
-    Long countArticleByName(String name);
+    /**
+     * 根据名称统计条数
+     *
+     * @param name 文章名称
+     * @return
+     */
+    Long countArticlesByName(String name);
+
+    /**
+     * 根据文章id删除，返回文章信息（只能针对主键使用）
+     *
+     * @param id 文章id
+     * @return
+     */
+    List<Article> deleteArticlesById(String id);
 
 }

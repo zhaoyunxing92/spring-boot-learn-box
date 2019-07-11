@@ -11,7 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.*;
+import java.util.List;
 
 /**
  * @author zhaoyunxing
@@ -50,7 +50,14 @@ public class SpringDataElasticsearchServiceTest {
 
     @Test
     public void countArticleByName() {
-        Long count = articleService.countArticleByName("docker搭建");
+        Long count = articleService.countArticlesByName("docker搭建");
         log.info("count: {}", count);
+    }
+
+    @Test
+    public void deleteArticlesByName() {
+        articleService.deleteById("40");
+        List<Article> articles = articleService.deleteArticlesById("40");
+        articles.forEach(System.out::println);
     }
 }

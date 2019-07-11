@@ -103,8 +103,23 @@ Page<Article> articles = articleService.findArticleByNameOrderByCreateTimeDesc("
 ```java
  Long count = articleService.countArticleByName("docker搭建");
 ```
+### 删除文章
 
+有很多方法，只写使用频率高的
 
+```java
+//无返回值删除
+articleService.deleteById("40");
+// 根据对象删除
+articleService.delete(new Article());
+//有返回值删除，只能针对主键
+List<Article> articles = articleService.deleteArticlesById("40");
+```
+### 其他未验证的感觉没有使用场景的
+ 
+ * 根据`top`或`first`限制
+ * 使用注解`@Query`的
+ 
 ## 可能遇到的问题
 
 * `java.lang.IllegalArgumentException: Fielddata is disabled on text fields by default. Set fielddata=true on [name] in order to load fielddata in memory by uninverting the inverted index. Note that this can however use significant memory. Alternatively use a keyword field instead.`
