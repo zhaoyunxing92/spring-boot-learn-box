@@ -11,8 +11,9 @@
  * [elasticsearch入门到放弃之docker搭建](https://www.jianshu.com/p/ba7caa5bed53) es环境搭建
  * [elasticsearch入门到放弃之x-pack安全认证](https://www.jianshu.com/p/3b01817996c8) x-pack保驾护航你的es
  * [elasticsearch入门到放弃之elasticsearch-head](https://www.jianshu.com/p/80bb53bc1256) es-head可视化你的es
- * [elasticsearch入门到放弃之elasticsearch-in-java](https://www.jianshu.com/p/9f6f7f67df4e) 这个很关键，看完这个，再看这个就很容易理解了
+ * [elasticsearch入门到放弃之elasticsearch-in-java](https://www.jianshu.com/p/9f6f7f67df4e) elasticsearch api使用
  * [elasticsearch入门到放弃之springboot elasticsearch x-pack](https://www.jianshu.com/p/7019d93219f5) springboot整合elasticsearch
+ * [spring-data-elasticsearch实践](https://www.jianshu.com/p/7f4be877ea1b)
   
 ## 可能遇到的问题
 
@@ -49,10 +50,10 @@
       这个是权限问题
       
       ```shell
-          # 给目录775权限
-          sudo chmod -R 775 /data/es/
-          # 修改文件归属者
-          sudo chown -R 1000:1000 /data/es/
+      # 给目录775权限
+      sudo chmod -R 775 /data/es/
+      # 修改文件归属者
+      sudo chown -R 1000:1000 /data/es/
       ```
  
  * `java.lang.RuntimeException: can not run elasticsearch as root`
@@ -80,4 +81,14 @@
  
  * `docker启动了但是不能正常访问或者只能本地访问,另外在用网段的电脑不能访问`
  
-   这个主要是docker网络模式的问题`network_mode: host`设置上就可以了,你也可以通过`docker inspect 容器id` 查看docker帮我们绑定的ip    
+   这个主要是docker网络模式的问题`network_mode: host`设置上就可以了,你也可以通过`docker inspect 容器id` 查看docker帮我们绑定的ip
+   
+ * `java.lang.IllegalArgumentException: Fielddata is disabled on text fields by default. Set fielddata=true on [name] in order to load fielddata in memory by uninverting the inverted index. Note that this can however use significant memory. Alternatively use a keyword field instead.`
+ 
+    这个问题是因为`Sort`的字段`name`是`text`类型的,按照官方[fieldata](https://www.elastic.co/guide/en/elasticsearch/reference/current/fielddata.html)的建议，它禁止这样操作，容易出现内存过大
+    
+    ```java
+    // fielddata = true 可以解决这个问题，但是可能带来oom问题
+    @Field(type = FieldType.Text,fielddata = true,store = true, analyzer = "ik_smart", searchAnalyzer = "ik_max_word")
+    private String name;
+    ```  

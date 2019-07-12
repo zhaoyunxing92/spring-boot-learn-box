@@ -23,7 +23,14 @@ spring boot集成其他组件
 - [x] [hystrix](./spring-boot-hystrix)
 - [x] [apollo](./spring-boot-apollo)
 - [x] [elasticsearch](./spring-boot-elasticsearch)
-
+  
+    - [x] [elasticsearch入门到放弃之docker搭建](https://www.jianshu.com/p/ba7caa5bed53) es环境搭建
+    - [x] [elasticsearch入门到放弃之x-pack安全认证](https://www.jianshu.com/p/3b01817996c8) x-pack保驾护航你的es
+    - [x] [elasticsearch入门到放弃之elasticsearch-head](https://www.jianshu.com/p/80bb53bc1256) es-head可视化你的es
+    - [x] [elasticsearch入门到放弃之elasticsearch-in-java](https://www.jianshu.com/p/9f6f7f67df4e) elasticsearch api使用
+    - [x] [elasticsearch入门到放弃之springboot elasticsearch x-pack](https://www.jianshu.com/p/7019d93219f5) springboot整合elasticsearch
+    - [x] [spring-data-elasticsearch实践](https://www.jianshu.com/p/7f4be877ea1b)
+ 
 ## 公众号
 
  在使用中遇到问题关注微信公众号提问题,其他地方的问题不一定反馈及时
