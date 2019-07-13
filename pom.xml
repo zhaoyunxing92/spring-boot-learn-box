@@ -27,6 +27,8 @@
         <spring.boot.aop.version>2.1.0.RELEASE</spring.boot.aop.version>
         <apollo.client.vresion>1.1.0</apollo.client.vresion>
         <spring.cloud.alibaba.version>0.9.0.RELEASE</spring.cloud.alibaba.version>
+        <!--修改es版本-->
+        <elasticsearch.version>6.4.0</elasticsearch.version>
     </properties>
 
     <modules>
@@ -38,7 +40,9 @@
         <module>spring-boot-sentinel/sentinel-apollo-push</module>
         <module>spring-boot-apollo</module>
         <module>spring-boot-skywalking</module>
-        <module>spring-boot-elasticsearch</module>
+        <module>spring-boot-elasticsearch/spring-boot-data-elasticsearch</module>
+        <module>spring-boot-elasticsearch/spring-boot-jest-elasticsearch</module>
+        <module>spring-boot-elasticsearch/elasticsearch-in-java</module>
     </modules>
 
     <dependencies>
@@ -128,5 +132,35 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <repositories>
+        <repository>
+            <id>spring</id>
+            <url>https://repo.spring.io/plugins-release/</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+
+        <repository>
+            <id>elasticsearch-releases</id>
+            <url>https://artifacts.elastic.co/maven</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>spring-libs-snapshot</id>
+            <name>Spring Snapshot Repository</name>
+            <url>https://repo.spring.io/libs-snapshot</url>
+        </repository>
+    </repositories>
 
 </project>

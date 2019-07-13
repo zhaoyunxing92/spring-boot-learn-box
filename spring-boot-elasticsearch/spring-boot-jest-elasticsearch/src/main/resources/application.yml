@@ -1,0 +1,7 @@
+spring:
+  elasticsearch:
+    jest:
+      uris:
+        - http://127.0.0.1:9200 # 多个使用数组
+      username: elastic  # 账号
+      password: xxxx # 密码

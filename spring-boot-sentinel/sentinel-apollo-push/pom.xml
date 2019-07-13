@@ -8,9 +8,10 @@
         <artifactId>spring-boot-learn-box</artifactId>
         <groupId>io.github.xyz</groupId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>spring-boot-sentinel-apollo-push</artifactId>
+    <artifactId>sentinel-apollo-push</artifactId>
 
     <dependencies>
         <dependency>
