@@ -36,12 +36,13 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
 
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("handlerRemoved:" + ctx.channel().id().asLongText());
+        log.warn("handlerRemoved: {}", ctx.channel().id().asLongText());
     }
+
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        System.out.println("异常发生:" + ctx.channel().id().asLongText());
+        log.error("异常发生:{}", ctx.channel().id().asLongText());
         ctx.close();
         cause.printStackTrace(System.err);
     }
@@ -57,8 +58,24 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
         // 检测心跳
         if (evt instanceof IdleStateEvent) {
-           // System.out.println("userEventTriggered==================");
-            log.info("IdleStateEvent ip{}",ctx.channel().remoteAddress().toString());
+            IdleStateEvent idleStateEvent = (IdleStateEvent) evt;
+
+            switch (idleStateEvent.state()){
+                //全部超时 ALL_IDLE
+                case ALL_IDLE:
+                    log.info("state {}", idleStateEvent.state());
+                    break;
+                // 写超时 WRITER_IDLE
+                case WRITER_IDLE:
+                    break;
+                // 读超时 READER_IDLE
+                default:
+                    log.info("");
+            }
+            log.info("state {}", idleStateEvent.state());
+
+            log.info("IdleStateEvent ip:{} time:{}", ctx.channel().remoteAddress().toString(), LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss:SSS")));
+
         }
 
     }
