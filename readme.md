@@ -41,4 +41,4 @@ github：https://github.com/zhaoyunxing92/spring-boot-learn-box
 
  在使用中遇到问题关注微信公众号提问题,其他地方的问题不一定反馈及时
 
-![关注不迷路](https://gitee.com/sunny9/resource/raw/master/wechat/zhaoyunxing.jpg)
+![关注不迷路](https://gitee.com/zhaoyunxing92/resource/raw/master/wechat/zhaoyunxing.jpg)

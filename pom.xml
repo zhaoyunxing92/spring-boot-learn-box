@@ -43,6 +43,9 @@
         <module>spring-boot-elasticsearch/spring-boot-data-elasticsearch</module>
         <module>spring-boot-elasticsearch/spring-boot-jest-elasticsearch</module>
         <module>spring-boot-elasticsearch/elasticsearch-in-java</module>
+        <module>spring-boot-rabbitmq/product</module>
+        <module>spring-boot-rabbitmq/consumer</module>
+        <module>spring-boot-rabbitmq/rabbitmq-java</module>
     </modules>
 
     <dependencies>
@@ -154,12 +157,20 @@
             </releases>
             <snapshots>
                 <enabled>false</enabled>
+                <updatePolicy>always</updatePolicy>
             </snapshots>
         </repository>
         <repository>
             <id>spring-libs-snapshot</id>
             <name>Spring Snapshot Repository</name>
             <url>https://repo.spring.io/libs-snapshot</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
         </repository>
     </repositories>
 
