@@ -13,7 +13,7 @@
  * [elasticsearch入门到放弃之elasticsearch-head](https://www.jianshu.com/p/80bb53bc1256) es-head可视化你的es
  * [elasticsearch入门到放弃之elasticsearch-in-java](https://www.jianshu.com/p/9f6f7f67df4e) elasticsearch api使用
  * [elasticsearch入门到放弃之springboot elasticsearch x-pack](https://www.jianshu.com/p/7019d93219f5) springboot整合elasticsearch
- * [spring-data-elasticsearch实践](https://www.jianshu.com/p/7f4be877ea1b)
+ * [spring-data-elasticsearch实践](https://www.jianshu.com/p/7f4be877ea1b) spring-data-elasticsearch实践
   
 ## 可能遇到的问题
 
