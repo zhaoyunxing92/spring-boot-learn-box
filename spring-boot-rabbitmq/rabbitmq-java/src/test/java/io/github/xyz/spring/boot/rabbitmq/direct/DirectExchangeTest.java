@@ -54,8 +54,8 @@ public class DirectExchangeTest {
      * 消费者
      */
     @Test
-    public void consumer() throws IOException {
-        String exchangeName="direct_exchange";
+    public void consumer() throws IOException, InterruptedException {
+        String exchangeName = "direct_exchange";
         // 4.声明exchange
         //channel.exchangeDeclare(exchangeName, BuiltinExchangeType.DIRECT, true);
 
@@ -63,14 +63,14 @@ public class DirectExchangeTest {
          * 5.声明队列
          * @param queue 队列名称
          * @param durable 是否持久，即使服务重启
-         * @param exclusive 是否只有这个队列消费
+         * @param exclusive 是否只有这个队列消费,true后消费者停止了这个队列也就自动删除
          * @param autoDelete 不使用的时候自动删除
          * @param arguments 其他参数
          */
         channel.queueDeclare(queueName, false, true, true, null);
 
         // 6.绑定
-       // channel.queueBind(queueName, exchangeName, "test.direct");
+        // channel.queueBind(queueName, exchangeName, "test.direct");
 
         log.info("[*] waiting for msg");
         //回调
@@ -82,10 +82,10 @@ public class DirectExchangeTest {
             log.info("[*] exchange is 【{}】", envelope.getExchange());
         };
 
-        while (true) {
-            //5.创建消费者
-           channel.basicConsume("", true, callback, cancelled -> log.info("[*]callback when the consumer is cancelled。{}", cancelled));
-        }
+        //5.创建消费者
+        channel.basicConsume("", true, callback, cancelled -> log.info("[*]callback when the consumer is cancelled。{}", cancelled));
+        // 防止线程退出
+        Thread.sleep(Integer.MAX_VALUE);
     }
 
     /**

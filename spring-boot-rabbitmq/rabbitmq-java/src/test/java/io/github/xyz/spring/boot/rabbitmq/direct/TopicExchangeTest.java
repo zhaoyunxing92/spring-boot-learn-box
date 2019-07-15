@@ -33,6 +33,7 @@ public class TopicExchangeTest {
         factory.setPort(5672);
         factory.setPassword("123456");
         factory.setUsername("guest");
+        // factory.setConnectionTimeout();
         /*虚拟机节点*/
         factory.setVirtualHost("/");
         //2.创建连接
@@ -54,12 +55,12 @@ public class TopicExchangeTest {
      * 消费者
      */
     @Test
-    public void consumer() throws IOException {
+    public void consumer() throws IOException, InterruptedException {
         // 4.声明exchange
         channel.exchangeDeclare(exchangeName, BuiltinExchangeType.TOPIC, true);
         // 5.声明队列
         String queueName = "topic_test";
-        channel.queueDeclare(queueName, true, true, true, null);
+        channel.queueDeclare(queueName, false, false, false, null);
         // 6.绑定
         /**
          * 1.`*` 只匹配一个词，可以理解为只有一个占位符,例如：`test.*`,只能匹配到`test.direct`却匹配不到`test.direct.sunny`
@@ -71,10 +72,10 @@ public class TopicExchangeTest {
         //回调
         DeliverCallback callback = (consumerTag, delivery) -> log.info(new String(delivery.getBody(), StandardCharsets.UTF_8));
 
-        while (true) {
-            //5.创建消费者
-            channel.basicConsume(queueName, true, callback, cancelled -> log.info("[*]callback when the consumer is cancelled。{}", cancelled));
-        }
+        //5.创建消费者
+        channel.basicConsume(queueName, true, callback, cancelled -> log.info("[*]callback when the consumer is cancelled。{}", cancelled));
+        // 防止线程退出
+        Thread.sleep(Integer.MAX_VALUE);
     }
 
     /**
@@ -87,9 +88,15 @@ public class TopicExchangeTest {
         String routingKey1 = "test.abc";
         String routingKey2 = "test.abc.efg";
         String routingKey3 = "acb.test.abc";
-        channel.basicPublish(exchangeName, routingKey1, null, routingKey1.getBytes());
-        channel.basicPublish(exchangeName, routingKey2, null, routingKey2.getBytes());
-        channel.basicPublish(exchangeName, routingKey3, null, routingKey3.getBytes());
+
+        AMQP.BasicProperties builder = new AMQP.BasicProperties.Builder()
+                .contentType("application/json")
+                .deliveryMode(2) //2标示消息持久化
+                .priority(0) //消息优先级
+                .build();
+        channel.basicPublish(exchangeName, routingKey1, builder, routingKey1.getBytes());
+        channel.basicPublish(exchangeName, routingKey2, builder, routingKey2.getBytes());
+        channel.basicPublish(exchangeName, routingKey3, builder, routingKey3.getBytes());
     }
 
 }
