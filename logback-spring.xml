@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration scan="true">
+    <!-- https://blog.csdn.net/wushuchu/article/details/79408825 -->
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+    <conversionRule conversionWord="wEx"
+                    converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+    <property name="CONSOLE_LOG_PATTERN"
+              value="${CONSOLE_LOG_PATTERN:-%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr([%tid]){green} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+    <property name="maxHistory" value="7"/>
+
+    <springProperty scope="context" name="log_home" source="log.path" defaultValue="/data/t3-logs"/>
+    <springProperty scope="context" name="module_name" source="dubbo.application.name" defaultValue="module"/>
+
+    <!--控制台输出info级别-->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
+                <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            </layout>
+        </encoder>
+    </appender>
+
+    <!--文件输出-->
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
+                <pattern>%d{yyyy-MM-dd HH:mm:ss:SSS}|[%thread]|[%tid]|%-5level|%logger{50}|%msg%n</pattern>
+            </layout>
+        </encoder>
+        <!--滚动策略 按照天保存 保存7天-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log_home}/${module_name}/${module_name}.%d.log</fileNamePattern>　
+            <maxHistory>${maxHistory}</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <springProfile name="local">
+        <!--<logger name="com.apache.ibatis" level="DEBUG"/>-->
+        <!--<logger name="java.sql.Statement" level="DEBUG"/>-->
+        <!--<logger name="java.sql.PreparedStatement" level="DEBUG"/>-->
+
+        <logger name="org.springframework" level="INFO"/>
+        <logger name="org.apache.skywalking.apm.dependencies.io.grpc.netty" level="INFO"/>
+        <!--<logger name="org.apache.skywalking.apm.dependencies.io.netty.util" level="INFO"/>-->
+        <logger name="org.apache.kafka" level="ERROR"/>
+        <logger name="org.hibernate" level="ERROR"/>
+        <logger name="com.alibaba" level="ERROR"/>
+        <root level="DEBUG">
+            <appender-ref ref="console"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="dev">
+        <logger name="com.apache.ibatis" level="ERROR"/>
+        <logger name="java.sql.Statement" level="ERROR"/>
+        <!--<logger name="java.sql.PreparedStatement" level="DEBUG"/>-->
+        <logger name="com.alibaba" level="INFO"/>
+        <logger name="org.apache.skywalking.apm.dependencies.io.grpc.netty" level="INFO"/>
+        <logger name="org.springframework" level="ERROR"/>
+        <logger name="org.hibernate" level="ERROR"/>
+        <logger name="org.apache.http" level="ERROR"/>
+        <logger name="org.apache.kafka" level="ERROR"/>
+        <root level="DEBUG">
+            <!--<appender-ref ref="console"/>-->
+            <appender-ref ref="file"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="test,pro,uat,insurance,weixin,pressure,release,gray">
+        <logger name="com.apache.ibatis" level="ERROR"/>
+        <logger name="java.sql.Statement" level="ERROR"/>
+        <logger name="java.sql.PreparedStatement" level="DEBUG"/>
+        <!--<logger name="com.alibaba" level="INFO"/>-->
+        <logger name="org.springframework" level="ERROR"/>
+        <logger name="org.hibernate" level="ERROR"/>
+        <logger name="org.apache.kafka" level="ERROR"/>
+        <logger name="org.apache.http" level="ERROR"/>
+        <logger name="org.apache.zookeeper.ClientCnxn" level="DEBUG"/>
+        <root level="INFO">
+            <!--<appender-ref ref="console"/>-->
+            <appender-ref ref="file"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="prod">
+        <logger name="com.apache.ibatis" level="ERROR"/>
+        <logger name="java.sql.Statement" level="ERROR"/>
+        <logger name="java.sql.PreparedStatement" level="ERROR"/>
+        <logger name="com.alibaba" level="ERROR"/>
+        <logger name="org.springframework" level="ERROR"/>
+        <logger name="org.hibernate" level="ERROR"/>
+        <logger name="org.apache.kafka" level="ERROR"/>
+        <logger name="org.apache.http" level="ERROR"/>
+        <logger name="org.apache.zookeeper.ClientCnxn" level="DEBUG"/>
+        <root level="INFO">
+            <!--<appender-ref ref="console"/>-->
+            <appender-ref ref="file"/>
+        </root>
+    </springProfile>
+
+</configuration>
