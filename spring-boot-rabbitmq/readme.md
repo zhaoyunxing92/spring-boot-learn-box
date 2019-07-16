@@ -3,7 +3,7 @@
 ## 文章列表
 
  * [x] [rabbitmq入门到放弃之docker rabbitmq](https://www.jianshu.com/p/f6999a902777) rabbitmq安装
- * [x] [exchange](https://www.jianshu.com/p/bdccfeb3d71e) exchange交换机详解
+ * [x] [exchange](./exchange.md) exchange交换机详解
  
  ## 可能遇到的问题
  
