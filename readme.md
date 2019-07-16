@@ -35,8 +35,14 @@ github：https://github.com/zhaoyunxing92/spring-boot-learn-box
     - [x] [elasticsearch入门到放弃之elasticsearch-head](https://www.jianshu.com/p/80bb53bc1256) es-head可视化你的es
     - [x] [elasticsearch入门到放弃之elasticsearch-in-java](https://www.jianshu.com/p/9f6f7f67df4e) elasticsearch api使用
     - [x] [elasticsearch入门到放弃之springboot elasticsearch x-pack](https://www.jianshu.com/p/7019d93219f5) springboot整合elasticsearch
-    - [x] [spring-data-elasticsearch实践](https://www.jianshu.com/p/7f4be877ea1b)
- 
+    - [x] [spring-data-elasticsearch实践](https://www.jianshu.com/p/7f4be877ea1b) spring-data系列的使用
+    
+- [x] [skywalking](./spring-boot-skywalking)    
+- [x] [rabbitmq](./spring-boot-rabbitmq)
+    
+    * [x] [rabbitmq入门到放弃之docker rabbitmq](https://www.jianshu.com/p/f6999a902777) rabbitmq安装
+    * [x] [exchange详解](./spring-boot-rabbitmq/exchange.md) 交换机分类、实例代码
+   
 ## 公众号
 
  在使用中遇到问题关注微信公众号提问题,其他地方的问题不一定反馈及时
