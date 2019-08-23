@@ -20,9 +20,9 @@
 ## 环境信息、配置
 
 * jdk 1.8
-* elasticsearch 6.4.0
-* x-pack 6.4.0
-* spring-boot-starter-data-elasticsearch 6.4.0
+* elasticsearch 6.8.2
+* x-pack 6.8.2
+* spring-boot-starter-data-elasticsearch 6.8.2
 * spring-boot 2.1.0 (它默认带的elasticsearch是6.2.2的)
 
 ### pom.xml文件
@@ -30,7 +30,7 @@
 ```xml
  <!--修改es版本这样设置最简单-->
 <properties>
-    <elasticsearch.version>6.4.0</elasticsearch.version>
+    <elasticsearch.version>6.8.2</elasticsearch.version>
 </properties>
 
 <dependency>
@@ -49,7 +49,7 @@
     <version>${elasticsearch.version}</version>
 </dependency>
 
-<!--这个好像要添加不然下载不到 spring-boot-starter-data-elasticsearch:6.4.0 -->
+<!--这个好像要添加不然下载不到 spring-boot-starter-data-elasticsearch:6.8.2 -->
 <repository>
     <id>spring-libs-snapshot</id>
     <name>Spring Snapshot Repository</name>

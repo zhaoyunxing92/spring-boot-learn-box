@@ -24,9 +24,9 @@
 > 环境信息很重要,不然很难成功
 
 * jdk 1.8
-* elasticsearch 6.4.0
-* x-pack 6.4.0
-* spring-boot-starter-data-elasticsearch 6.4.0
+* elasticsearch 6.8.2
+* x-pack 6.8.2
+* spring-boot-starter-data-elasticsearch 6.8.2
 * spring-boot 2.1.0 (它默认带的elasticsearch是6.2.2的)
 
 ## pom.xml文件
@@ -34,7 +34,7 @@
 ```xml
  <!--修改es版本这样设置最简单-->
 <properties>
-    <elasticsearch.version>6.4.0</elasticsearch.version>
+    <elasticsearch.version>6.8.2</elasticsearch.version>
 </properties>
 
 <dependency>
@@ -53,7 +53,7 @@
     <version>${elasticsearch.version}</version>
 </dependency>
 
-<!--这个好像要添加不然下载不到 spring-boot-starter-data-elasticsearch:6.4.0 -->
+<!--这个好像要添加不然下载不到 spring-boot-starter-data-elasticsearch:6.8.2 -->
 <repository>
     <id>spring-libs-snapshot</id>
     <name>Spring Snapshot Repository</name>
@@ -330,7 +330,7 @@ public class ElasticsearchCase {
 
 * `Caused by: java.lang.ClassNotFoundException: org.elasticsearch.action.admin.indices.mapping.put.PutMappingResponse`
  
-  出现这个问题是因为你选择的`spring-boot-starter-data-elasticsearch`版本没有对`elasticsearch`兼容,你找一个有`PutMappingResponse`的版本，我选择的是`6.4.0`
+  出现这个问题是因为你选择的`spring-boot-starter-data-elasticsearch`版本没有对`elasticsearch`兼容,你找一个有`PutMappingResponse`的版本，我选择的是`6.8.2`
 
 * `failed to load elasticsearch nodes : org.elasticsearch.index.mapper.MapperParsingException: analyzer [ik_smart] not found for field [name]`
   
