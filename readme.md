@@ -1,7 +1,7 @@
 # spring-boot-learn-box
 [![Build Status](https://travis-ci.com/zhaoyunxing92/spring-boot-learn-box.svg?branch=master)](https://travis-ci.com/zhaoyunxing92/spring-boot-learn-box)
 
-spring boot集成其他组件
+spring boot集成其他组件,如果你有想集成的组件而这里没有,可以提交一个`issues`,我会根据自己的时间和兴趣进行整合
 
 ## 代码地址
 
