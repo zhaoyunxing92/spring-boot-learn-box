@@ -1,0 +1,19 @@
+oss:
+  sts:
+    access-key-id: LTAI4FnSbpHyU2nisdDcViti
+    access-key-secret: 0trwmSIltvpcsqb2dNN8YE7VWxODRg
+    role-arn: acs:ram::1683064562548132:role/aliyunosstokengeneratorrole
+    role-session-name: external-username
+    action:
+      - oss:ListObjects
+      - oss:GetObject
+    resource:
+      - acs:oss:*:*:ccclubsubi
+      - acs:oss:*:*:ccclubsubi/*
+    policy:
+      statement:
+        - action:
+        -
+      version:
+
+
