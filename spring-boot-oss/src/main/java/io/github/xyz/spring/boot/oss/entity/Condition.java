@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.stereotype.Component;
 
@@ -71,15 +72,14 @@ import java.util.List;
  * @date: 2019-09-10 17:50
  * @desc:
  */
-@Data
-@Component
-@ConfigurationProperties(prefix = "oss.sts.policy.statement.condition")
-@ConditionalOnClass(AssumeRoleResponseUnmarshaller.class)
-@Deprecated
-public class Condition {
-    /**
-     * 指定 ip 网段,支持*通配
-     */
-    @JSONField(name = "acs:SourceIp")
-    private List<String> sourceIp;
-}
+//@Data
+//@Component
+//@ConfigurationProperties(prefix = "oss.sts.policy.statement.condition")
+//@ConditionalOnClass(AssumeRoleResponseUnmarshaller.class)
+//public class Condition {
+//    /**
+//     * 指定 ip 网段,支持*通配
+//     */
+//    @JSONField(name = "acs:SourceIp")
+//    private List<String> sourceIp;
+//}
