@@ -14,10 +14,16 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
+import javax.annotation.PostConstruct;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author zhaoyunxing
@@ -30,6 +36,7 @@ import java.util.List;
 @ConfigurationProperties(prefix = "oss.sts")
 @ConditionalOnClass(AssumeRoleResponseUnmarshaller.class)
 public class OssStsConfig {
+
     /**
      * STS服务的所有接入地址，每个地址的功能都相同，请尽量在同区域进行调用.默认值:sts.cn-hangzhou.aliyuncs.com.
      */
@@ -121,5 +128,17 @@ public class OssStsConfig {
         statements.add(new Statement("Allow", getAction(), getResource()));
 
         return JSONObject.toJSONString(new Policy(statements));
+    }
+
+    /**
+     * bean初始化完成后进行参数验证
+     */
+    @PostConstruct
+    public void validator() {
+        // 参数验证
+        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+        Set<ConstraintViolation<OssStsConfig>> validators = validator.validate(this);
+        //todo：validators.iterator().hasNext()这个必须判断下
+        Assert.isTrue(validators.isEmpty(), validators.iterator().hasNext() ? validators.iterator().next().getMessage() : "ossConfig参数验证不通过");
     }
 }

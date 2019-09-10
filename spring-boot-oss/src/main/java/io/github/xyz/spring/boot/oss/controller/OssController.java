@@ -15,14 +15,8 @@ import io.github.xyz.spring.boot.oss.config.OssStsConfig;
 import io.github.xyz.spring.boot.oss.entity.OssStsInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import java.util.Set;
 
 /**
  * @author zhaoyunxing
@@ -36,14 +30,7 @@ public class OssController {
     private final OssStsConfig ossConfig;
 
     @Autowired
-    public OssController(OssStsConfig ossConfig) {
-        this.ossConfig = ossConfig;
-        // 参数验证
-        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
-        Set<ConstraintViolation<OssStsConfig>> validators = validator.validate(ossConfig);
-        //todo：validators.iterator().hasNext()这个必须判断下
-        Assert.isTrue(validators.isEmpty(), validators.iterator().hasNext() ? validators.iterator().next().getMessage() : "ossConfig参数验证不通过");
-    }
+    public OssController(OssStsConfig ossConfig) { this.ossConfig = ossConfig; }
 
     @GetMapping
     public String ossConfig() {
