@@ -4,6 +4,10 @@
 
 ## 参考的文档
 
+* [Policy属性含义](https://help.aliyun.com/document_detail/100680.html?spm=a2c4g.11186623.2.8.320841f0tGGFLR#h2-url-7) 这个很关键，字段含义都在里面
+
+* [Policy策略编辑器](http://gosspublic.alicdn.com/ram-policy-editor/index.html?spm=a2c4g.11186623.2.10.3a8f3eb10uleqj) Policy策略编辑器
+
 * [快速搭建移动应用直传服务](https://help.aliyun.com/document_detail/31920.html?spm=a2c4g.11186623.6.1378.1b307d43Se1NJZ) 快速搭建移动应用直传服务
 
 * [oss-sts](https://help.aliyun.com/document_detail/100624.html?spm=5176.10695662.1996646101.searchclickresult.64e0515aCLJzVr) STS（Security Token Service）进行临时授权访问
