@@ -10,7 +10,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +29,7 @@ public class Statement {
      */
     @JSONField(name = "Effect")
     @Pattern(regexp = "(Allow|Deny)", message = "effect属性必须是：Allow or Deny")
-    private String effect="Allow";
+    private String effect = "Allow";
     /**
      * Action 分为三大类：
      *
@@ -50,8 +49,9 @@ public class Statement {
     private List<String> resource;
     /**
      * {@link Condition} 代表 Policy 授权的一些条件，上面的示例里面可以设置对于 acs:UserAgent 的检查、acs:SourceIp 的检查，还有 oss:Prefix 项用来在 GetBucket 的时候对资源进行限制。
+     *
+     * todo：该属性不能设置，应该是文档错了
      */
-    @Valid
-    @JSONField(name = "Condition")
-    private Condition condition;
+    //    @Valid
+    //    private Condition condition;
 }

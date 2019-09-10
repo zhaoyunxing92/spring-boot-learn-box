@@ -1,16 +1,13 @@
 oss:
   sts:
-    access-key-id: abc
-    access-key-secret: edf
-    role-arn: hsf
-    role-session-name: dfdg
+    access-key-id:
+    access-key-secret:
+    role-arn:
+    role-session-name:
     policy:
-      version: 2.0
+      version:
       statement:
         - effect: Allow
           resource:
-            - ab
-            - cd
-          condition:
-            source-ip:
-              - 192.68
+            - acs:oss:*:*:xx
+            - acs:oss:*:*:xxx/*

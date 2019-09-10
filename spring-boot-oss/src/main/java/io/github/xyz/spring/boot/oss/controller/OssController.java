@@ -48,8 +48,7 @@ public class OssController {
             request.setRoleArn(ossConfig.getRoleArn());
             request.setRoleSessionName(ossConfig.getRoleSessionName());
             // 若policy为空，则用户将获得该角色下所有权限
-            //            request.setPolicy(ossConfig.getPolicy());
-            request.setPolicy(null);
+            request.setPolicy(JSONObject.toJSONString(ossConfig.getPolicy()));
             // 设置凭证有效时间
             request.setDurationSeconds(ossConfig.getDurationSeconds());
 

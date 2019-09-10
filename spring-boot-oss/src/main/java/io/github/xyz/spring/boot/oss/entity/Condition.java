@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -74,6 +75,7 @@ import java.util.List;
 @Component
 @ConfigurationProperties(prefix = "oss.sts.policy.statement.condition")
 @ConditionalOnClass(AssumeRoleResponseUnmarshaller.class)
+@Deprecated
 public class Condition {
     /**
      * 指定 ip 网段,支持*通配

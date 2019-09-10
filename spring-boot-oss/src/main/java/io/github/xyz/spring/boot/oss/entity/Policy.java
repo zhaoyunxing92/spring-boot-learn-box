@@ -31,16 +31,7 @@ import java.util.List;
  *             "Resource": [
  *                 "acs:oss:*:1775305056529849:mybucket"
  *             ],
- *             "Effect": "Allow",
- *             "Condition": {
- *                 "StringEquals": {
- *                     "acs:UserAgent": "java-sdk",
- *                     "oss:Prefix": "foo"
- *                 },
- *                 "IpAddress": {
- *                     "acs:SourceIp": "192.168.0.1"
- *                 }
- *             }
+ *             "Effect": "Allow"
  *         },
  *         {
  *             "Action": [
@@ -51,12 +42,7 @@ import java.util.List;
  *             "Resource": [
  *                 "acs:oss:*:1775305056529849:mybucket/file*"
  *             ],
- *             "Effect": "Allow",
- *             "Condition": {
- *                 "IpAddress": {
- *                     "acs:SourceIp": "192.168.0.1"
- *                 }
- *             }
+ *             "Effect": "Allow"
  *         }
  *     ]
  * }

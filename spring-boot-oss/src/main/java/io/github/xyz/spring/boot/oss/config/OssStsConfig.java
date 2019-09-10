@@ -86,6 +86,5 @@ public class OssStsConfig {
         Set<ConstraintViolation<OssStsConfig>> validators = validator.validate(this);
         //todo：validators.iterator().hasNext()这个必须判断下
         Assert.isTrue(validators.isEmpty(), validators.iterator().hasNext() ? validators.iterator().next().getMessage() : "ossConfig参数验证不通过");
-        System.out.println(JSONObject.toJSONString(this));
     }
 }
