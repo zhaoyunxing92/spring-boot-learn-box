@@ -5,10 +5,12 @@ package io.github.xyz.spring.boot.oss.config;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
+import com.aliyuncs.sts.transform.v20150401.AssumeRoleResponseUnmarshaller;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.ToString;
 import org.hibernate.validator.constraints.Range;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.stereotype.Component;
@@ -26,6 +28,7 @@ import java.util.List;
 @ToString
 @Component
 @ConfigurationProperties(prefix = "oss.sts")
+@ConditionalOnClass(AssumeRoleResponseUnmarshaller.class)
 public class OssStsConfig {
     /**
      * STS服务的所有接入地址，每个地址的功能都相同，请尽量在同区域进行调用.默认值:sts.cn-hangzhou.aliyuncs.com.
