@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * @author zhaoyunxing
  * @date: 2019-09-09 10:17
- * @des:
+ * @desc:
  */
 @SpringBootApplication
 public class OssServer {

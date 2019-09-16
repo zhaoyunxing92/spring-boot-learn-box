@@ -3,11 +3,8 @@
  */
 package io.github.xyz.spring.boot.oss.config;
 
-import com.alibaba.fastjson.JSONObject;
 import com.aliyuncs.sts.transform.v20150401.AssumeRoleResponseUnmarshaller;
-import com.sun.media.sound.SoftTuning;
 import io.github.xyz.spring.boot.oss.entity.Policy;
-import io.github.xyz.spring.boot.oss.entity.Statement;
 import lombok.Data;
 import lombok.ToString;
 import org.hibernate.validator.constraints.Range;
@@ -22,6 +19,8 @@ import javax.validation.Valid;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -37,7 +36,10 @@ import java.util.Set;
 @ConfigurationProperties(prefix = "oss.sts")
 @ConditionalOnClass(AssumeRoleResponseUnmarshaller.class)
 public class OssStsConfig {
-
+    /**
+     * 是否启用sts，默认启用
+     */
+    private Boolean enable = true;
     /**
      * STS服务的所有接入地址，每个地址的功能都相同，请尽量在同区域进行调用.默认值:sts.cn-hangzhou.aliyuncs.com.
      */
@@ -67,6 +69,7 @@ public class OssStsConfig {
     /**
      * 设置临时凭证的有效期，单位是s，最小为900，最大为3600.默认值1000
      */
+    @NotNull(message = "请配置【durationSeconds】属性")
     @Range(min = 900, max = 3600, message = "有效期必须在{min}~{max}之间")
     private Long durationSeconds = 1000L;
 
@@ -85,6 +88,7 @@ public class OssStsConfig {
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
         Set<ConstraintViolation<OssStsConfig>> validators = validator.validate(this);
         //todo：validators.iterator().hasNext()这个必须判断下
-        Assert.isTrue(validators.isEmpty(), validators.iterator().hasNext() ? validators.iterator().next().getMessage() : "ossConfig参数验证不通过");
+        Iterator<ConstraintViolation<OssStsConfig>> iterator = validators.iterator();
+        Assert.isTrue(validators.isEmpty(), iterator.hasNext() ? iterator.next().getMessage() : "OssStsConfig参数验证不通过");
     }
 }
