@@ -42,7 +42,11 @@ github：https://github.com/zhaoyunxing92/spring-boot-learn-box
     
     * [x] [rabbitmq入门到放弃之docker rabbitmq](https://www.jianshu.com/p/f6999a902777) rabbitmq安装
     * [x] [exchange详解](./spring-boot-rabbitmq/exchange.md) 交换机分类、实例代码
+    
+- [x] [spring-boot-oss](./spring-boot-oss) 主要是sts方式使用oss
    
+    * [x] [oss-spring-boot-starter](https://github.com/zhaoyunxing92/sunny-spring-boot-starter/tree/master/oss-spring-boot-starter) sts和后端验签两个方式使用oss
+
 ## 公众号
 
  在使用中遇到问题关注微信公众号提问题,其他地方的问题不一定反馈及时

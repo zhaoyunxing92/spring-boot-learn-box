@@ -1,0 +1,13 @@
+oss:
+  sts:
+    access-key-id:
+    access-key-secret:
+    role-arn:
+    role-session-name:
+    policy:
+      version:
+      statement:
+        - effect: Allow
+          resource:
+            - acs:oss:*:*:xx
+            - acs:oss:*:*:xxx/*
