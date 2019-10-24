@@ -28,7 +28,7 @@
         <sentinel.version>1.6.0</sentinel.version>
         <spring.boot.aop.version>2.1.0.RELEASE</spring.boot.aop.version>
         <apollo.client.vresion>1.1.0</apollo.client.vresion>
-        <spring.cloud.alibaba.version>0.9.0.RELEASE</spring.cloud.alibaba.version>
+        <alibaba.cloud.version>2.1.0.RELEASE</alibaba.cloud.version>
         <!--修改es版本-->
         <elasticsearch.version>6.8.2</elasticsearch.version>
         <aliyun-java-sdk-sts.version>3.0.0</aliyun-java-sdk-sts.version>
@@ -51,6 +51,8 @@
         <module>spring-boot-rabbitmq/consumer</module>
         <module>spring-boot-rabbitmq/rabbitmq-java</module>
         <module>spring-boot-oss</module>
+        <module>spring-boot-rocketmq/dubbo-dtx-bank-01</module>
+        <module>spring-boot-rocketmq/dubbo-dtx-bank-02</module>
     </modules>
 
     <dependencies>
@@ -64,12 +66,13 @@
         <dependencies>
             <!--spring cloud alibaba -->
             <dependency>
-                <groupId>org.springframework.cloud</groupId>
+                <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>${spring.cloud.alibaba.version}</version>
+                <version>${alibaba.cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
             <!--spring boot-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
