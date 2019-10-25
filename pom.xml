@@ -33,6 +33,7 @@
         <elasticsearch.version>6.8.2</elasticsearch.version>
         <aliyun-java-sdk-sts.version>3.0.0</aliyun-java-sdk-sts.version>
         <aliyun-java-sdk-core.version>3.5.0</aliyun-java-sdk-core.version>
+        <mybatis.spring.version>2.0.1</mybatis.spring.version>
     </properties>
 
     <modules>
@@ -51,8 +52,8 @@
         <module>spring-boot-rabbitmq/consumer</module>
         <module>spring-boot-rabbitmq/rabbitmq-java</module>
         <module>spring-boot-oss</module>
-        <module>spring-boot-rocketmq/dubbo-dtx-bank-01</module>
-        <module>spring-boot-rocketmq/dubbo-dtx-bank-02</module>
+        <module>spring-boot-rocketmq/dubbo-dtx-lisi-bank</module>
+        <module>spring-boot-rocketmq/dubbo-dtx-zhangsan-bank</module>
     </modules>
 
     <dependencies>
@@ -64,6 +65,16 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>2.0.1</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.xyz</groupId>
+                <artifactId>dubbo-dtx-lisi-bank-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <!--spring cloud alibaba -->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>

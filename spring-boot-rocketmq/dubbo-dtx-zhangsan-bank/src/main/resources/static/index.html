@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>rocket mq 实现分布式事物</title>
+    <meta content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no" id="viewport" name="viewport">
+</head>
+<!-- import Vue.js -->
+<script src="https://vuejs.org/js/vue.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- import stylesheet -->
+<link rel="stylesheet" href="https://unpkg.com/iview/dist/styles/iview.css">
+<!-- import iView -->
+<script src="https://unpkg.com/iview/dist/iview.min.js"></script>
+<body>
+<div id="app">
+    <div style="background:#f8f8f8;padding: 25px">
+        <row gutter="16">
+            <i-col span="12">
+                <card>
+                    <p slot="title">张三账户</p>
+                    <p>
+                        <icon type="md-person" size="18" color="#8043d4"></icon>
+                        ：{{zhangsan.accountName}}
+                    </p>
+                    <br/>
+                    <p>
+                        <icon type="logo-yen" size="16" color="#ff4400"></icon>
+                        ：{{zhangsan.money}}
+                    </p>
+                </card>
+            </i-col>
+            <i-col span="12">
+                <card>
+                    <p slot="title">李四账户</p>
+                    <p>
+                        <icon type="md-person" size="18" color="#8043d4"></icon>
+                        ：{{ lisi.accountName }}
+                    </p>
+                    <br/>
+                    <p>
+                        <icon type="logo-yen" size="16" color="#ff4400"></icon>
+                        ：{{lisi.money}}
+                    </p>
+                </card>
+            </i-col>
+        </row>
+        <br/>
+
+        <row gutter="10">
+            <i-col span="8">
+                <h2>张三
+                    <icon type="md-arrow-forward" size="24"></icon>
+                    李四 没有任何事物措施
+                </h2>
+                <i-form :ref="formInline" v-model="formInline" :label-width="40">
+
+                    <form-item label="账户">
+                        <i-input type="text" disabled size="large" v-model="formInline.accountName" placeholder="对方账户"/>
+                    </form-item>
+
+                    <form-item label="金额">
+                        <i-input type="number" size="large" v-model="formInline.money" placeholder="转账金额"/>
+                    </form-item>
+
+                    <form-item style="text-align: center;">
+                        <i-button type="primary" @click="transfer()">转账</i-button>
+                    </form-item>
+                </i-form>
+            </i-col>
+
+            <i-col span="8">
+                <h2>张三
+                    <icon type="md-arrow-forward" size="24"></icon>
+                    李四 事物消息转账
+                </h2>
+
+                <i-form :ref="formInline" v-model="formInline" :label-width="40">
+
+                    <form-item label="账户">
+                        <i-input type="text" disabled size="large" v-model="formInline.accountName" placeholder="对方账户"/>
+                    </form-item>
+
+                    <form-item label="金额">
+                        <i-input type="number" size="large" v-model="formInline.money" placeholder="转账金额"/>
+                    </form-item>
+
+                    <form-item style="text-align: center;">
+                        <i-button type="primary" @click="txTransfer()">转账</i-button>
+                    </form-item>
+                </i-form>
+            </i-col>
+
+            <i-col span="8">
+                <h2>张三
+                    <icon type="md-arrow-forward" size="24"></icon>
+                    李四 消息转账
+                </h2>
+
+                <i-form :ref="formInline" v-model="formInline" :label-width="40">
+
+                    <form-item label="账户">
+                        <i-input type="text" disabled size="large" v-model="formInline.accountName" placeholder="对方账户"/>
+                    </form-item>
+
+                    <form-item label="金额">
+                        <i-input type="number" size="large" v-model="formInline.money" placeholder="转账金额"/>
+                    </form-item>
+
+                    <form-item style="text-align: center;">
+                        <i-button type="primary" @click="msgTransfer()">转账</i-button>
+                    </form-item>
+                </i-form>
+            </i-col>
+        </row>
+    </div>
+
+</div>
+</body>
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      zhangsan: {
+        accountName: '',
+        money: 0
+      },
+      lisi: {
+        accountName: '',
+        money: 0
+      },
+      formInline: {
+        accountName: 'lisi',
+        money: 10
+      }
+    },
+    mounted: function() {
+      this.initBank();
+    },
+    methods: {
+      // 转账
+      transfer() {
+        let that = this;
+        axios.post("/bank/transfer", that.formInline)
+             .then(function( res ) {
+               that.$Message.success('转账成功！');
+               that.initBank();
+             })
+             .catch(function( error ) {
+               that.$Message.error('转账失败！');
+             });
+      },
+      //事物转账
+      txTransfer() {
+        let that = this;
+        axios.post("/bank/transfer/tx", that.formInline)
+             .then(function( res ) {
+               that.$Message.success('转账成功！');
+               that.initBank();
+             })
+             .catch(function( error ) {
+               that.$Message.error('转账失败！');
+             });
+      },
+      //消息转账
+      msgTransfer() {
+        let that = this;
+        axios.post("/bank/transfer/msg", that.formInline)
+             .then(function( res ) {
+               that.$Message.success('转账成功！');
+               that.initBank();
+             })
+             .catch(function( error ) {
+               that.$Message.error('转账失败！');
+             });
+      },
+      // 加载账户
+      initBank() {
+        let that = this;
+        axios({
+          method: 'get',
+          url: '/bank',
+        }).then(function( res ) {
+          that.zhangsan = res.data.zhangsan;
+          that.lisi = res.data.lisi;
+          that.$Message.success('加载账户成功！');
+        }).catch(function( error ) {
+          that.$Message.error('加载账户异常！');
+        });
+      }
+    }
+  });
+</script>
+<style>
+    .ivu-form-label-right {
+        padding: 20px 15px;
+        background-color: #ffffff;
+        border: 1px solid #dcdee2;
+        border-radius: 5px;
+    }
+</style>
+</html>

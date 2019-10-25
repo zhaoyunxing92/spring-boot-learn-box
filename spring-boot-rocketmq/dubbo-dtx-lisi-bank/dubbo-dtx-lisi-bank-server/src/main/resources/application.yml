@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: dubbo-dtx-lisi-bank
+  profiles:
+    active: local
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/bank02?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: 123456
+dubbo:
+  scan:
+    base-packages: io.github.xyz.spring.boot.rocketmq.lisi.service
+  protocol:
+    name: dubbo
+    port: -1
+
+mybatis:
+  mapper-locations: classpath:io/github/xyz/spring/boot/rocketmq/lisi/mapper/xml/*.xml
+  type-aliases-package: io.github.xyz.spring.boot.rocketmq.lisi.model
+
+logging:
+  level:
+    io.github.xyz.spring.boot.rocketmq.lisi.mapper: debug
+
+server:
+  port: 7101

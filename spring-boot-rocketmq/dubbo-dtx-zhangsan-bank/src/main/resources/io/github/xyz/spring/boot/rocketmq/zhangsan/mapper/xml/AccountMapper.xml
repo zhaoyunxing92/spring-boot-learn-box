@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.github.xyz.spring.boot.rocketmq.zhangsan.mapper.AccountMapper">
+    <resultMap id="BaseResultMap" type="io.github.xyz.spring.boot.rocketmq.zhangsan.model.Account">
+        <!-- Don't change -->
+        <result column="account_name" jdbcType="VARCHAR" property="accountName"/>
+        <result column="money" jdbcType="BIGINT" property="money"/>
+        <result column="modifier_time" jdbcType="TIMESTAMP" property="modifierTime"/>
+    </resultMap>
+
+    <select id="selectByPrimaryKey" parameterType="string" resultMap="BaseResultMap">
+        select account_name,money from account where account_name= #{accountId,jdbcType=BIGINT}
+    </select>
+
+    <update id="updateAccount">
+       update account
+         set
+           money=money + #{money,jdbcType=BIGINT}
+        where account_name = #{accountId,jdbcType=BIGINT}
+    </update>
+</mapper>
