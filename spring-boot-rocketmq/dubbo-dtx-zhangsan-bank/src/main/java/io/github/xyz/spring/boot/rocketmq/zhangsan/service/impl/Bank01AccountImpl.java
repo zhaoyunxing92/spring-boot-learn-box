@@ -48,6 +48,9 @@ public class Bank01AccountImpl implements Bank01Account {
         Long money = account.getMoney();
         accountMapper.updateAccount("zhangsan", money * -1);
         bank02Account.updateAccount(account.getAccountName(), money);
+        if (money > 10) {
+            throw new RuntimeException("转账金额超过10元");
+        }
     }
 
     @Override

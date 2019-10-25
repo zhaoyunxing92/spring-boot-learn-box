@@ -12,12 +12,17 @@ import java.util.Map;
  * @date: 2019-10-24 15:13
  */
 public interface Bank01Account {
-
+    /**
+     * 获取账户
+     *
+     * @return
+     */
     Map<String, Object> banks();
 
 
     /**
      * 转账
+     *
      * @param account
      */
     void transfer(Account account);

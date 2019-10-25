@@ -144,11 +144,12 @@
         axios.post("/bank/transfer", that.formInline)
              .then(function( res ) {
                that.$Message.success('转账成功！');
-               that.initBank();
              })
-             .catch(function( error ) {
+             .catch(function( ex ) {
+               console.log(ex);
                that.$Message.error('转账失败！');
              });
+        that.initBank();
       },
       //事物转账
       txTransfer() {
@@ -183,7 +184,6 @@
         }).then(function( res ) {
           that.zhangsan = res.data.zhangsan;
           that.lisi = res.data.lisi;
-          that.$Message.success('加载账户成功！');
         }).catch(function( error ) {
           that.$Message.error('加载账户异常！');
         });
