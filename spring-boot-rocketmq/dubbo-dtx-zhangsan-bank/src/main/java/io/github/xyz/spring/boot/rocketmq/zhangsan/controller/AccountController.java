@@ -8,7 +8,7 @@ import io.github.xyz.spring.boot.rocketmq.zhangsan.model.Account;
 import io.github.xyz.spring.boot.rocketmq.zhangsan.service.Bank01Account;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
+import java.util.List;
 
 /**
  * @author zhaoyunxing
@@ -23,7 +23,7 @@ public class AccountController {
     public AccountController(Bank01Account bank01Account) {this.bank01Account = bank01Account;}
 
     @GetMapping
-    public Map<String, Object> hello() {
+    public List<Object> hello() {
         return bank01Account.banks();
     }
 
@@ -35,6 +35,27 @@ public class AccountController {
     @PostMapping("/transfer")
     public void transfer(@RequestBody Account account) {
         bank01Account.transfer(account);
+    }
+
+    /**
+     * rocket 事物转账
+     *
+     * @param account
+     */
+    @PostMapping("/transfer/tx")
+    public void txTransfer(@RequestBody Account account) {
+        bank01Account.txTransfer(account);
+    }
+
+
+    /**
+     * 事物转账
+     *
+     * @param account
+     */
+    @PostMapping("/transfer/msg")
+    public void msgTransfer(@RequestBody Account account) {
+        bank01Account.msgTransfer(account);
     }
 
 }

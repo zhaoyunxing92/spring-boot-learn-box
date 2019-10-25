@@ -15,35 +15,35 @@
 <body>
 <div id="app">
     <div style="background:#f8f8f8;padding: 25px">
-        <row gutter="16">
-            <i-col span="12">
+        <row gutter="10">
+            <i-col span="12" v-for="bank in banks">
                 <card>
-                    <p slot="title">张三账户</p>
+                    <p slot="title">银行账户</p>
                     <p>
                         <icon type="md-person" size="18" color="#8043d4"></icon>
-                        ：{{zhangsan.accountName}}
+                        ：{{bank.accountName}}
                     </p>
                     <br/>
                     <p>
                         <icon type="logo-yen" size="16" color="#ff4400"></icon>
-                        ：{{zhangsan.money}}
+                        ：{{bank.money}}
                     </p>
                 </card>
             </i-col>
-            <i-col span="12">
-                <card>
-                    <p slot="title">李四账户</p>
-                    <p>
-                        <icon type="md-person" size="18" color="#8043d4"></icon>
-                        ：{{ lisi.accountName }}
-                    </p>
-                    <br/>
-                    <p>
-                        <icon type="logo-yen" size="16" color="#ff4400"></icon>
-                        ：{{lisi.money}}
-                    </p>
-                </card>
-            </i-col>
+            <!--            <i-col span="12">-->
+            <!--                <card>-->
+            <!--                    <p slot="title">李四账户</p>-->
+            <!--                    <p>-->
+            <!--                        <icon type="md-person" size="18" color="#8043d4"></icon>-->
+            <!--                        ：{{ lisi.accountName }}-->
+            <!--                    </p>-->
+            <!--                    <br/>-->
+            <!--                    <p>-->
+            <!--                        <icon type="logo-yen" size="16" color="#ff4400"></icon>-->
+            <!--                        ：{{lisi.money}}-->
+            <!--                    </p>-->
+            <!--                </card>-->
+            <!--            </i-col>-->
         </row>
         <br/>
 
@@ -53,14 +53,14 @@
                     <icon type="md-arrow-forward" size="24"></icon>
                     李四 没有任何事物措施
                 </h2>
-                <i-form :ref="formInline" v-model="formInline" :label-width="40">
+                <i-form :label-width="40">
 
                     <form-item label="账户">
-                        <i-input type="text" disabled size="large" v-model="formInline.accountName" placeholder="对方账户"/>
+                        <i-input type="text" disabled size="large" v-model="account1.accountName" placeholder="对方账户"/>
                     </form-item>
 
                     <form-item label="金额">
-                        <i-input type="number" size="large" v-model="formInline.money" placeholder="转账金额"/>
+                        <i-input type="number" size="large" v-model="account1.money" placeholder="转账金额"/>
                     </form-item>
 
                     <form-item style="text-align: center;">
@@ -75,14 +75,14 @@
                     李四 事物消息转账
                 </h2>
 
-                <i-form :ref="formInline" v-model="formInline" :label-width="40">
+                <i-form :label-width="40">
 
                     <form-item label="账户">
-                        <i-input type="text" disabled size="large" v-model="formInline.accountName" placeholder="对方账户"/>
+                        <i-input type="text" disabled size="large" v-model="account2.accountName" placeholder="对方账户"/>
                     </form-item>
 
                     <form-item label="金额">
-                        <i-input type="number" size="large" v-model="formInline.money" placeholder="转账金额"/>
+                        <i-input type="number" size="large" v-model="account2.money" placeholder="转账金额"/>
                     </form-item>
 
                     <form-item style="text-align: center;">
@@ -97,14 +97,14 @@
                     李四 消息转账
                 </h2>
 
-                <i-form :ref="formInline" v-model="formInline" :label-width="40">
+                <i-form :label-width="40">
 
                     <form-item label="账户">
-                        <i-input type="text" disabled size="large" v-model="formInline.accountName" placeholder="对方账户"/>
+                        <i-input type="text" disabled size="large" v-model="account3.accountName" placeholder="对方账户"/>
                     </form-item>
 
                     <form-item label="金额">
-                        <i-input type="number" size="large" v-model="formInline.money" placeholder="转账金额"/>
+                        <i-input type="number" size="large" v-model="account3.money" placeholder="转账金额"/>
                     </form-item>
 
                     <form-item style="text-align: center;">
@@ -121,15 +121,16 @@
   new Vue({
     el: '#app',
     data: {
-      zhangsan: {
-        accountName: '',
-        money: 0
+      banks: [],
+      account1: {
+        accountName: 'lisi',
+        money: 10
       },
-      lisi: {
-        accountName: '',
-        money: 0
+      account2: {
+        accountName: 'lisi',
+        money: 10
       },
-      formInline: {
+      account3: {
         accountName: 'lisi',
         money: 10
       }
@@ -141,7 +142,7 @@
       // 转账
       transfer() {
         let that = this;
-        axios.post("/bank/transfer", that.formInline)
+        axios.post("/bank/transfer", that.account1)
              .then(function( res ) {
                that.$Message.success('转账成功！');
              })
@@ -154,7 +155,7 @@
       //事物转账
       txTransfer() {
         let that = this;
-        axios.post("/bank/transfer/tx", that.formInline)
+        axios.post("/bank/transfer/tx", that.account2)
              .then(function( res ) {
                that.$Message.success('转账成功！');
                that.initBank();
@@ -166,7 +167,7 @@
       //消息转账
       msgTransfer() {
         let that = this;
-        axios.post("/bank/transfer/msg", that.formInline)
+        axios.post("/bank/transfer/msg", that.account3)
              .then(function( res ) {
                that.$Message.success('转账成功！');
                that.initBank();
@@ -182,8 +183,7 @@
           method: 'get',
           url: '/bank',
         }).then(function( res ) {
-          that.zhangsan = res.data.zhangsan;
-          that.lisi = res.data.lisi;
+          that.banks = res.data;
         }).catch(function( error ) {
           that.$Message.error('加载账户异常！');
         });

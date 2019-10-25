@@ -4,8 +4,7 @@
 package io.github.xyz.spring.boot.rocketmq.zhangsan.service;
 
 import io.github.xyz.spring.boot.rocketmq.zhangsan.model.Account;
-
-import java.util.Map;
+import java.util.List;
 
 /**
  * @author zhaoyunxing
@@ -17,7 +16,7 @@ public interface Bank01Account {
      *
      * @return
      */
-    Map<String, Object> banks();
+    List<Object> banks();
 
 
     /**
@@ -28,10 +27,22 @@ public interface Bank01Account {
     void transfer(Account account);
 
     /**
+     * 事物转账
+     * @param account
+     */
+    void txTransfer(Account account);
+
+    /**
      * 获取账户信息
      *
      * @param accountId
      * @return
      */
     Account getAccount(String accountId);
+
+    /**
+     * rocket 消息转账
+     * @param account
+     */
+    void msgTransfer(Account account);
 }

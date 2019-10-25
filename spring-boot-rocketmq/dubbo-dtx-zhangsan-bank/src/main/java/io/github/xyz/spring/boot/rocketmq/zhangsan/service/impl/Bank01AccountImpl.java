@@ -9,8 +9,11 @@ import io.github.xyz.spring.boot.rocketmq.zhangsan.model.Account;
 import io.github.xyz.spring.boot.rocketmq.zhangsan.service.Bank01Account;
 import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -44,6 +47,7 @@ public class Bank01AccountImpl implements Bank01Account {
      * @param account
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void transfer(Account account) {
         Long money = account.getMoney();
         accountMapper.updateAccount("zhangsan", money * -1);
@@ -54,11 +58,30 @@ public class Bank01AccountImpl implements Bank01Account {
     }
 
     @Override
-    public Map<String, Object> banks() {
-        Map<String, Object> map = new HashMap<>(2);
+    public List<Object> banks() {
+        List<Object> banks = new ArrayList<>(2);
+        banks.add(bank02Account.getAccount("lisi"));
+        banks.add(getAccount("zhangsan"));
+        return banks;
+    }
 
-        map.put("lisi", bank02Account.getAccount("lisi"));
-        map.put("zhangsan", getAccount("zhangsan"));
-        return map;
+    /**
+     * 事物转账
+     *
+     * @param account
+     */
+    @Override
+    public void txTransfer(Account account) {
+
+    }
+
+    /**
+     * rocket 消息转账
+     *
+     * @param account
+     */
+    @Override
+    public void msgTransfer(Account account) {
+
     }
 }
