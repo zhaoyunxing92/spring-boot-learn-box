@@ -42,5 +42,11 @@
             <groupId>io.github.xyz</groupId>
             <artifactId>dubbo-dtx-lisi-bank-api</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-spring-boot-starter</artifactId>
+            <version>2.0.3</version>
+        </dependency>
     </dependencies>
 </project>

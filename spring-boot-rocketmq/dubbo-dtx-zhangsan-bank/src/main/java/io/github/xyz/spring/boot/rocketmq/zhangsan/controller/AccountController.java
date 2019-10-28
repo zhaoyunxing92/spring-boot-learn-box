@@ -23,7 +23,7 @@ public class AccountController {
     public AccountController(Bank01Account bank01Account) {this.bank01Account = bank01Account;}
 
     @GetMapping
-    public List<Object> hello() {
+    public List<Object> banks() {
         return bank01Account.banks();
     }
 

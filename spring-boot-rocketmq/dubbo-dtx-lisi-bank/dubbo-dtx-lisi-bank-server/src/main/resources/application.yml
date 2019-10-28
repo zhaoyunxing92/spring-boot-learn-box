@@ -31,3 +31,9 @@ logging:
 
 server:
   port: 7101
+
+rocketmq:
+  name-server: localhost:9876
+  producer:
+    group: dubbo-dtx-lisi-bank
+#    send-message-timeout: 300000

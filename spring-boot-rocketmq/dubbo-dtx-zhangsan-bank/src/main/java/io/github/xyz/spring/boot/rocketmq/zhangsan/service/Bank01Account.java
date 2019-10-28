@@ -4,6 +4,7 @@
 package io.github.xyz.spring.boot.rocketmq.zhangsan.service;
 
 import io.github.xyz.spring.boot.rocketmq.zhangsan.model.Account;
+
 import java.util.List;
 
 /**
@@ -28,9 +29,25 @@ public interface Bank01Account {
 
     /**
      * 事物转账
+     *
      * @param account
      */
     void txTransfer(Account account);
+
+    /**
+     * 事物消息转账
+     *
+     * @param account
+     */
+    void txMsgTransfer(Account account);
+
+    /**
+     * 是否执行过
+     *
+     * @param txId
+     * @return
+     */
+    boolean hasTxLog(String txId);
 
     /**
      * 获取账户信息
@@ -42,6 +59,7 @@ public interface Bank01Account {
 
     /**
      * rocket 消息转账
+     *
      * @param account
      */
     void msgTransfer(Account account);

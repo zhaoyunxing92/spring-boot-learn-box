@@ -5,8 +5,6 @@ package io.github.xyz.spring.boot.rocketmq.lisi.service;
 
 import io.github.xyz.spring.boot.rocketmq.lisi.LiSiDto;
 
-import java.util.Map;
-
 /**
  * @author zhaoyunxing
  * @date: 2019-10-24 18:00
@@ -27,4 +25,5 @@ public interface Bank02Account {
      * @return
      */
     LiSiDto getAccount(String accountId);
+
 }

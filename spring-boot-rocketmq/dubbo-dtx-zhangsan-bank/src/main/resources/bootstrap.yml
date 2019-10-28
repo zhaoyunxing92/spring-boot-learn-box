@@ -35,3 +35,10 @@ logging:
 
 server:
   port: 7100
+
+
+rocketmq:
+  name-server: localhost:9876
+  producer:
+    group: dubbo-dtx-zhangsan-bank
+#    send-message-timeout: 300000

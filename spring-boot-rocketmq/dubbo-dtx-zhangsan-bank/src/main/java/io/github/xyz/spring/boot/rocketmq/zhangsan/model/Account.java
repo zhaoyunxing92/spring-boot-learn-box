@@ -27,4 +27,8 @@ public class Account {
      * 修改时间
      */
     private Date modifierTime;
+    /**
+     * 操作流水
+     */
+    private String txId;
 }
