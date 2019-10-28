@@ -11,6 +11,7 @@ import io.github.xyz.spring.boot.rocketmq.lisi.service.impl.BankAccountImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
+import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @Component
 @RocketMQMessageListener(topic = TxConstant.TX_TOPIC, consumerGroup = TxConstant.TX_CONSUMER_GROUP)
-public class TransactionListenerImpl implements RocketMQListener<String> {
+public class TransactionListenerImpl implements RocketMQListener<Account> {
 
     private final BankAccountImpl bank02Account;
 
@@ -31,12 +32,13 @@ public class TransactionListenerImpl implements RocketMQListener<String> {
     /**
      * 接受到消息
      *
-     * @param msg
+     * @param account
      */
     @Override
-    public void onMessage(String msg) {
-        log.info("topic:{}", JSONObject.toJSONString(msg));
-        Account account = JSONObject.parseObject(msg, Account.class);
+    public void onMessage(Account account) {
+        log.info("topic:{}", JSONObject.toJSONString(account));
+        // log.info("topic:{}", JSONObject.toJSONString(msg));
+        // Account account = JSONObject.parseObject(msg, Account.class);
         bank02Account.txMsgTransfer(account);
     }
 }
