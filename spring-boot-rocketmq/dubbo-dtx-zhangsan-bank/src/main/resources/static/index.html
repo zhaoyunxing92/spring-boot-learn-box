@@ -30,20 +30,7 @@
                     </p>
                 </card>
             </i-col>
-            <!--            <i-col span="12">-->
-            <!--                <card>-->
-            <!--                    <p slot="title">李四账户</p>-->
-            <!--                    <p>-->
-            <!--                        <icon type="md-person" size="18" color="#8043d4"></icon>-->
-            <!--                        ：{{ lisi.accountName }}-->
-            <!--                    </p>-->
-            <!--                    <br/>-->
-            <!--                    <p>-->
-            <!--                        <icon type="logo-yen" size="16" color="#ff4400"></icon>-->
-            <!--                        ：{{lisi.money}}-->
-            <!--                    </p>-->
-            <!--                </card>-->
-            <!--            </i-col>-->
+
         </row>
         <br/>
 
@@ -145,12 +132,12 @@
         axios.post("/bank/transfer", that.account1)
              .then(function( res ) {
                that.$Message.success('转账成功！');
+               that.initBank();
              })
              .catch(function( ex ) {
                console.log(ex);
                that.$Message.error('转账失败！');
              });
-        that.initBank();
       },
       //事物转账
       txTransfer() {
