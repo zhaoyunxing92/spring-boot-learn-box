@@ -36,8 +36,12 @@ public class BankAccountImpl implements Bank02Account {
      * @param money     金额
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void updateAccount(String accountId, Long money) {
         accountMapper.updateAccount(accountId, money);
+        if (money > 15) {
+            throw new RuntimeException("转账金额大于15");
+        }
     }
 
     /**
