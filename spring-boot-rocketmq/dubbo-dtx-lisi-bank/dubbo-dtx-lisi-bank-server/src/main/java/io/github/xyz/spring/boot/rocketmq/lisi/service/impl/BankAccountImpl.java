@@ -39,7 +39,7 @@ public class BankAccountImpl implements Bank02Account {
     @Transactional(rollbackFor = Exception.class)
     public void updateAccount(String accountId, Long money) {
         accountMapper.updateAccount(accountId, money);
-        if (money > 15) {
+        if (money == 15) {
             throw new RuntimeException("转账金额大于15");
         }
     }

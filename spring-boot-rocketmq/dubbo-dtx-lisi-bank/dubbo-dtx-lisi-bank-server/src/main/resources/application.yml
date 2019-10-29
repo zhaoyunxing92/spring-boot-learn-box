@@ -20,6 +20,8 @@ dubbo:
   protocol:
     name: dubbo
     port: -1
+  cloud:
+    subscribed-services: dubbo-dtx-lisi-bank
 
 mybatis:
   mapper-locations: classpath:io/github/xyz/spring/boot/rocketmq/lisi/mapper/xml/*.xml
