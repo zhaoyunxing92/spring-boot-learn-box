@@ -32,30 +32,40 @@
             </i-col>
 
         </row>
-        <br/>
+
         <alert show-icon>
             转账异常触发规则
             <icon type="ios-bulb-outline" slot="icon"></icon>
             <template slot="desc">
-                当转账金额><b style="color: #ff9900">10</b>时，服务<b style="color: #ed4014">dubbo-dtx-zhangsan-bank</b>触发异常
+                当转账金额<b style="color: #ff9900">=10</b>时，服务<b style="color: #ed4014">zhangsan</b>触发异常
                 <br/>
-                当转账金额><b style="color: #ff9900">15</b>时，服务<b style="color: #ed4014">dubbo-dtx-lisi-bank-server</b>触发异常
+                当转账金额<b style="color: #ff9900">=15</b>时，服务<b style="color: #ed4014">lisi</b>触发异常
             </template>
         </alert>
+        
+        <br/>
         <row gutter="10">
             <i-col span="8">
                 <h2>张三
                     <icon type="md-arrow-forward" size="24"></icon>
-                    李四 没有任何事物措施
+                    李四 本地事物措施
                 </h2>
                 <i-form :label-width="40">
 
+                    <alert type="warning">
+                        <template slot="desc">
+                            当转账金额<b style="color: #ff9900">=10</b>时，<b style="color: #ed4014">zhangsan</b>服务触发异常,但是<b style="color: #ed4014">lisi</b>却收到转账
+                            <br/>
+                            当转账金额<b style="color: #ff9900">=15</b>时，<b style="color: #ed4014">lisi</b>触发异常,这时两个账户钱都不会变
+                        </template>
+                    </alert>
+
                     <form-item label="账户">
-                        <i-input type="text" disabled size="large" v-model="account1.accountName" placeholder="对方账户"/>
+                        <i-input type="text" disabled size="large" v-model="account1.accountName" placeholder="对方账户"></i-input>
                     </form-item>
 
                     <form-item label="金额">
-                        <i-input type="number" size="large" v-model="account1.money" placeholder="转账金额"/>
+                        <i-input type="number" size="large" v-model="account1.money" placeholder="转账金额"></i-input>
                     </form-item>
 
                     <form-item style="text-align: center;">
@@ -72,12 +82,20 @@
 
                 <i-form :label-width="40">
 
+                    <alert type="warning">
+                        <template slot="desc">
+                            当转账金额<b style="color: #ff9900">=10</b>时，<b style="color: #ed4014">zhangsan</b>服务触发异常,<b style="color:#ed4014">不发送事物消息</b>
+                            <br/>
+                            当转账金额<b style="color: #ff9900">=15</b>时，<b style="color: #ed4014">lisi</b>触发异常,<b style="color:#ed4014">这时候消息会一直通知等<b style="color: #19be6b">lisi</b>完成消费</b>
+                        </template>
+                    </alert>
+
                     <form-item label="账户">
-                        <i-input type="text" disabled size="large" v-model="account2.accountName" placeholder="对方账户"/>
+                        <i-input type="text" disabled size="large" v-model="account2.accountName" placeholder="对方账户"></i-input>
                     </form-item>
 
                     <form-item label="金额">
-                        <i-input type="number" size="large" v-model="account2.money" placeholder="转账金额"/>
+                        <i-input type="number" size="large" v-model="account2.money" placeholder="转账金额"></i-input>
                     </form-item>
 
                     <form-item style="text-align: center;">
@@ -95,11 +113,11 @@
                 <i-form :label-width="40">
 
                     <form-item label="账户">
-                        <i-input type="text" disabled size="large" v-model="account3.accountName" placeholder="对方账户"/>
+                        <i-input type="text" disabled size="large" v-model="account3.accountName" placeholder="对方账户"></i-input>
                     </form-item>
 
                     <form-item label="金额">
-                        <i-input type="number" size="large" v-model="account3.money" placeholder="转账金额"/>
+                        <i-input type="number" size="large" v-model="account3.money" placeholder="转账金额"></i-input>
                     </form-item>
 
                     <form-item style="text-align: center;">
@@ -145,6 +163,9 @@
              .catch(function( ex ) {
                console.log(ex);
                that.$Message.error('转账失败！');
+             })
+             .then(function() {
+               that.initBank();
              });
       },
       //事物转账
@@ -153,10 +174,12 @@
         axios.post("/bank/transfer/tx", that.account2)
              .then(function( res ) {
                that.$Message.success('转账成功！');
-               that.initBank();
              })
              .catch(function( error ) {
                that.$Message.error('转账失败！');
+             })
+             .then(function() {
+               that.initBank();
              });
       },
       //消息转账
@@ -165,10 +188,12 @@
         axios.post("/bank/transfer/msg", that.account3)
              .then(function( res ) {
                that.$Message.success('转账成功！');
-               that.initBank();
              })
              .catch(function( error ) {
                that.$Message.error('转账失败！');
+             })
+             .then(function() {
+               that.initBank();
              });
       },
       // 加载账户
@@ -188,7 +213,8 @@
 </script>
 <style>
     .ivu-form-label-right {
-        padding: 20px 15px;
+        padding: 15px;
+        margin-top: 5px;
         background-color: #ffffff;
         border: 1px solid #dcdee2;
         border-radius: 5px;
