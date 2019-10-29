@@ -10,8 +10,11 @@ package io.github.xyz.spring.boot.rocketmq.lisi.constant;
 public class TxConstant {
 
     public static final String TX_TOPIC = "tx_topic";
+    public static final String MSG_TOPIC = "msg_topic";
 
     public static final String TX_PRODUCER_GROUP = "TxProducerGroup";
 
     public static final String TX_CONSUMER_GROUP = "TxConsumerGroup";
+
+    public static final String MSG_CONSUMER_GROUP = "MsgConsumerGroup";
 }

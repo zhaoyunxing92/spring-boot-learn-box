@@ -6,14 +6,11 @@ package io.github.xyz.spring.boot.rocketmq.lisi.listener;
 import com.alibaba.fastjson.JSONObject;
 import io.github.xyz.spring.boot.rocketmq.lisi.constant.TxConstant;
 import io.github.xyz.spring.boot.rocketmq.lisi.model.Account;
-import io.github.xyz.spring.boot.rocketmq.lisi.service.Bank02Account;
 import io.github.xyz.spring.boot.rocketmq.lisi.service.impl.BankAccountImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
-import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author zhaoyunxing

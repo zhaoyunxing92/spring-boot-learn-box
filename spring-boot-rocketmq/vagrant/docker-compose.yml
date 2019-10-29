@@ -1,0 +1,83 @@
+version: '3.1'
+services:
+  # mysql
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    command: --default-authentication-plugin=mysql_native_password # 指定使用插件
+    network_mode: host
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456 # root用户密码
+      - TZ=Asia/Shanghai
+    volumes:
+      - ./conf/mysql/mysql.cnf:/etc/mysql/mysql.cnf # 把当前的mysql.conf挂载到容器中- ./mysql.cnf:/etc/my.cnf # 把当前的mysql.conf挂载到容器中
+      - ./conf/mysql:/docker-entrypoint-initdb.d # 初始化sql
+      - /data/mysql:/var/lib/mysql # 数据挂载
+  redis:
+    image: redis:5.0.4
+    container_name: redis
+    network_mode: host
+    ports:
+      - 6379:6379
+    volumes:
+      - ./conf/redis/redis.conf:/etc/redis/redis.conf # 把当前的redis.conf挂载到容器中
+      - /data/redis:/data # 数据目录挂载出来
+    command: redis-server /etc/redis/redis.conf
+  nacos:
+    image: nacos/nacos-server:latest
+    container_name: nacos
+    network_mode: host
+    ports:
+      - 8848:8848
+    environment:
+      - MODE=standalone
+      - JAVA_OPTS=-Xmx64m -Xms64m
+    volumes:
+      - ./conf/nacos/custom.properties:/home/nacos/init.d/custom.properties
+
+  # rocket mq name server
+  rmqnamesrv:
+    image: foxiswho/rocketmq:server
+    container_name: rocket-server
+    network_mode: host
+    environment:
+      JAVA_OPT_EXT: "-server -Xms64m -Xmx64m -Xmn64m"
+    ports:
+      - 9876:9876
+    volumes:
+      - /data/rocket/server/logs:/opt/logs
+      - /data/rocket/server/store:/opt/rmqstore
+
+  # rocket mq broker
+  rmqbroker:
+    image: foxiswho/rocketmq:broker
+    container_name: rocket-broker
+    network_mode: host
+    ports:
+      - 10909:10909
+      - 10911:10911
+    volumes:
+      - /data/rocket/broker/logs:/opt/logs
+      - /data/rocket/broker/store:/opt/rmqstore
+      - ./conf/rocketmq/broker.conf:/etc/rocketmq/broker.conf
+    environment:
+      - NAMESRV_ADDR=localhost:9876
+      - JAVA_OPTS:=-Duser.home=/opt
+      - JAVA_OPT_EXT=-server -Xms64m -Xmx64m -Xmn64m
+    command: mqbroker -c /etc/rocketmq/broker.conf
+    depends_on:
+      - rmqnamesrv
+  # rocket console
+  rmqconsole:
+    image: styletang/rocketmq-console-ng
+    container_name: rocket-console
+    network_mode: host
+    ports:
+      - 8180:8180
+    environment:
+      - JAVA_OPTS=-Drocketmq.config.namesrvAddr=localhost:9876 -Dserver.port=8180 -Drocketmq.config.isVIPChannel=false
+      - JAVA_OPT_EXT=-Xms128m -Xmx128m -Xmn128m
+    depends_on:
+      - rmqnamesrv

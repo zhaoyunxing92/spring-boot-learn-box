@@ -4,7 +4,6 @@
 package io.github.xyz.spring.boot.rocketmq.zhangsan.listener;
 
 import com.alibaba.fastjson.JSONObject;
-import io.github.xyz.spring.boot.rocketmq.lisi.constant.TxConstant;
 import io.github.xyz.spring.boot.rocketmq.zhangsan.model.Account;
 import io.github.xyz.spring.boot.rocketmq.zhangsan.service.Bank01Account;
 import lombok.extern.slf4j.Slf4j;
@@ -12,9 +11,6 @@ import org.apache.rocketmq.spring.annotation.RocketMQTransactionListener;
 import org.apache.rocketmq.spring.core.RocketMQLocalTransactionListener;
 import org.apache.rocketmq.spring.core.RocketMQLocalTransactionState;
 import org.springframework.messaging.Message;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Objects;
 
 import static io.github.xyz.spring.boot.rocketmq.lisi.constant.TxConstant.TX_PRODUCER_GROUP;
 

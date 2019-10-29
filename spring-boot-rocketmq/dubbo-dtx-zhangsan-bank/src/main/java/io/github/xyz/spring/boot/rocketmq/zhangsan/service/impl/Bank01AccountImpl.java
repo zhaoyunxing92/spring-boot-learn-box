@@ -100,8 +100,16 @@ public class Bank01AccountImpl implements Bank01Account {
      * @param account
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void msgTransfer(Account account) {
-
+        Long money = account.getMoney();
+        accountMapper.updateAccount("zhangsan", money * -1);
+        account.setTxId(UUID.randomUUID().toString());
+        if (money == 10) {
+            throw new RuntimeException("转账金额超过10元");
+        }
+        //必须最后发送消息
+        rocketMQTemplate.convertAndSend(TxConstant.MSG_TOPIC, account);
     }
 
     /**

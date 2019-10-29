@@ -1,0 +1,49 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+Vagrant.configure("2") do |config|
+  # The most common configuration options are documented and commented below.
+  # For a complete reference, please see the online documentation at
+  # https://docs.vagrantup.com.
+
+  # Every Vagrant development environment requires a box. You can search for
+  # boxes at https://vagrantcloud.com/search.
+  config.vm.box = "zhaoyunxing/centos-docker"
+  config.vm.box_version = "1.0"
+
+  # docker compose配置
+  config.vm.provision:docker
+  config.vm.provision:docker_compose,
+  yml:[
+   "/cherry/docker-compose.yml"
+  ],
+  rebuild: true,
+  run:"always"
+
+  config.vm.network "forwarded_port", guest: 22, host: 2222
+  config.vm.network "forwarded_port", guest: 8848, host: 8848
+  config.vm.network "forwarded_port", guest: 3306, host: 3306
+  config.vm.network "forwarded_port", guest: 8180, host: 8180
+  config.vm.network "forwarded_port", guest: 9876, host: 9876
+  config.vm.network "forwarded_port", guest: 10909, host: 10909
+  config.vm.network "forwarded_port", guest: 10911, host: 10911
+
+  # 同步目录
+  config.vm.synced_folder ".", "/cherry",type: "virtualbox"
+  # windows
+  #config.vm.synced_folder ".", "/cherry", type: "rsync"
+  #config.ssh.username = "vagrant"
+  #config.ssh.password = "vagrant"
+
+  #virtualbox
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = "4096"
+    vb.cpus=2
+    vb.name="spring-dtx-server"
+  end
+end
+
