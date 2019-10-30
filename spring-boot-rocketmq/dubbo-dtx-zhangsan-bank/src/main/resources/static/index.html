@@ -47,14 +47,12 @@
         <row gutter="10">
 
             <i-col span="6">
-                <h2>张三
-                    <icon type="md-arrow-forward" size="24"></icon>
-                    李四 本地事物措施
+                <h2>
+                    本地事物措施
                 </h2>
                 <i-form :label-width="40">
 
                     <alert type="warning">
-                        本地事物
                         <template slot="desc">
                             当转账金额<b style="color: #ff9900">=10</b>时，<b style="color: #ed4014">zhangsan</b>服务触发异常,但是<b style="color: #ed4014">lisi</b>却收到转账
                             <br/>
@@ -77,15 +75,12 @@
             </i-col>
 
             <i-col span="6">
-                <h2>张三
-                    <icon type="md-arrow-forward" size="24"></icon>
-                    李四 事物消息转账
+                <h2>
+                    可靠消息最终一致性(rocketmq)
                 </h2>
 
                 <i-form :label-width="40">
-
                     <alert type="warning">
-                        可靠消息最终一致性
                         <template slot="desc">
                             当转账金额<b style="color: #ff9900">=10</b>时，<b style="color: #ed4014">zhangsan</b>服务触发异常,<b style="color:#ed4014">不发送事物消息</b>
                             <br/>
@@ -109,15 +104,12 @@
             </i-col>
 
             <i-col span="6">
-                <h2>张三
-                    <icon type="md-arrow-forward" size="24"></icon>
-                    李四 消息转账
+                <h2>
+                    最大努力通知方式(rocketmq)
                 </h2>
 
                 <i-form :label-width="40">
-
                     <alert type="warning">
-                        最大努力通知方式
                         <template slot="desc">
                             当转账金额<b style="color: #ff9900">=10</b>时，<b style="color: #ed4014">zhangsan</b>服务触发异常,<b style="color:#ed4014">不发送事物消息</b>
                             <br/>
@@ -140,15 +132,12 @@
             </i-col>
 
             <i-col span="6">
-                <h2>张三
-                    <icon type="md-arrow-forward" size="24"></icon>
-                    李四 2pc
+                <h2>
+                    Seata 方案
                 </h2>
 
                 <i-form :label-width="40">
-
                     <alert type="warning">
-                        Seata 方案
                         <template slot="desc">
                             当转账金额<b style="color: #ff9900">=10</b>时，<b style="color: #ed4014">zhangsan</b>服务触发异常,<b style="color:#ed4014">不发送事物消息</b>
                             <br/>
@@ -157,15 +146,15 @@
                     </alert>
 
                     <form-item label="账户">
-                        <i-input type="text" disabled size="large" v-model="account3.accountName" placeholder="对方账户"></i-input>
+                        <i-input type="text" disabled size="large" v-model="account4.accountName" placeholder="对方账户"></i-input>
                     </form-item>
 
                     <form-item label="金额">
-                        <i-input type="number" size="large" v-model="account3.money" placeholder="转账金额"></i-input>
+                        <i-input type="number" size="large" v-model="account4.money" placeholder="转账金额"></i-input>
                     </form-item>
 
                     <form-item style="text-align: center;">
-                        <i-button type="primary" @click="msgTransfer()">转账</i-button>
+                        <i-button type="primary" @click="seataTransfer()">转账</i-button>
                     </form-item>
                 </i-form>
             </i-col>
@@ -188,6 +177,11 @@
         money: 10
       },
       account3: {
+        accountName: 'lisi',
+        money: 10
+      }
+      ,
+      account4: {
         accountName: 'lisi',
         money: 10
       }
@@ -230,6 +224,20 @@
       msgTransfer() {
         let that = this;
         axios.post("/bank/transfer/msg", that.account3)
+             .then(function( res ) {
+               that.$Message.success('转账成功！');
+             })
+             .catch(function( error ) {
+               that.$Message.error('转账失败！');
+             })
+             .then(function() {
+               that.initBank();
+             });
+      },
+      //消息转账
+      seataTransfer() {
+        let that = this;
+        axios.post("/bank/transfer/seata", that.account4)
              .then(function( res ) {
                that.$Message.success('转账成功！');
              })

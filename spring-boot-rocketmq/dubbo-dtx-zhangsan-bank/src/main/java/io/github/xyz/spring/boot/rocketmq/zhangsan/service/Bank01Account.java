@@ -63,4 +63,11 @@ public interface Bank01Account {
      * @param account
      */
     void msgTransfer(Account account);
+
+    /**
+     * seata 方案转账
+     *
+     * @param account
+     */
+    void seataTransfer(Account account);
 }

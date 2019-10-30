@@ -6,6 +6,7 @@ package io.github.xyz.spring.boot.rocketmq.zhangsan.controller;
 
 import io.github.xyz.spring.boot.rocketmq.zhangsan.model.Account;
 import io.github.xyz.spring.boot.rocketmq.zhangsan.service.Bank01Account;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -58,4 +59,13 @@ public class AccountController {
         bank01Account.msgTransfer(account);
     }
 
+    /**
+     * seata转账
+     *
+     * @param account
+     */
+    @PostMapping("/transfer/seata")
+    public void seataTransfer(@RequestBody Account account) {
+        bank01Account.seataTransfer(account);
+    }
 }

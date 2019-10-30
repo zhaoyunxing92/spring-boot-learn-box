@@ -10,6 +10,7 @@ import io.github.xyz.spring.boot.rocketmq.zhangsan.mapper.AccountMapper;
 import io.github.xyz.spring.boot.rocketmq.zhangsan.mapper.TxMsgLogMapper;
 import io.github.xyz.spring.boot.rocketmq.zhangsan.model.Account;
 import io.github.xyz.spring.boot.rocketmq.zhangsan.service.Bank01Account;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
@@ -140,7 +141,17 @@ public class Bank01AccountImpl implements Bank01Account {
      */
     @Override
     public boolean hasTxLog(String txId) {
-
         return StringUtils.hasText(txMsgLogMapper.selectMsgLog(txId));
+    }
+
+    @Override
+    @GlobalTransactional(timeoutMills = 300000, name = "spring-cloud-demo-tx")
+    public void seataTransfer(Account account) {
+        Long money = account.getMoney();
+        accountMapper.updateAccount("zhangsan", money * -1);
+        bank02Account.updateAccount(account.getAccountName(), money);
+        if (money == 10) {
+            throw new RuntimeException("转账金额超过10元");
+        }
     }
 }
