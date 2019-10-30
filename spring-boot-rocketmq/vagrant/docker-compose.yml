@@ -15,16 +15,7 @@ services:
       - ./conf/mysql/mysql.cnf:/etc/mysql/mysql.cnf # 把当前的mysql.conf挂载到容器中- ./mysql.cnf:/etc/my.cnf # 把当前的mysql.conf挂载到容器中
       - ./conf/mysql:/docker-entrypoint-initdb.d # 初始化sql
       - /data/mysql:/var/lib/mysql # 数据挂载
-  redis:
-    image: redis:5.0.4
-    container_name: redis
-    network_mode: host
-    ports:
-      - 6379:6379
-    volumes:
-      - ./conf/redis/redis.conf:/etc/redis/redis.conf # 把当前的redis.conf挂载到容器中
-      - /data/redis:/data # 数据目录挂载出来
-    command: redis-server /etc/redis/redis.conf
+  # nacos
   nacos:
     image: nacos/nacos-server:latest
     container_name: nacos
@@ -36,7 +27,6 @@ services:
       - JAVA_OPTS=-Xmx64m -Xms64m
     volumes:
       - ./conf/nacos/custom.properties:/home/nacos/init.d/custom.properties
-
   # rocket mq name server
   rmqnamesrv:
     image: foxiswho/rocketmq:server
@@ -49,7 +39,6 @@ services:
     volumes:
       - /data/rocket/server/logs:/opt/logs
       - /data/rocket/server/store:/opt/rmqstore
-
   # rocket mq broker
   rmqbroker:
     image: foxiswho/rocketmq:broker
