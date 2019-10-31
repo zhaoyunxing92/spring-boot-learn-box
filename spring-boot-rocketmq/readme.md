@@ -48,3 +48,34 @@ mvn clean package -pl spring-boot-rocketmq/dubbo-dtx-zhangsan-bank,spring-boot-r
  5.  `String clusterName = config.getConfig(service + . + vgroup_mapping.+ key)` 这个key就是第一步设置的
  
  6. 根据`clusterName`的值然后再 `String endpointStr = CONFIG.getConfig(service + . + clusterName + .grouplist);` 至此配置地址获取完成
+
+### seata 使用注意项
+
+* 数据库表必须有主键,不然出现数组越界已经提交[issues](https://github.com/seata/seata/issues/1854) 
+
+> io.seata.rm.datasource.exec.UpdateExecutor.buildBeforeImageSQL
+
+```java
+ private String buildBeforeImageSQL(TableMeta tableMeta, ArrayList<List<Object>> paramAppenderList) {
+        SQLUpdateRecognizer recognizer = (SQLUpdateRecognizer)sqlRecognizer;
+        List<String> updateColumns = recognizer.getUpdateColumns();
+        StringBuilder prefix = new StringBuilder("SELECT ");
+        if (!tableMeta.containsPK(updateColumns)) {
+            prefix.append(getColumnNameInSQL(tableMeta.getPkName()) + ", ");
+        }
+        StringBuilder suffix = new StringBuilder(" FROM " + getFromTableInSQL());
+        String whereCondition = buildWhereCondition(recognizer, paramAppenderList);
+        if (StringUtils.isNotBlank(whereCondition)) {
+            suffix.append(" WHERE " + whereCondition);
+        }
+        suffix.append(" FOR UPDATE");
+        StringJoiner selectSQLJoin = new StringJoiner(", ", prefix.toString(), suffix.toString());
+        for (String updateColumn : updateColumns) {
+            selectSQLJoin.add(updateColumn);
+        }
+        return selectSQLJoin.toString();
+    }
+``` 
+
+* `spring-cloud-starter-alibaba-seata`如果使用的这个那么必须导入`spring-boot-starter-web`,而不能仅使用`spring-boot-starter`,具体已经提交[pull requests](https://github.com/alibaba/spring-cloud-alibaba/pull/1029)
+ 
