@@ -35,7 +35,15 @@ dubbo:
 #  type-aliases-package: io.github.xyz.spring.boot.rocketmq.zhangsan.model
 logging:
   level:
+    org.springframework: warn
+    com.netflix.config: error
+    org.apache.dubbo.config: error
+    org.apache.dubbo.remoting: warn
     io.github.xyz.spring.boot.rocketmq.zhangsan.mapper: debug
+    io.seata.core.rpc.netty.AbstractRpcRemoting: warn
+    io.seata.core.rpc.netty.NettyPoolableFactory: warn
+    io.seata.core.rpc.netty.NettyClientChannelManager: warn
+    com.alibaba.cloud.dubbo.service.DubboMetadataServiceExporter: warn
 
 server:
   port: 7100
