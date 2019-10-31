@@ -22,6 +22,7 @@ import org.springframework.util.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import static io.github.xyz.spring.boot.rocketmq.lisi.constant.TxConstant.TX_PRODUCER_GROUP;
 
@@ -149,6 +150,13 @@ public class Bank01AccountImpl implements Bank01Account {
     public void seataTransfer(Account account) {
         Long money = account.getMoney();
         accountMapper.updateAccount("zhangsan", money * -1);
+        // 睡眠5秒方便观察数据
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         bank02Account.updateAccount(account.getAccountName(), money);
         if (money == 10) {
             throw new RuntimeException("转账金额超过10元");

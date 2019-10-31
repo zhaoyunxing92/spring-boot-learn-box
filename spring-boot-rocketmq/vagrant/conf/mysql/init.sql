@@ -7,7 +7,7 @@ create table if not exists bank01.account (
 	account_name varchar(32) default null comment '账户名称',
 	money bigint not null default 1000 comment '账户金额',
 	modifier_time timestamp default current_timestamp on update current_timestamp not null comment '修改时间',
-	unique key uk_name (account_name)
+	primary key uk_name (account_name)
 ) engine=innodb default charset=utf8 comment='账户表';
 
 
@@ -37,7 +37,7 @@ create table if not exists bank02.account (
 	account_name varchar(32) default null comment '账户名称',
 	money bigint not null default 10 comment '账户金额',
 	modifier_time timestamp default current_timestamp on update current_timestamp not null comment '修改时间',
-	unique key uk_name (user_name)
+	primary key uk_name (user_name)
 ) engine=innodb default charset=utf8 comment='账户表';
 
 create table if not exists bank02.tx_msg_log (
