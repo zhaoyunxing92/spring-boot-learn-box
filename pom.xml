@@ -34,6 +34,7 @@
         <aliyun-java-sdk-sts.version>3.0.0</aliyun-java-sdk-sts.version>
         <aliyun-java-sdk-core.version>3.5.0</aliyun-java-sdk-core.version>
         <mybatis.spring.version>2.0.1</mybatis.spring.version>
+        <seata.version>0.9.0</seata.version>
     </properties>
 
     <modules>
@@ -65,6 +66,11 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>io.seata</groupId>
+                <artifactId>seata-all</artifactId>
+                <version>${seata.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>

@@ -16,6 +16,15 @@
 
 * rocketmq 4.5.2 (主要用事物消息)
 
+* seata 0.9.0
+
+## 本地编译jar
+
+```shell
+#根目录下
+mvn clean package -pl spring-boot-rocketmq/dubbo-dtx-zhangsan-bank,spring-boot-rocketmq/dubbo-dtx-lisi-bank/dubbo-dtx-lisi-bank-server -am
+```
+
 ## 基本概念
 
 ### seata
