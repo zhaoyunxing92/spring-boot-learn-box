@@ -6,14 +6,15 @@
     <meta content="width=device-width,minimum-scale=1,maximum-scale=1,user-scalable=no" id="viewport" name="viewport">
 </head>
 <!-- import Vue.js -->
-<script src="https://vuejs.org/js/vue.min.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="./js/vue.min.js"></script>
+<script src="./js/axios.min.js"></script>
 <!-- import stylesheet -->
-<link rel="stylesheet" href="https://unpkg.com/iview/dist/styles/iview.css">
+<link rel="stylesheet" href="./css/iview.css">
 <!-- import iView -->
-<script src="https://unpkg.com/iview/dist/iview.min.js"></script>
+<script src="./js/iview.min.js"></script>
 <body>
 <div id="app">
+
     <div style="background:#f8f8f8;padding: 25px">
         <row gutter="10">
             <i-col span="12" v-for="bank in banks">
@@ -139,9 +140,7 @@
                 <i-form :label-width="40">
                     <alert type="warning">
                         <template slot="desc">
-                            当转账金额<b style="color: #ff9900">=10</b>时，<b style="color: #ed4014">zhangsan</b>服务触发异常,<b style="color:#ed4014">不发送事物消息</b>
-                            <br/>
-                            当转账金额<b style="color: #ff9900">=15</b>时，<b style="color: #ed4014">lisi</b>触发异常,<b style="color:#ed4014">但消息会一直通知等<b style="color: #19be6b">lisi</b>完成消费</b>
+                            当<b style="color: #ed4014">zhangsan</b>服务调用<b style="color: #ed4014">lisi</b>时(线程模拟睡眠五秒观察数据),数据库已经commit了这就是跟2pc的区别,并且数据库表<b style="color: #ed4014">undo_log</b>产生一条记录,等全部rpc执行完成了有异常则执行回滚,没有异常则删除日志
                         </template>
                     </alert>
 
@@ -160,7 +159,6 @@
             </i-col>
         </row>
     </div>
-
 </div>
 </body>
 <script>
@@ -193,60 +191,154 @@
       // 转账
       transfer() {
         let that = this;
+        that.$Spin.show({
+          render: (h) => {
+            return h('div', [
+              h('Icon', {
+                'class': 'demo-spin-icon-load',
+                props: {
+                  type: 'ios-loading',
+                  size: 18
+                }
+              }),
+              h('div', 'Loading')
+            ])
+          }
+        });
         axios.post("/bank/transfer", that.account1)
              .then(function( res ) {
-               that.$Message.success('转账成功！');
-               that.initBank();
+               that.$Message.success({
+                 content: '转账成功',
+                 duration: 10,
+                 closable: true});
              })
              .catch(function( ex ) {
                console.log(ex);
-               that.$Message.error('转账失败！');
+               that.$Message.error({
+                 content: '转账失败',
+                 duration: 10,
+                 closable: true});
              })
              .then(function() {
                that.initBank();
+               setTimeout(() => {
+                 that.$Spin.hide();
+               }, 1000);
              });
+
       },
       //事物转账
       txTransfer() {
         let that = this;
+        that.$Spin.show({
+          render: (h) => {
+            return h('div', [
+              h('Icon', {
+                'class': 'demo-spin-icon-load',
+                props: {
+                  type: 'ios-loading',
+                  size: 18
+                }
+              }),
+              h('div', 'Loading')
+            ])
+          }
+        });
         axios.post("/bank/transfer/tx", that.account2)
              .then(function( res ) {
-               that.$Message.success('转账成功！');
+               that.$Message.success({
+                 content: '转账成功',
+                 duration: 10,
+                 closable: true});
              })
              .catch(function( error ) {
-               that.$Message.error('转账失败！');
+               that.$Message.error({
+                 content: '转账失败',
+                 duration: 10,
+                 closable: true});
              })
              .then(function() {
                that.initBank();
+               setTimeout(() => {
+                 that.$Spin.hide();
+               }, 1000);
              });
+
       },
       //消息转账
       msgTransfer() {
         let that = this;
+        that.$Spin.show({
+          render: (h) => {
+            return h('div', [
+              h('Icon', {
+                'class': 'demo-spin-icon-load',
+                props: {
+                  type: 'ios-loading',
+                  size: 18
+                }
+              }),
+              h('div', 'Loading')
+            ])
+          }
+        });
         axios.post("/bank/transfer/msg", that.account3)
              .then(function( res ) {
-               that.$Message.success('转账成功！');
+               that.$Message.success({
+                 content: '转账成功',
+                 duration: 10,
+                 closable: true});
              })
              .catch(function( error ) {
-               that.$Message.error('转账失败！');
+               that.$Message.error({
+                 content: '转账失败',
+                 duration: 10,
+                 closable: true});
              })
              .then(function() {
                that.initBank();
+               setTimeout(() => {
+                 that.$Spin.hide();
+               }, 1000);
              });
       },
       //消息转账
       seataTransfer() {
         let that = this;
+        that.$Spin.show({
+          render: (h) => {
+            return h('div', [
+              h('Icon', {
+                'class': 'demo-spin-icon-load',
+                props: {
+                  type: 'ios-loading',
+                  size: 18
+                }
+              }),
+              h('div', 'Loading')
+            ])
+          }
+        });
         axios.post("/bank/transfer/seata", that.account4)
              .then(function( res ) {
-               that.$Message.success('转账成功！');
+               that.$Message.success({
+                 content: '转账成功',
+                 duration: 10,
+                 closable: true});
              })
              .catch(function( error ) {
-               that.$Message.error('转账失败！');
+               that.$Message.error({
+                 content: '转账失败',
+                 duration: 10,
+                 closable: true});
              })
              .then(function() {
                that.initBank();
+               setTimeout(() => {
+                 that.$Spin.hide();
+               }, 1000);
              });
+
       },
       // 加载账户
       initBank() {
@@ -270,6 +362,15 @@
         background-color: #ffffff;
         border: 1px solid #dcdee2;
         border-radius: 5px;
+    }
+    .vertical-center-modal{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    .ivu-modal{
+        top: 0;
+    }
     }
 </style>
 </html>
