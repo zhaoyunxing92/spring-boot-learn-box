@@ -8,13 +8,13 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848
+        server-addr: localhost:8848
     alibaba:
       seata:
         tx-service-group: zhangsan-seata-service-group
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/bank01?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://localhost:3306/bank01?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
     password: 123456
 dubbo:
