@@ -41,20 +41,14 @@
         <module>spring-boot-netty</module>
         <module>spring-boot-kafka</module>
         <module>spring-boot-hystrix</module>
-        <module>spring-boot-sentinel/sentinel</module>
-        <module>spring-boot-sentinel/sentinel-apollo</module>
-        <module>spring-boot-sentinel/sentinel-apollo-push</module>
+        <module>spring-boot-sentinel</module>
         <module>spring-boot-apollo</module>
         <module>spring-boot-skywalking</module>
-        <module>spring-boot-elasticsearch/spring-boot-data-elasticsearch</module>
-        <module>spring-boot-elasticsearch/spring-boot-jest-elasticsearch</module>
-        <module>spring-boot-elasticsearch/elasticsearch-in-java</module>
-        <module>spring-boot-rabbitmq/product</module>
-        <module>spring-boot-rabbitmq/consumer</module>
-        <module>spring-boot-rabbitmq/rabbitmq-java</module>
+        <module>spring-boot-elasticsearch</module>
+        <module>spring-boot-rabbitmq</module>
         <module>spring-boot-oss</module>
-        <module>spring-boot-rocketmq/dubbo-dtx-lisi-bank</module>
-        <module>spring-boot-rocketmq/dubbo-dtx-zhangsan-bank</module>
+        <module>spring-boot-rocketmq</module>
+        <module>spring-boot-seata</module>
     </modules>
 
     <dependencies>
@@ -79,6 +73,11 @@
             <dependency>
                 <groupId>io.github.xyz</groupId>
                 <artifactId>dubbo-dtx-lisi-bank-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.xyz</groupId>
+                <artifactId>dubbo-seata-bom</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!--spring cloud alibaba -->

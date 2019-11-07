@@ -69,6 +69,8 @@ github：https://github.com/zhaoyunxing92/spring-boot-learn-box
 
 - [x] [spring-boot-dubbo](./spring-boot-rocketmq/readme.md) dubbo在spring boot中使用
 
+- [x] [spring-boot-mybatis](./spring-boot-rocketmq/readme.md) mybatis在spring boot中使用
+
 ## 公众号
 
  在使用中遇到问题关注微信公众号提问题,其他地方的问题不一定反馈及时
