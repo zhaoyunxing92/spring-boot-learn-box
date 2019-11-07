@@ -6,7 +6,7 @@ LABEL version=1.0 \
       author="zhaoyunxing"
 
 WORKDIR /dtx
-ADD target/zhangsan-server.jar ./zhangsan-server.jar
+ADD /spring-boot-rocketmq/dubbo-dtx-zhangsan-bank/target/zhangsan-server.jar ./zhangsan-server.jar
 
 # 解决时区问题
 RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
