@@ -58,15 +58,24 @@ services:
     command: mqbroker -c /etc/rocketmq/broker.conf
     depends_on:
       - rmqnamesrv
-  # rocket console
-  rmqconsole:
-    image: styletang/rocketmq-console-ng
-    container_name: rocket-console
+  # seata
+  seata:
+    image: zhaoyunxing/seata:0.9.0
+    container_name: seata
     network_mode: host
     ports:
-      - 8180:8180
-    environment:
-      - JAVA_OPTS=-Drocketmq.config.namesrvAddr=localhost:9876 -Dserver.port=8180 -Drocketmq.config.isVIPChannel=false
-      - JAVA_OPT_EXT=-Xms128m -Xmx128m -Xmn128m
+      - 8091:8091
+  # zhangsan
+  zhangsan:
+    image: zhaoyunxing/dtx:zhangsan
+    container_name: zhangsan
+    network_mode: host
+    ports:
+      - 7100:7100
     depends_on:
-      - rmqnamesrv
+      - lisi
+  # lisi
+  lisi:
+    image: zhaoyunxing/dtx:lisi
+    container_name: lisi
+    network_mode: host

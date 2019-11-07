@@ -18,6 +18,7 @@
 
 * seata 0.9.0
 
+* alibaba cloud 2.1.0.RELEASE
 ## 本地编译jar
 
 ```shell
