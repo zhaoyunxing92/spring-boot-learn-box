@@ -22,30 +22,52 @@ github：https://github.com/zhaoyunxing92/spring-boot-learn-box
 * apollo 1.1.0
 
 ## 集成进度
+
 - [ ] netty
+
 - [x] [kafka](./spring-boot-kafka)
+
 - [x] [sentinel](./spring-boot-sentinel/sentinel)
+
 - [x] [sentinel-apollo](./spring-boot-sentinel/sentinel-apollo)
+
 - [x] [hystrix](./spring-boot-hystrix)
+
 - [x] [apollo](./spring-boot-apollo)
+
 - [x] [elasticsearch](./spring-boot-elasticsearch)
   
     - [x] [elasticsearch入门到放弃之docker搭建](https://www.jianshu.com/p/ba7caa5bed53) es环境搭建
+    
     - [x] [elasticsearch入门到放弃之x-pack安全认证](https://www.jianshu.com/p/3b01817996c8) x-pack保驾护航你的es
+    
     - [x] [elasticsearch入门到放弃之elasticsearch-head](https://www.jianshu.com/p/80bb53bc1256) es-head可视化你的es
+    
     - [x] [elasticsearch入门到放弃之elasticsearch-in-java](https://www.jianshu.com/p/9f6f7f67df4e) elasticsearch api使用
+    
     - [x] [elasticsearch入门到放弃之springboot elasticsearch x-pack](https://www.jianshu.com/p/7019d93219f5) springboot整合elasticsearch
+   
     - [x] [spring-data-elasticsearch实践](https://www.jianshu.com/p/7f4be877ea1b) spring-data系列的使用
     
-- [x] [skywalking](./spring-boot-skywalking)    
+- [x] [skywalking](./spring-boot-skywalking)
+   
 - [x] [rabbitmq](./spring-boot-rabbitmq)
     
     * [x] [rabbitmq入门到放弃之docker rabbitmq](https://www.jianshu.com/p/f6999a902777) rabbitmq安装
+    
     * [x] [exchange详解](./spring-boot-rabbitmq/exchange.md) 交换机分类、实例代码
     
 - [x] [spring-boot-oss](./spring-boot-oss) 主要是sts方式使用oss
    
     * [x] [oss-spring-boot-starter](https://github.com/zhaoyunxing92/sunny-spring-boot-starter/tree/master/oss-spring-boot-starter) sts和后端验签两个方式使用oss
+
+- [x] [spring-boot-rocketmq](./spring-boot-rocketmq/readme.md) rocketmq在spring boot中使用
+
+- [x] [spring-boot-seata](./spring-boot-rocketmq/readme.md) seata在spring boot中使用
+
+- [x] [spring-boot-nacos](./spring-boot-rocketmq/readme.md) nacos在spring boot中使用
+
+- [x] [spring-boot-dubbo](./spring-boot-rocketmq/readme.md) dubbo在spring boot中使用
 
 ## 公众号
 
