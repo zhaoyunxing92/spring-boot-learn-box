@@ -9,8 +9,8 @@ WORKDIR /dtx
 ADD /spring-boot-rocketmq/dubbo-dtx-zhangsan-bank/target/zhangsan-server.jar ./zhangsan-server.jar
 
 # 解决时区问题
-RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-RUN echo 'Asia/Shanghai' > /etc/timezone
+RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+     && echo 'Asia/Shanghai' > /etc/timezone
 
 ENTRYPOINT ["java","-jar","./zhangsan-server.jar"]
 

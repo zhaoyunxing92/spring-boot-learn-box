@@ -30,13 +30,12 @@ public class BankAccountImpl implements Bank02Account {
     }
 
     /**
-     * 修改账号金额
+     * seata 修改账号金额
      *
      * @param accountId 账号
      * @param money     金额
      */
     @Override
-    @Transactional(rollbackFor = Exception.class)
     public void updateAccount(String accountId, Long money) {
         accountMapper.updateAccount(accountId, money);
         if (money == 15) {

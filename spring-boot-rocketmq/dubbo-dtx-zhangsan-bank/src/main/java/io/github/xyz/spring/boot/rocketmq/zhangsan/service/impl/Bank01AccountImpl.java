@@ -148,18 +148,20 @@ public class Bank01AccountImpl implements Bank01Account {
     @Override
     @GlobalTransactional(timeoutMills = 300000, name = "spring-cloud-demo-tx")
     public void seataTransfer(Account account) {
-        Long money = account.getMoney();
-        accountMapper.updateAccount("zhangsan", money * -1);
-        // 睡眠5秒方便观察数据
         try {
-            TimeUnit.SECONDS.sleep(5);
+            // 睡眠10秒方便观察数据
+            Long money = account.getMoney();
+            accountMapper.updateAccount("zhangsan", money * -1);
+            TimeUnit.SECONDS.sleep(10);
+
+            bank02Account.updateAccount(account.getAccountName(), money);
+            TimeUnit.SECONDS.sleep(10);
+
+            if (money == 10) {
+                throw new RuntimeException("转账金额超过10元");
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
-
-        bank02Account.updateAccount(account.getAccountName(), money);
-        if (money == 10) {
-            throw new RuntimeException("转账金额超过10元");
         }
     }
 }
