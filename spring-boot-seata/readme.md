@@ -19,3 +19,9 @@
 ## 参考文档
 
 * [dubbo-spring-boot](https://github.com/apache/dubbo-spring-boot-project/blob/master/README_CN.md) dubbo在spring boot 中使用
+
+## maven 打包
+
+```shell
+mvn clean package -pl spring-boot-seata/dubbo-seata-zhangsan,spring-boot-seata/dubbo-seata-wangwu -am
+```
