@@ -7,6 +7,3 @@
 
 !spring-boot-rocketmq/dubbo-dtx-zhangsan-bank/target/zhangsan-server.jar
 !spring-boot-rocketmq/dubbo-dtx-lisi-bank/dubbo-dtx-lisi-bank-server/target/lisi-server.jar
-
-!/spring-boot-seata/dubbo-seata-wangwu/target/dubbo-seata-wangwu.jar
-!/spring-boot-seata/dubbo-seata-zhangsan/target/dubbo-seata-zhangsan.jar
