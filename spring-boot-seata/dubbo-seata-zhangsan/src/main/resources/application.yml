@@ -1,0 +1,18 @@
+server:
+  port: 7200
+spring:
+  application:
+    name: dubbo-seata-zhangsan
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/bank01?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: 123456
+dubbo:
+  scan:
+    base-packages: io.github.xyz.dubbo.seata.zhangsan.service
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    address: nacos://127.0.0.1:8848
