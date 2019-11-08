@@ -3,13 +3,13 @@
  */
 package io.github.xyz.dubbo.seata.zhangsan.service;
 
-import io.github.xyz.dubbo.seata.Account;
+import io.github.xyz.dubbo.seata.service.AccountService;
 import org.apache.dubbo.config.annotation.Service;
 
 /**
  * @author zhaoyunxing
  * @date: 2019-11-07 17:51
  */
-@Service(group = "zhangSanAccount", interfaceClass = Account.class)
-public class ZhangSanAccountImpl implements Account {
+@Service(group = "zhangSanAccount", interfaceClass = AccountService.class)
+public class ZhangSanAccountImpl implements AccountService {
 }

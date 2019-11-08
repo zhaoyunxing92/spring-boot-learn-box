@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-io.github.sunny.spring.boot.OssStsAutoConfiguration
+io.github.xyz.dubbo.seata.config.SeataAutoConfig

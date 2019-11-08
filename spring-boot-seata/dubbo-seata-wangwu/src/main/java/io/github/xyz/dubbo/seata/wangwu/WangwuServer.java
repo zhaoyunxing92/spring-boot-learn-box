@@ -13,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class WangwuServer {
     public static void main(String[] args) {
+        //System.setProperty("seata.config.name","registry");
         SpringApplication.run(WangwuServer.class, args);
     }
 }

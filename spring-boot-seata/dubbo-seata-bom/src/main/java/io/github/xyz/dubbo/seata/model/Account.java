@@ -1,7 +1,7 @@
 /**
  * Copyright(C) 2019 Hangzhou sunny Technology Co., Ltd. All rights reserved.
  */
-package io.github.xyz.dubbo.seata.wangwu.model;
+package io.github.xyz.dubbo.seata.model;
 
 import lombok.Data;
 
