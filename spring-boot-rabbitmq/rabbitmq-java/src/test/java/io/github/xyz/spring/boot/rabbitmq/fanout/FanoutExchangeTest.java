@@ -16,7 +16,7 @@ import java.util.concurrent.TimeoutException;
 /**
  * @author zhaoyunxing
  * @date: 2019-07-15 11:19
- * @des: 扇型交换机
+ * @desc: 扇型交换机
  */
 @Slf4j
 public class FanoutExchangeTest {
