@@ -29,6 +29,7 @@
         <mybatis.spring.version>2.0.1</mybatis.spring.version>
         <seata.version>0.9.0</seata.version>
         <seata.spring.boot.starter>0.9.0.1</seata.spring.boot.starter>
+        <spring.boot.starter.velocity.version>1.4.7.RELEASE</spring.boot.starter.velocity.version>
     </properties>
 
     <modules>
@@ -43,6 +44,7 @@
         <module>spring-boot-oss</module>
         <module>spring-boot-rocketmq</module>
         <module>spring-boot-seata</module>
+        <module>spring-boot-thymeleaf</module>
     </modules>
 
     <dependencies>
@@ -174,6 +176,12 @@
                 <groupId>com.aliyun</groupId>
                 <artifactId>aliyun-java-sdk-core</artifactId>
                 <version>${aliyun-java-sdk-core.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-velocity -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-velocity</artifactId>
+                <version>${spring.boot.starter.velocity.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
