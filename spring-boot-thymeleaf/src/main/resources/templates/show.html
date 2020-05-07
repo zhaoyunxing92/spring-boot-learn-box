@@ -1,0 +1,12 @@
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>SpringBoot模版渲染</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <th:block th:include="layout/header :: header"></th:block>
+</head>
+<body>
+<p th:text="'用户ID：' + ${uid}"></p>
+<p th:text="'用户名称：' + ${name}"></p>
+</body>
+</html>
