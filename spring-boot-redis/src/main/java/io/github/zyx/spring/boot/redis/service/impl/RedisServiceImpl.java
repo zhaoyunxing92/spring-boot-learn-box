@@ -18,8 +18,9 @@ public class RedisServiceImpl implements RedisService {
      * @return string
      */
     @Override
-    @Cacheable(key = "#name", cacheNames = "my-redis-cache1")
+    @Cacheable(key = "#name", cacheNames = "my-redis-cache2")
     public String getName(String name) {
+        System.out.println(name);
         return name;
     }
 }

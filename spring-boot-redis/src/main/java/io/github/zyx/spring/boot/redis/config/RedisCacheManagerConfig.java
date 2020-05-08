@@ -22,7 +22,8 @@ public class RedisCacheManagerConfig {
     @Bean
     public CacheManager cacheManager(RedisConnectionFactory factory) {
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig();
-        config = config.entryTtl(Duration.ofMinutes(1))
+
+        config = config.entryTtl(Duration.ofMinutes(100))
                 .disableCachingNullValues();
 
         // 设置一个初始化的缓存空间set集合
