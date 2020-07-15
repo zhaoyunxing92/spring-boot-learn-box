@@ -16,5 +16,6 @@
         <module>spring-boot-jest-elasticsearch</module>
         <module>spring-boot-data-elasticsearch</module>
         <module>elasticsearch-in-java</module>
+        <module>spring-boot-es-no-xpack</module>
     </modules>
 </project>

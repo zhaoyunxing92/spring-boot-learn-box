@@ -23,7 +23,7 @@
         <apollo.client.vresion>1.1.0</apollo.client.vresion>
         <alibaba.cloud.version>2.1.0.RELEASE</alibaba.cloud.version>
         <!--修改es版本-->
-        <elasticsearch.version>6.8.2</elasticsearch.version>
+        <elasticsearch.version>6.6.1</elasticsearch.version>
         <aliyun-java-sdk-sts.version>3.0.0</aliyun-java-sdk-sts.version>
         <aliyun-java-sdk-core.version>3.5.0</aliyun-java-sdk-core.version>
         <mybatis.spring.version>2.0.1</mybatis.spring.version>
