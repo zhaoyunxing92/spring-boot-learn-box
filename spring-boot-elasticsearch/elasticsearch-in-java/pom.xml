@@ -13,7 +13,7 @@
     <artifactId>elasticsearch-in-java</artifactId>
 
     <properties>
-        <log4j.version>2.7</log4j.version>
+        <log4j.version>2.13.3</log4j.version>
         <junit.version>4.12</junit.version>
     </properties>
 
