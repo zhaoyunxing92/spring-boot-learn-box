@@ -11,9 +11,29 @@
 
     <artifactId>spring-boot-dubbo</artifactId>
     <packaging>pom</packaging>
-
+    <properties>
+        <spring.boot.version>2.3.1.RELEASE</spring.boot.version>
+        <!--修改es版本-->
+        <elasticsearch.version>7.2.1</elasticsearch.version>
+    </properties>
     <modules>
-        <module>provider</module>
-        <module>customer</module>
+        <module>dubbo-provider</module>
+        <module>dubbo-customer</module>
     </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
