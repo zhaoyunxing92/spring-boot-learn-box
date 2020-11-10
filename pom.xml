@@ -46,6 +46,7 @@
         <module>spring-boot-seata</module>
         <module>spring-boot-thymeleaf</module>
         <module>spring-boot-redis</module>
+        <module>spring-boot-dubbo</module>
     </modules>
 
     <dependencies>
@@ -177,12 +178,6 @@
                 <groupId>com.aliyun</groupId>
                 <artifactId>aliyun-java-sdk-core</artifactId>
                 <version>${aliyun-java-sdk-core.version}</version>
-            </dependency>
-            <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-velocity -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-velocity</artifactId>
-                <version>${spring.boot.starter.velocity.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
