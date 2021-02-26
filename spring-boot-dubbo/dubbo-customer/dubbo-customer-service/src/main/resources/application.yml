@@ -1,11 +1,6 @@
 spring:
   application:
     name: dubbo-customer
-  data:
-    elasticsearch:
-      client:
-        reactive:
-          endpoints: localhost:9200
 dubbo:
   application:
     id: dubbo-provider
