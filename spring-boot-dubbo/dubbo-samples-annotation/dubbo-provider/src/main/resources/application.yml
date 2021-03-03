@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: dubbo-provider
+dubbo:
+  application:
+    id: dubbo-provider
+  scan:
+    base-packages: io.github.xyz.spring.boot.dubbo.annotation.service
+  registry:
+    address: zookeeper://127.0.0.1:2181
+    subscribe: false # 只注册

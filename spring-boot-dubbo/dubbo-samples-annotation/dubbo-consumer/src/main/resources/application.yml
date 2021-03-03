@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: dubbo-consumer
+dubbo:
+  application:
+    id: dubbo-consumer
+    logger:
+  scan:
+    base-packages: io.github.xyz.spring.boot.dubbo.annotation.controller
+  registry:
+    address: zookeeper://127.0.0.1:2181
+    register: false # 只订阅
+  consumer:
+    check: false # 不检查
+
+

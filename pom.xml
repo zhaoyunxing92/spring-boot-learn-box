@@ -12,7 +12,10 @@
     <properties>
         <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
         <skipTests>true</skipTests>
+
         <netty.version>4.1.42.Final</netty.version>
         <spring.boot.version>2.1.0.RELEASE</spring.boot.version>
         <spring.kafka.version>2.2.0.RELEASE</spring.kafka.version>
@@ -182,6 +185,7 @@
                 <version>${aliyun-java-sdk-core.version}</version>
             </dependency>
 
+            <!-- https://github.com/apache/dubbo-spring-boot-project -->
             <dependency>
                 <groupId>org.apache.dubbo</groupId>
                 <artifactId>dubbo-spring-boot-starter</artifactId>
@@ -217,11 +221,6 @@
                 </exclusions>
             </dependency>
 
-            <dependency>
-                <groupId>io.github.xyz</groupId>
-                <artifactId>dubbo-customer-api</artifactId>
-                <version>${project.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
