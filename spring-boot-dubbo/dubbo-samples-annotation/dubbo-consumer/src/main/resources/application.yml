@@ -4,7 +4,6 @@ spring:
 dubbo:
   application:
     id: dubbo-consumer
-    logger:
   scan:
     base-packages: io.github.xyz.spring.boot.dubbo.annotation.controller
   registry:
@@ -12,5 +11,3 @@ dubbo:
     register: false # 只订阅
   consumer:
     check: false # 不检查
-
-
