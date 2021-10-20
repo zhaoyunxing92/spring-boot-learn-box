@@ -33,7 +33,7 @@
         <seata.version>0.9.0</seata.version>
         <seata.spring.boot.starter>0.9.0.1</seata.spring.boot.starter>
         <spring.boot.starter.velocity.version>1.4.7.RELEASE</spring.boot.starter.velocity.version>
-        <dubbo.version>2.7.7</dubbo.version>
+        <dubbo.version>2.7.13</dubbo.version>
     </properties>
 
     <modules>
