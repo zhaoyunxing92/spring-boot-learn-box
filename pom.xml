@@ -48,6 +48,7 @@
         <module>spring-boot-thymeleaf</module>
         <module>spring-boot-redis</module>
         <module>spring-boot-dubbo</module>
+        <module>spring-boot-async</module>
     </modules>
 
     <dependencies>
