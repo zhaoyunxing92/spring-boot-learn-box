@@ -12,6 +12,8 @@
     <properties>
         <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
         <skipTests>true</skipTests>
         <netty.version>4.1.52.Final</netty.version>
         <spring.boot.version>2.1.0.RELEASE</spring.boot.version>
@@ -30,7 +32,7 @@
         <seata.version>0.9.0</seata.version>
         <seata.spring.boot.starter>0.9.0.1</seata.spring.boot.starter>
         <spring.boot.starter.velocity.version>1.4.7.RELEASE</spring.boot.starter.velocity.version>
-        <dubbo.version>2.7.7</dubbo.version>
+        <dubbo.version>2.7.13</dubbo.version>
     </properties>
 
     <modules>
