@@ -18,7 +18,7 @@
         <netty.version>4.1.52.Final</netty.version>
         <spring.boot.version>2.1.0.RELEASE</spring.boot.version>
         <spring.kafka.version>2.2.0.RELEASE</spring.kafka.version>
-        <fastjson.version>1.2.47</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <hystrix.version>2.1.0.RELEASE</hystrix.version>
         <sentinel.version>1.6.0</sentinel.version>
         <spring.boot.aop.version>2.1.0.RELEASE</spring.boot.aop.version>
